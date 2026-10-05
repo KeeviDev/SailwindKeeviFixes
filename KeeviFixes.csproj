@@ -54,8 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ModConfig.cs" />
+    <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\CenteredBigItemRotation.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.BaseLib">

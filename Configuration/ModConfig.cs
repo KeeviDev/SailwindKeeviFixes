@@ -1,5 +1,4 @@
 using BepInEx.Configuration;
-using UnityEngine;
 
 namespace KeeviFixes.Configuration
 {
@@ -8,9 +7,20 @@ namespace KeeviFixes.Configuration
     /// </summary>
     internal static class ModConfig
     {
+        private const string BigItemsSection = "Big Items";
+
+        public static ConfigEntry<bool> RotateBigItemsAroundCenter { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
-
+            RotateBigItemsAroundCenter = config.Bind(
+                BigItemsSection,
+                "Rotate big items around their center",
+                true,
+                new ConfigDescription(
+                    "Fixes the rotation point of big items: crates, barrels, furniture and other big items turn " +
+                    "around their middle when you rotate them, instead of swinging around a point at their base " +
+                    "or edge."));
         }
     }
 }
