@@ -7,6 +7,7 @@ namespace KeeviFixes.Configuration
     /// </summary>
     internal static class ModConfig
     {
+        private const string AllItemsSection = "All Items";
         private const string BigItemsSection = "Big Items";
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
@@ -18,6 +19,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> HoldBigContainersAfterDrinking { get; private set; }
 
         public static ConfigEntry<bool> PreventBilgePumpHandleBreaking { get; private set; }
+
+        public static ConfigEntry<bool> DropItemsPickedUpInFrontOfOthers { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -48,6 +51,13 @@ namespace KeeviFixes.Configuration
                 "Prevent bilge pump handle breaking on pause",
                 true,
                 new ConfigDescription("Fixes the bilge pump handle breaking when you pause while holding it."));
+
+            DropItemsPickedUpInFrontOfOthers = config.Bind(
+                AllItemsSection,
+                "Allow dropping items picked up in front of others",
+                true,
+                new ConfigDescription(
+                    "Fixes being unable to drop or throw an item you picked up in front of another one."));
         }
     }
 }

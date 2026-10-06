@@ -58,6 +58,7 @@
     <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
+    <Compile Include="Patches\PickupLookTargetPatches.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\BigContainerDrinking.cs" />
