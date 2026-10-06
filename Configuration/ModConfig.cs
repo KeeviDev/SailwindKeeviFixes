@@ -8,6 +8,7 @@ namespace KeeviFixes.Configuration
     internal static class ModConfig
     {
         private const string AllItemsSection = "All Items";
+        private const string CratesSection = "Crates";
         private const string BigItemsSection = "Big Items";
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
@@ -23,6 +24,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> DropItemsPickedUpInFrontOfOthers { get; private set; }
 
         public static ConfigEntry<bool> PreventDroppingHeldItemsWhileInteracting { get; private set; }
+
+        public static ConfigEntry<bool> PreventReachingItemsStoredInCrates { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -68,6 +71,13 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes dropping the item you hold when an interaction ends, such as climbing a ladder onto a " +
                     "boat or using other items and buttons."));
+
+            PreventReachingItemsStoredInCrates = config.Bind(
+                CratesSection,
+                "Prevent reaching items stored in crates",
+                true,
+                new ConfigDescription(
+                    "Fixes picking up items stored in a crate or other storage without opening it."));
         }
     }
 }

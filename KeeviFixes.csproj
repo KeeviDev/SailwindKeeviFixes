@@ -55,6 +55,10 @@
       <HintPath>..\lib\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\lib\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ModConfig.cs" />
@@ -62,6 +66,7 @@
     <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\ButtonClickReleasePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
+    <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Patches\PickupLookTargetPatches.cs" />
     <Compile Include="Plugin.cs" />
