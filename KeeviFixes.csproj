@@ -72,6 +72,7 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\BigContainerDrinking.cs" />
+    <Compile Include="Runtime\BoatWalls.cs" />
     <Compile Include="Runtime\CenteredBigItemRotation.cs" />
     <Compile Include="Runtime\GoPointerFields.cs" />
   </ItemGroup>

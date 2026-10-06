@@ -27,6 +27,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> PreventReachingItemsStoredInCrates { get; private set; }
 
+        public static ConfigEntry<bool> PreventReachingItemsThroughWalls { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -78,6 +80,12 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes picking up items stored in a crate or other storage without opening it."));
+
+            PreventReachingItemsThroughWalls = config.Bind(
+                AllItemsSection,
+                "Prevent reaching items through walls",
+                true,
+                new ConfigDescription("Fixes picking up and using items through walls, floors and ceilings on boats."));
         }
     }
 }
