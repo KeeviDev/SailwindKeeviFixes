@@ -14,6 +14,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> ShowMapDrawingsAfterLoading { get; private set; }
 
+        public static ConfigEntry<bool> HoldBigContainersAfterDrinking { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -30,6 +32,13 @@ namespace KeeviFixes.Configuration
                 "Show map drawings after loading",
                 true,
                 new ConfigDescription("Fixes drawings disappearing from maps."));
+
+            HoldBigContainersAfterDrinking = config.Bind(
+                BigItemsSection,
+                "Return barrels state after drinking",
+                true,
+                new ConfigDescription(
+                    "Fixes barrels being held like small items after you drink from them."));
         }
     }
 }

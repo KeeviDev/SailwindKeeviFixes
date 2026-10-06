@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using HarmonyLib;
 using KeeviFixes.Configuration;
 using UnityEngine;
 
@@ -13,10 +11,6 @@ namespace KeeviFixes.Runtime
     /// </summary>
     internal sealed class CenteredBigItemRotation
     {
-        private static readonly AccessTools.FieldRef<GoPointer, Vector3> BigItemLocalPos = FindGoPointerField<Vector3>("bigItemLocalPos");
-        private static readonly AccessTools.FieldRef<GoPointer, Vector3> DecolLocalPos = FindGoPointerField<Vector3>("decolLocalPos");
-        private static readonly AccessTools.FieldRef<GoPointer, Quaternion> BigItemLocalRot = FindGoPointerField<Quaternion>("bigItemLocalRot");
-
         private static readonly Dictionary<GoPointer, CenteredBigItemRotation> TrackedByHolder =
             new Dictionary<GoPointer, CenteredBigItemRotation>();
 
@@ -38,7 +32,7 @@ namespace KeeviFixes.Runtime
         /// <summary>Whether the game still has every holder field this fix reads and moves.</summary>
         public static bool IsSupported
         {
-            get { return BigItemLocalPos != null && DecolLocalPos != null && BigItemLocalRot != null; }
+            get { return GoPointerFields.AreFound; }
         }
 
         /// <summary>
@@ -95,8 +89,8 @@ namespace KeeviFixes.Runtime
         private void MoveHeldItem(GoPointer holder, Vector3 worldShift)
         {
             Vector3 shiftInHolder = holder.transform.InverseTransformVector(worldShift);
-            BigItemLocalPos(holder) += shiftInHolder;
-            DecolLocalPos(holder) += shiftInHolder;
+            GoPointerFields.BigItemLocalPos(holder) += shiftInHolder;
+            GoPointerFields.DecolLocalPos(holder) += shiftInHolder;
             item.transform.position += worldShift;
         }
 
@@ -106,7 +100,8 @@ namespace KeeviFixes.Runtime
         /// </summary>
         private static Quaternion ReadRotationInHand(GoPointer holder, PickupableItem heldItem)
         {
-            return Quaternion.AngleAxis(heldItem.heldRotationOffset, Vector3.right) * BigItemLocalRot(holder);
+            return Quaternion.AngleAxis(heldItem.heldRotationOffset, Vector3.right)
+                * GoPointerFields.BigItemLocalRot(holder);
         }
 
         /// <summary>
@@ -172,16 +167,6 @@ namespace KeeviFixes.Runtime
             yield return new Vector3(max.x, min.y, max.z);
             yield return new Vector3(max.x, max.y, min.z);
             yield return new Vector3(max.x, max.y, max.z);
-        }
-
-        /// <summary>
-        /// Returns an accessor for a private <see cref="GoPointer"/> field, or null when the game no longer has a
-        /// field of that name and type.
-        /// </summary>
-        private static AccessTools.FieldRef<GoPointer, T> FindGoPointerField<T>(string name)
-        {
-            FieldInfo field = AccessTools.Field(typeof(GoPointer), name);
-            return field != null && field.FieldType == typeof(T) ? AccessTools.FieldRefAccess<GoPointer, T>(field) : null;
         }
     }
 }

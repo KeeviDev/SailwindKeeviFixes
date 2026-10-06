@@ -54,11 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ModConfig.cs" />
+    <Compile Include="Patches\BigContainerDrinkingPatches.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\BigContainerDrinking.cs" />
     <Compile Include="Runtime\CenteredBigItemRotation.cs" />
+    <Compile Include="Runtime\GoPointerFields.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.BaseLib">
