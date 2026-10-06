@@ -94,10 +94,7 @@ namespace KeeviFixes.Patches
         /// </summary>
         private static bool Raycast(Ray ray, out RaycastHit hit, float maxDistance, int layerMask)
         {
-            if (ModConfig.PreventReachingItemsStoredInCrates.Value)
-                layerMask &= ~itemInCrateMask;
-
-            bool found = Physics.Raycast(ray, out hit, maxDistance, layerMask);
+            bool found = Physics.Raycast(ray, out hit, maxDistance, ReachableLayers(layerMask));
             if (found && BoatWalls.IsSupported && ModConfig.PreventReachingItemsThroughWalls.Value)
             {
                 ShipItem item = BoatWalls.ItemFrom(hit.collider);
@@ -107,6 +104,14 @@ namespace KeeviFixes.Patches
             }
 
             return found;
+        }
+
+        /// <summary>
+        /// The look ray's layers without the items stored in crates when that setting is on.
+        /// </summary>
+        public static int ReachableLayers(int layerMask)
+        {
+            return ModConfig.PreventReachingItemsStoredInCrates.Value ? layerMask & ~itemInCrateMask : layerMask;
         }
     }
 

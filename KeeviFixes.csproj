@@ -66,6 +66,7 @@
     <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\ButtonClickReleasePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
+    <Compile Include="Patches\FurnitureReachPatches.cs" />
     <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Patches\PickupLookTargetPatches.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Runtime\BigContainerDrinking.cs" />
     <Compile Include="Runtime\BoatWalls.cs" />
     <Compile Include="Runtime\CenteredBigItemRotation.cs" />
+    <Compile Include="Runtime\FurnitureReach.cs" />
     <Compile Include="Runtime\GoPointerFields.cs" />
   </ItemGroup>
   <ItemGroup>

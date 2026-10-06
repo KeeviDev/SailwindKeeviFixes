@@ -10,6 +10,7 @@ namespace KeeviFixes.Configuration
         private const string AllItemsSection = "All Items";
         private const string CratesSection = "Crates";
         private const string BigItemsSection = "Big Items";
+        private const string FurnitureSection = "Furniture";
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
 
@@ -28,6 +29,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> PreventReachingItemsStoredInCrates { get; private set; }
 
         public static ConfigEntry<bool> PreventReachingItemsThroughWalls { get; private set; }
+
+        public static ConfigEntry<bool> AllowPickingUpSmallItemsBehindNailedFurniture { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -86,6 +89,41 @@ namespace KeeviFixes.Configuration
                 "Prevent reaching items through walls",
                 true,
                 new ConfigDescription("Fixes picking up and using items through walls, floors and ceilings on boats."));
+
+            AllowPickingUpSmallItemsBehindNailedFurniture = config.Bind(
+                FurnitureSection,
+                "Allow picking up small items behind nailed furniture",
+                true,
+                new ConfigDescription(
+                    "Lets you pick up small items behind or under nailed furniture, such as a cup that fell behind a " +
+                    "table or under a bed. Needs \"Prevent reaching items stored in crates\" turned on."));
+
+            KeepFurnitureReachDependentOnStoredItems();
+        }
+
+        /// <summary>
+        /// Keeps picking up small items behind nailed furniture enabled only together with keeping stored items out of
+        /// reach, since a look past nailed storage furniture would otherwise reach the items stored inside it: turning
+        /// the stored items fix off turns the furniture one off, and turning the furniture one on turns it back on.
+        /// </summary>
+        private static void KeepFurnitureReachDependentOnStoredItems()
+        {
+            DisableFurnitureReachWithoutStoredItemsFix();
+
+            PreventReachingItemsStoredInCrates.SettingChanged +=
+                (sender, args) => DisableFurnitureReachWithoutStoredItemsFix();
+
+            AllowPickingUpSmallItemsBehindNailedFurniture.SettingChanged += (sender, args) =>
+            {
+                if (AllowPickingUpSmallItemsBehindNailedFurniture.Value && !PreventReachingItemsStoredInCrates.Value)
+                    PreventReachingItemsStoredInCrates.Value = true;
+            };
+        }
+
+        private static void DisableFurnitureReachWithoutStoredItemsFix()
+        {
+            if (!PreventReachingItemsStoredInCrates.Value && AllowPickingUpSmallItemsBehindNailedFurniture.Value)
+                AllowPickingUpSmallItemsBehindNailedFurniture.Value = false;
         }
     }
 }
