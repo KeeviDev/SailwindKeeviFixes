@@ -22,6 +22,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> DropItemsPickedUpInFrontOfOthers { get; private set; }
 
+        public static ConfigEntry<bool> PreventDroppingHeldItemsWhileInteracting { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -58,6 +60,14 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes being unable to drop or throw an item you picked up in front of another one."));
+
+            PreventDroppingHeldItemsWhileInteracting = config.Bind(
+                AllItemsSection,
+                "Prevent dropping held items while interacting",
+                true,
+                new ConfigDescription(
+                    "Fixes dropping the item you hold when an interaction ends, such as climbing a ladder onto a " +
+                    "boat or using other items and buttons."));
         }
     }
 }
