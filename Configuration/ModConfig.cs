@@ -9,12 +9,15 @@ namespace KeeviFixes.Configuration
     {
         private const string BigItemsSection = "Big Items";
         private const string MapsSection = "Maps";
+        private const string BoatsSection = "Boats";
 
         public static ConfigEntry<bool> RotateBigItemsAroundCenter { get; private set; }
 
         public static ConfigEntry<bool> ShowMapDrawingsAfterLoading { get; private set; }
 
         public static ConfigEntry<bool> HoldBigContainersAfterDrinking { get; private set; }
+
+        public static ConfigEntry<bool> PreventBilgePumpHandleBreaking { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -39,6 +42,12 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes barrels being held like small items after you drink from them."));
+
+            PreventBilgePumpHandleBreaking = config.Bind(
+                BoatsSection,
+                "Prevent bilge pump handle breaking on pause",
+                true,
+                new ConfigDescription("Fixes the bilge pump handle breaking when you pause while holding it."));
         }
     }
 }

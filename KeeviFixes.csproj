@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ModConfig.cs" />
     <Compile Include="Patches\BigContainerDrinkingPatches.cs" />
+    <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Plugin.cs" />
