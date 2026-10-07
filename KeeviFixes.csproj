@@ -66,6 +66,7 @@
     <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\ButtonClickReleasePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
+    <Compile Include="Patches\FocusClickPatches.cs" />
     <Compile Include="Patches\FurniturePlacingPatch.cs" />
     <Compile Include="Patches\FurnitureReachPatches.cs" />
     <Compile Include="Patches\HangingYawPatches.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Runtime\BigContainerDrinking.cs" />
     <Compile Include="Runtime\BoatWalls.cs" />
     <Compile Include="Runtime\CenteredBigItemRotation.cs" />
+    <Compile Include="Runtime\FocusClick.cs" />
     <Compile Include="Runtime\FurnitureReach.cs" />
     <Compile Include="Runtime\GoPointerFields.cs" />
     <Compile Include="Runtime\HungItemRehang.cs" />

@@ -42,6 +42,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> PreventHungItemsFallingAfterLoading { get; private set; }
 
+        public static ConfigEntry<bool> IgnoreTheClickThatFocusesTheGame { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -134,6 +136,14 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes items falling off hooks after loading a save or coming back to your boat."));
+
+            IgnoreTheClickThatFocusesTheGame = config.Bind(
+                InterfaceSection,
+                "Ignore the click that focuses the game",
+                true,
+                new ConfigDescription(
+                    "Fixes the click that switches to the game window acting in game, such as dropping the item you " +
+                    "hold."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }

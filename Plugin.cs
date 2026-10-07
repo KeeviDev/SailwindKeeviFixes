@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using KeeviFixes.Configuration;
+using KeeviFixes.Runtime;
 
 namespace KeeviFixes
 {
@@ -35,6 +36,11 @@ namespace KeeviFixes
             }
 
             Log.LogInfo(string.Format("{0} v{1} loaded.", PLUGIN_NAME, PLUGIN_VERSION));
+        }
+
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            FocusClick.OnFocusChanged(hasFocus);
         }
 
         private void LogSettings()
