@@ -35,6 +35,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> PreventStuckClicksAfterChartingAndMenus { get; private set; }
 
+        public static ConfigEntry<bool> AllowPlacingChartingKitOnFurniture { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -108,6 +110,12 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the map staying selected after charting, and other items and buttons staying selected " +
                     "after menus, such as a winch after a pause."));
+
+            AllowPlacingChartingKitOnFurniture = config.Bind(
+                FurnitureSection,
+                "Allow placing the charting kit on furniture",
+                true,
+                new ConfigDescription("Fixes being unable to put the charting kit on tables and other furniture."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
