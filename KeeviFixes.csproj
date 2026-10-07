@@ -69,6 +69,7 @@
     <Compile Include="Patches\FurnitureReachPatches.cs" />
     <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
+    <Compile Include="Patches\MissedClickReleasePatch.cs" />
     <Compile Include="Patches\PickupLookTargetPatches.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

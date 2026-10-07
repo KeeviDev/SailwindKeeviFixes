@@ -13,6 +13,7 @@ namespace KeeviFixes.Configuration
         private const string FurnitureSection = "Furniture";
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
+        private const string InterfaceSection = "Interface";
 
         public static ConfigEntry<bool> RotateBigItemsAroundCenter { get; private set; }
 
@@ -31,6 +32,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> PreventReachingItemsThroughWalls { get; private set; }
 
         public static ConfigEntry<bool> AllowPickingUpSmallItemsBehindNailedFurniture { get; private set; }
+
+        public static ConfigEntry<bool> PreventStuckClicksAfterChartingAndMenus { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -97,6 +100,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Lets you pick up small items behind or under nailed furniture, such as a cup that fell behind a " +
                     "table or under a bed. Needs \"Prevent reaching items stored in crates\" turned on."));
+
+            PreventStuckClicksAfterChartingAndMenus = config.Bind(
+                InterfaceSection,
+                "Prevent stuck clicks after charting and menus",
+                true,
+                new ConfigDescription(
+                    "Fixes the map staying selected after charting, and other items and buttons staying selected " +
+                    "after menus, such as a winch after a pause."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
