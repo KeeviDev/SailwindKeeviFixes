@@ -40,6 +40,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> KeepHungItemsFacing { get; private set; }
 
+        public static ConfigEntry<bool> PreventHungItemsFallingAfterLoading { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -125,6 +127,13 @@ namespace KeeviFixes.Configuration
                 "Keep hung items facing",
                 true,
                 new ConfigDescription("Fixes items hung on hooks slowly turning around when the boat rocks in waves."));
+
+            PreventHungItemsFallingAfterLoading = config.Bind(
+                HooksSection,
+                "Prevent hung items falling after loading",
+                true,
+                new ConfigDescription(
+                    "Fixes items falling off hooks after loading a save or coming back to your boat."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
