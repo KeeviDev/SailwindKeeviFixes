@@ -11,6 +11,7 @@ namespace KeeviFixes.Configuration
         private const string CratesSection = "Crates";
         private const string BigItemsSection = "Big Items";
         private const string FurnitureSection = "Furniture";
+        private const string HooksSection = "Hooks";
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
         private const string InterfaceSection = "Interface";
@@ -36,6 +37,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> PreventStuckClicksAfterChartingAndMenus { get; private set; }
 
         public static ConfigEntry<bool> AllowPlacingChartingKitOnFurniture { get; private set; }
+
+        public static ConfigEntry<bool> KeepHungItemsFacing { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -116,6 +119,12 @@ namespace KeeviFixes.Configuration
                 "Allow placing the charting kit on furniture",
                 true,
                 new ConfigDescription("Fixes being unable to put the charting kit on tables and other furniture."));
+
+            KeepHungItemsFacing = config.Bind(
+                HooksSection,
+                "Keep hung items facing",
+                true,
+                new ConfigDescription("Fixes items hung on hooks slowly turning around when the boat rocks in waves."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
