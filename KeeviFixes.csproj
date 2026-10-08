@@ -66,6 +66,7 @@
     <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\ButtonClickReleasePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
+    <Compile Include="Patches\DestroyedItemTwinPatch.cs" />
     <Compile Include="Patches\FocusClickPatches.cs" />
     <Compile Include="Patches\FurniturePlacingPatch.cs" />
     <Compile Include="Patches\FurnitureReachPatches.cs" />

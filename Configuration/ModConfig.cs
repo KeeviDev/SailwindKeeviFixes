@@ -12,6 +12,7 @@ namespace KeeviFixes.Configuration
         private const string BigItemsSection = "Big Items";
         private const string FurnitureSection = "Furniture";
         private const string HooksSection = "Hooks";
+        private const string KnivesSection = "Knives";
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
         private const string InterfaceSection = "Interface";
@@ -43,6 +44,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> PreventHungItemsFallingAfterLoading { get; private set; }
 
         public static ConfigEntry<bool> IgnoreTheClickThatFocusesTheGame { get; private set; }
+
+        public static ConfigEntry<bool> PreventBoatShakingWhenCuttingItems { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -144,6 +147,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the click that switches to the game window acting in game, such as dropping the item you " +
                     "hold."));
+
+            PreventBoatShakingWhenCuttingItems = config.Bind(
+                KnivesSection,
+                "Prevent boat shaking when cutting items",
+                true,
+                new ConfigDescription(
+                    "Fixes the boat shaking with a thud when you cut something lying on it, such as a fish or a " +
+                    "barrel."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
