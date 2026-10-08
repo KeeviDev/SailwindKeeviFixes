@@ -47,6 +47,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> PreventBoatShakingWhenCuttingItems { get; private set; }
 
+        public static ConfigEntry<bool> PlaceCutPiecesNeatly { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -155,6 +157,12 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the boat shaking with a thud when you cut something lying on it, such as a fish or a " +
                     "barrel."));
+
+            PlaceCutPiecesNeatly = config.Bind(
+                KnivesSection,
+                "Place cut pieces neatly",
+                true,
+                new ConfigDescription("Fixes the pieces of a cut item flying apart or falling through the deck."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
