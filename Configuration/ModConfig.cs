@@ -51,6 +51,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> PreventMooredBoatsComingLoose { get; private set; }
 
+        public static ConfigEntry<bool> KeepMooringLineLength { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -172,6 +174,14 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes moored boats coming loose and drifting away after loading a save or coming back to them."));
+
+            KeepMooringLineLength = config.Bind(
+                BoatsSection,
+                "Keep mooring line length",
+                true,
+                new ConfigDescription(
+                    "Fixes mooring lines changing their length after loading a save, pausing or coming back to the " +
+                    "boat."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }

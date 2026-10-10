@@ -91,6 +91,7 @@
     <Compile Include="Runtime\MooredBoat.cs" />
     <Compile Include="Runtime\MooringFix.cs" />
     <Compile Include="Runtime\MooringLineFields.cs" />
+    <Compile Include="Runtime\MooringLineLength.cs" />
     <Compile Include="Runtime\MooringRetie.cs" />
   </ItemGroup>
   <ItemGroup>

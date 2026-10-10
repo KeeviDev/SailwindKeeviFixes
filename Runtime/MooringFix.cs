@@ -39,7 +39,7 @@ namespace KeeviFixes.Runtime
             {
                 Plugin.Log.LogWarning(
                     "Could not find the mooring line members - the game may have updated. " +
-                    "Moored boats may still come loose.");
+                    "Moored boats may still come loose, and mooring lines may still change their length.");
                 return;
             }
 

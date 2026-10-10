@@ -17,7 +17,7 @@ namespace KeeviFixes.Runtime
         /// <summary>How far, seen from above, a loaded line's end may be from its cleat.</summary>
         private const float MatchDistance = 0.5f;
 
-        private static readonly List<PickupableBoatMooringRope> LoadedLines = new List<PickupableBoatMooringRope>();
+        private static readonly List<LoadedLine> LoadedLines = new List<LoadedLine>();
 
         private static bool IsEnabled
         {
@@ -34,7 +34,7 @@ namespace KeeviFixes.Runtime
 
             PickupableBoatMooringRope line = saveable.GetComponent<PickupableBoatMooringRope>();
             if (line != null && !line.IsMoored() && IsEnabled)
-                LoadedLines.Add(line);
+                LoadedLines.Add(new LoadedLine(line, data.extraValue));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace KeeviFixes.Runtime
                     .Where(cleat => cleat != null && cleat.gameObject.scene.IsValid())
                     .ToArray();
                 int tied = 0;
-                foreach (PickupableBoatMooringRope line in LoadedLines)
+                foreach (LoadedLine line in LoadedLines)
                 {
                     if (Retie(line, cleats))
                         tied++;
@@ -99,12 +99,9 @@ namespace KeeviFixes.Runtime
             }
         }
 
-        /// <summary>
-        /// Ties the line to the cleat under its end, and lets it measure its length on its boat's first awake update,
-        /// since the cleat may be lowered with its far island while loading.
-        /// </summary>
-        private static bool Retie(PickupableBoatMooringRope line, GPButtonDockMooring[] cleats)
+        private static bool Retie(LoadedLine loaded, GPButtonDockMooring[] cleats)
         {
+            PickupableBoatMooringRope line = loaded.Line;
             if (line == null || line.IsMoored())
                 return false;
 
@@ -116,7 +113,7 @@ namespace KeeviFixes.Runtime
             }
 
             line.MoorTo(cleat);
-            MooringLineFields.IsLengthDue(line) = true;
+            MooringLineLength.RestoreAfterLoading(line, loaded.SavedLength);
             return true;
         }
 
@@ -158,6 +155,20 @@ namespace KeeviFixes.Runtime
                 "Found no free cleat under the loaded mooring line {0} of {1}, so it goes back aboard.",
                 line.name,
                 line.GetBoatRigidbody().name));
+        }
+
+        private struct LoadedLine
+        {
+            public readonly PickupableBoatMooringRope Line;
+
+            /// <summary>The length saved with the line, or 0 for a save made without this fix.</summary>
+            public readonly float SavedLength;
+
+            public LoadedLine(PickupableBoatMooringRope line, float savedLength)
+            {
+                Line = line;
+                SavedLength = savedLength;
+            }
         }
     }
 }
