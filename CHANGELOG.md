@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.1] - 2026-10-10
+
+### Changed
+
+- Shorter setting names
+
 ## [1.0.0] - 2026-10-10
 
 ### Initial release
@@ -24,4 +30,5 @@
 - The map and other items no longer stay selected after charting or menus
 - Every fix has its own switch in the config, grouped into sections
 
+[1.0.1]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.1
 [1.0.0]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.0
