@@ -76,6 +76,7 @@
     <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Patches\MissedClickReleasePatch.cs" />
+    <Compile Include="Patches\MooringPatches.cs" />
     <Compile Include="Patches\PickupLookTargetPatches.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Runtime\FurnitureReach.cs" />
     <Compile Include="Runtime\GoPointerFields.cs" />
     <Compile Include="Runtime\HungItemRehang.cs" />
+    <Compile Include="Runtime\MooredBoat.cs" />
+    <Compile Include="Runtime\MooringFix.cs" />
+    <Compile Include="Runtime\MooringLineFields.cs" />
+    <Compile Include="Runtime\MooringRetie.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.BaseLib">

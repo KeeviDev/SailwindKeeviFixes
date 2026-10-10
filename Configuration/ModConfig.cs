@@ -49,6 +49,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> PlaceCutPiecesNeatly { get; private set; }
 
+        public static ConfigEntry<bool> PreventMooredBoatsComingLoose { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             RotateBigItemsAroundCenter = config.Bind(
@@ -163,6 +165,13 @@ namespace KeeviFixes.Configuration
                 "Place cut pieces neatly",
                 true,
                 new ConfigDescription("Fixes the pieces of a cut item flying apart or falling through the deck."));
+
+            PreventMooredBoatsComingLoose = config.Bind(
+                BoatsSection,
+                "Prevent moored boats coming loose",
+                true,
+                new ConfigDescription(
+                    "Fixes moored boats coming loose and drifting away after loading a save or coming back to them."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }
