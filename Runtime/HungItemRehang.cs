@@ -48,7 +48,7 @@ namespace KeeviFixes.Runtime
         public static void OnLoaded(SaveablePrefab prefab, SavePrefabData data)
         {
             if (data == null || data.crateId > 0 || data.inventorySlot > -1
-                || !ModConfig.PreventHungItemsFallingAfterLoading.Value)
+                || !ModConfig.FixHungItemsFalling.Value)
                 return;
 
             ShipItemLampHook hook = prefab.GetComponent<ShipItemLampHook>();
@@ -72,7 +72,7 @@ namespace KeeviFixes.Runtime
             try
             {
                 if (LoadedItems.Count > 0 && LoadedHooks.Count > 0
-                    && ModConfig.PreventHungItemsFallingAfterLoading.Value)
+                    && ModConfig.FixHungItemsFalling.Value)
                 {
                     ForgetDestroyedItems();
                     foreach (HangableItem item in LoadedItems)
@@ -103,7 +103,7 @@ namespace KeeviFixes.Runtime
             Pending.Remove(item);
             ShipItem shipItem = item.GetComponent<ShipItem>();
             if (pending.Hook == null || Occupied(pending.Hook) || item.IsHanging() || shipItem == null
-                || shipItem.held != null || !ModConfig.PreventHungItemsFallingAfterLoading.Value)
+                || shipItem.held != null || !ModConfig.FixHungItemsFalling.Value)
                 return;
 
             Collider hook = pending.Hook.GetComponent<Collider>();

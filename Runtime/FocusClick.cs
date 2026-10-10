@@ -121,7 +121,7 @@ namespace KeeviFixes.Runtime
 
             refreshedFrame = frame;
             bool inWindow = Time.realtimeSinceStartup - focusTime <= FocusClickWindow
-                && ModConfig.IgnoreTheClickThatFocusesTheGame.Value;
+                && ModConfig.FixFocusClick.Value;
             if (swallowedCount == 0 && !inWindow)
                 return;
 
@@ -145,7 +145,7 @@ namespace KeeviFixes.Runtime
 
         private static void Swallow(int button)
         {
-            if (Swallowed[button] || !ModConfig.IgnoreTheClickThatFocusesTheGame.Value)
+            if (Swallowed[button] || !ModConfig.FixFocusClick.Value)
                 return;
 
             Swallowed[button] = true;

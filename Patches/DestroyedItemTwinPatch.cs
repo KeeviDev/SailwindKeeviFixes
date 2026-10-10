@@ -57,7 +57,7 @@ namespace KeeviFixes.Patches
         /// </summary>
         private static void DeactivateTwin(ShipItem item)
         {
-            if (!ModConfig.PreventBoatShakingWhenCuttingItems.Value)
+            if (!ModConfig.FixBoatShakingWhenCutting.Value)
                 return;
 
             ItemRigidbody twin = item.GetItemRigidbody();

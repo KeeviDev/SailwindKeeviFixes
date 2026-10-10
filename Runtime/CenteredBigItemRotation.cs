@@ -44,7 +44,7 @@ namespace KeeviFixes.Runtime
         public static void KeepHeldItemCentered(GoPointer holder)
         {
             PickupableItem heldItem = holder.GetHeldItem();
-            if (heldItem == null || !heldItem.big || !ModConfig.RotateBigItemsAroundCenter.Value)
+            if (heldItem == null || !heldItem.big || !ModConfig.FixRotationCenter.Value)
             {
                 TrackedByHolder.Remove(holder);
                 return;

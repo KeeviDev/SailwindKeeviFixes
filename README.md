@@ -47,25 +47,25 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 
 | Section | Setting | What it fixes |
 |---|---|---|
-| All Items | Allow dropping items picked up in front of others | Items picked up in front of others can be dropped right away. |
-| All Items | Prevent dropping held items while interacting | Ladders and buttons no longer make you drop what you hold. |
-| All Items | Prevent reaching items through walls | No picking up or using items through boat walls, decks and ceilings. |
-| Crates | Prevent reaching items stored in crates | No taking items out of a closed crate without opening it. |
-| Big Items | Rotate big items around their center | Big items turn around their middle. |
-| Big Items | Return barrels state after drinking | Barrels are held like barrels again after drinking. |
-| Furniture | Allow picking up small items behind nailed furniture ¹ | Small items behind or under furniture can be picked up. |
-| Furniture | Allow placing the charting kit on furniture | The charting kit goes on tables and other furniture. |
-| Hooks | Keep hung items facing | Hung items stop slowly spinning in waves. |
-| Hooks | Prevent hung items falling after loading | Hung items stay on their hooks after loading or coming back. |
-| Knives | Prevent boat shaking when cutting items | Cutting no longer shakes the boat. |
-| Knives | Place cut pieces neatly | Cut pieces no longer fly apart or fall through the deck. |
-| Maps | Show map drawings after loading | Drawings no longer disappear from maps. |
-| Boats | Prevent bilge pump handle breaking on pause | Pausing no longer breaks the bilge pump handle. |
-| Boats | Prevent moored boats coming loose ² | Moored boats stay tied after loading or coming back. |
-| Boats | Keep mooring line length ² | Mooring lines keep the length you gave them. |
-| Interface | Ignore the click that focuses the game | Clicking back into the game no longer acts in it. |
-| Interface | Prevent stuck clicks after charting and menus | The map and other items no longer stay selected after charting or menus. |
+| All Items | Fix dropping after pickup | Items picked up in front of others can be dropped right away. |
+| All Items | Fix dropping while interacting | Ladders and buttons no longer make you drop what you hold. |
+| All Items | Fix reaching through walls | No picking up or using items through boat walls, decks and ceilings. |
+| Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
+| Big Items | Fix rotation center | Big items turn around their middle. |
+| Big Items | Fix barrels after drinking | Barrels are held like barrels again after drinking. |
+| Furniture | Fix reaching behind furniture ¹ | Small items behind or under furniture can be picked up. |
+| Furniture | Fix charting kit placement | The charting kit goes on tables and other furniture. |
+| Hooks | Fix hung item facing | Hung items stop slowly spinning in waves. |
+| Hooks | Fix hung items falling | Hung items stay on their hooks after loading or coming back. |
+| Knives | Fix boat shaking when cutting | Cutting no longer shakes the boat. |
+| Knives | Fix cut piece placement | Cut pieces no longer fly apart or fall through the deck. |
+| Maps | Fix map drawings disappearing | Drawings no longer disappear from maps. |
+| Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
+| Boats | Fix moored boats coming loose ² | Moored boats stay tied after loading or coming back. |
+| Boats | Fix mooring line length ² | Mooring lines keep the length you gave them. |
+| Interface | Fix focus click | Clicking back into the game no longer acts in it. |
+| Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 
-¹ The fix "Allow picking up small items behind nailed furniture" requires "Prevent reaching items stored in crates" to be enabled.
+¹ "Fix reaching behind furniture" requires "Fix reaching into crates" to be enabled.
 
-² The fixes "Prevent moored boats coming loose" and "Keep mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
+² "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.

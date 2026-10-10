@@ -30,7 +30,7 @@ namespace KeeviFixes.Patches
 
         private static void Postfix(MapChartTextureRenderer __instance)
         {
-            if (ModConfig.ShowMapDrawingsAfterLoading.Value)
+            if (ModConfig.FixMapDrawingsDisappearing.Value)
             {
                 __instance.renderCam.Render();
             }

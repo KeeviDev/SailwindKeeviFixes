@@ -46,7 +46,7 @@ namespace KeeviFixes.Patches
                 return false;
             }
 
-            ModConfig.KeepHungItemsFacing.SettingChanged += (sender, args) => settingVersion++;
+            ModConfig.FixHungItemFacing.SettingChanged += (sender, args) => settingVersion++;
             return true;
         }
 
@@ -62,7 +62,7 @@ namespace KeeviFixes.Patches
             bool ___lockZ)
         {
             // Most hangables are not hanging; a plain reference check keeps their frames free of calls into Unity.
-            if (ReferenceEquals(___currentHook, null) || !ModConfig.KeepHungItemsFacing.Value || !___currentHook)
+            if (ReferenceEquals(___currentHook, null) || !ModConfig.FixHungItemFacing.Value || !___currentHook)
                 return;
 
             HangingYaw heading =

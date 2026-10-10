@@ -17,167 +17,167 @@ namespace KeeviFixes.Configuration
         private const string BoatsSection = "Boats";
         private const string InterfaceSection = "Interface";
 
-        public static ConfigEntry<bool> RotateBigItemsAroundCenter { get; private set; }
+        public static ConfigEntry<bool> FixRotationCenter { get; private set; }
 
-        public static ConfigEntry<bool> ShowMapDrawingsAfterLoading { get; private set; }
+        public static ConfigEntry<bool> FixMapDrawingsDisappearing { get; private set; }
 
-        public static ConfigEntry<bool> HoldBigContainersAfterDrinking { get; private set; }
+        public static ConfigEntry<bool> FixBarrelsAfterDrinking { get; private set; }
 
-        public static ConfigEntry<bool> PreventBilgePumpHandleBreaking { get; private set; }
+        public static ConfigEntry<bool> FixBilgePumpHandle { get; private set; }
 
-        public static ConfigEntry<bool> DropItemsPickedUpInFrontOfOthers { get; private set; }
+        public static ConfigEntry<bool> FixDroppingAfterPickup { get; private set; }
 
-        public static ConfigEntry<bool> PreventDroppingHeldItemsWhileInteracting { get; private set; }
+        public static ConfigEntry<bool> FixDroppingWhileInteracting { get; private set; }
 
-        public static ConfigEntry<bool> PreventReachingItemsStoredInCrates { get; private set; }
+        public static ConfigEntry<bool> FixReachingIntoCrates { get; private set; }
 
-        public static ConfigEntry<bool> PreventReachingItemsThroughWalls { get; private set; }
+        public static ConfigEntry<bool> FixReachingThroughWalls { get; private set; }
 
-        public static ConfigEntry<bool> AllowPickingUpSmallItemsBehindNailedFurniture { get; private set; }
+        public static ConfigEntry<bool> FixReachingBehindFurniture { get; private set; }
 
-        public static ConfigEntry<bool> PreventStuckClicksAfterChartingAndMenus { get; private set; }
+        public static ConfigEntry<bool> FixStuckClicks { get; private set; }
 
-        public static ConfigEntry<bool> AllowPlacingChartingKitOnFurniture { get; private set; }
+        public static ConfigEntry<bool> FixChartingKitPlacement { get; private set; }
 
-        public static ConfigEntry<bool> KeepHungItemsFacing { get; private set; }
+        public static ConfigEntry<bool> FixHungItemFacing { get; private set; }
 
-        public static ConfigEntry<bool> PreventHungItemsFallingAfterLoading { get; private set; }
+        public static ConfigEntry<bool> FixHungItemsFalling { get; private set; }
 
-        public static ConfigEntry<bool> IgnoreTheClickThatFocusesTheGame { get; private set; }
+        public static ConfigEntry<bool> FixFocusClick { get; private set; }
 
-        public static ConfigEntry<bool> PreventBoatShakingWhenCuttingItems { get; private set; }
+        public static ConfigEntry<bool> FixBoatShakingWhenCutting { get; private set; }
 
-        public static ConfigEntry<bool> PlaceCutPiecesNeatly { get; private set; }
+        public static ConfigEntry<bool> FixCutPiecePlacement { get; private set; }
 
-        public static ConfigEntry<bool> PreventMooredBoatsComingLoose { get; private set; }
+        public static ConfigEntry<bool> FixMooredBoatsComingLoose { get; private set; }
 
-        public static ConfigEntry<bool> KeepMooringLineLength { get; private set; }
+        public static ConfigEntry<bool> FixMooringLineLength { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
-            RotateBigItemsAroundCenter = config.Bind(
+            FixRotationCenter = config.Bind(
                 BigItemsSection,
-                "Rotate big items around their center",
+                "Fix rotation center",
                 true,
                 new ConfigDescription(
                     "Fixes the rotation point of big items: crates, barrels, furniture and other big items turn " +
                     "around their middle when you rotate them, instead of swinging around a point at their base " +
                     "or edge."));
 
-            ShowMapDrawingsAfterLoading = config.Bind(
+            FixMapDrawingsDisappearing = config.Bind(
                 MapsSection,
-                "Show map drawings after loading",
+                "Fix map drawings disappearing",
                 true,
                 new ConfigDescription("Fixes drawings disappearing from maps."));
 
-            HoldBigContainersAfterDrinking = config.Bind(
+            FixBarrelsAfterDrinking = config.Bind(
                 BigItemsSection,
-                "Return barrels state after drinking",
+                "Fix barrels after drinking",
                 true,
                 new ConfigDescription(
                     "Fixes barrels being held like small items after you drink from them."));
 
-            PreventBilgePumpHandleBreaking = config.Bind(
+            FixBilgePumpHandle = config.Bind(
                 BoatsSection,
-                "Prevent bilge pump handle breaking on pause",
+                "Fix bilge pump handle",
                 true,
                 new ConfigDescription("Fixes the bilge pump handle breaking when you pause while holding it."));
 
-            DropItemsPickedUpInFrontOfOthers = config.Bind(
+            FixDroppingAfterPickup = config.Bind(
                 AllItemsSection,
-                "Allow dropping items picked up in front of others",
+                "Fix dropping after pickup",
                 true,
                 new ConfigDescription(
                     "Fixes being unable to drop or throw an item you picked up in front of another one."));
 
-            PreventDroppingHeldItemsWhileInteracting = config.Bind(
+            FixDroppingWhileInteracting = config.Bind(
                 AllItemsSection,
-                "Prevent dropping held items while interacting",
+                "Fix dropping while interacting",
                 true,
                 new ConfigDescription(
                     "Fixes dropping the item you hold when an interaction ends, such as climbing a ladder onto a " +
                     "boat or using other items and buttons."));
 
-            PreventReachingItemsStoredInCrates = config.Bind(
+            FixReachingIntoCrates = config.Bind(
                 CratesSection,
-                "Prevent reaching items stored in crates",
+                "Fix reaching into crates",
                 true,
                 new ConfigDescription(
                     "Fixes picking up items stored in a crate or other storage without opening it."));
 
-            PreventReachingItemsThroughWalls = config.Bind(
+            FixReachingThroughWalls = config.Bind(
                 AllItemsSection,
-                "Prevent reaching items through walls",
+                "Fix reaching through walls",
                 true,
                 new ConfigDescription("Fixes picking up and using items through walls, floors and ceilings on boats."));
 
-            AllowPickingUpSmallItemsBehindNailedFurniture = config.Bind(
+            FixReachingBehindFurniture = config.Bind(
                 FurnitureSection,
-                "Allow picking up small items behind nailed furniture",
+                "Fix reaching behind furniture",
                 true,
                 new ConfigDescription(
                     "Lets you pick up small items behind or under nailed furniture, such as a cup that fell behind a " +
-                    "table or under a bed. Needs \"Prevent reaching items stored in crates\" turned on."));
+                    "table or under a bed. Needs \"Fix reaching into crates\" turned on."));
 
-            PreventStuckClicksAfterChartingAndMenus = config.Bind(
+            FixStuckClicks = config.Bind(
                 InterfaceSection,
-                "Prevent stuck clicks after charting and menus",
+                "Fix stuck clicks",
                 true,
                 new ConfigDescription(
                     "Fixes the map staying selected after charting, and other items and buttons staying selected " +
                     "after menus, such as a winch after a pause."));
 
-            AllowPlacingChartingKitOnFurniture = config.Bind(
+            FixChartingKitPlacement = config.Bind(
                 FurnitureSection,
-                "Allow placing the charting kit on furniture",
+                "Fix charting kit placement",
                 true,
                 new ConfigDescription("Fixes being unable to put the charting kit on tables and other furniture."));
 
-            KeepHungItemsFacing = config.Bind(
+            FixHungItemFacing = config.Bind(
                 HooksSection,
-                "Keep hung items facing",
+                "Fix hung item facing",
                 true,
                 new ConfigDescription("Fixes items hung on hooks slowly turning around when the boat rocks in waves."));
 
-            PreventHungItemsFallingAfterLoading = config.Bind(
+            FixHungItemsFalling = config.Bind(
                 HooksSection,
-                "Prevent hung items falling after loading",
+                "Fix hung items falling",
                 true,
                 new ConfigDescription(
                     "Fixes items falling off hooks after loading a save or coming back to your boat."));
 
-            IgnoreTheClickThatFocusesTheGame = config.Bind(
+            FixFocusClick = config.Bind(
                 InterfaceSection,
-                "Ignore the click that focuses the game",
+                "Fix focus click",
                 true,
                 new ConfigDescription(
                     "Fixes the click that switches to the game window acting in game, such as dropping the item you " +
                     "hold."));
 
-            PreventBoatShakingWhenCuttingItems = config.Bind(
+            FixBoatShakingWhenCutting = config.Bind(
                 KnivesSection,
-                "Prevent boat shaking when cutting items",
+                "Fix boat shaking when cutting",
                 true,
                 new ConfigDescription(
                     "Fixes the boat shaking with a thud when you cut something lying on it, such as a fish or a " +
                     "barrel."));
 
-            PlaceCutPiecesNeatly = config.Bind(
+            FixCutPiecePlacement = config.Bind(
                 KnivesSection,
-                "Place cut pieces neatly",
+                "Fix cut piece placement",
                 true,
                 new ConfigDescription("Fixes the pieces of a cut item flying apart or falling through the deck."));
 
-            PreventMooredBoatsComingLoose = config.Bind(
+            FixMooredBoatsComingLoose = config.Bind(
                 BoatsSection,
-                "Prevent moored boats coming loose",
+                "Fix moored boats coming loose",
                 true,
                 new ConfigDescription(
                     "Fixes moored boats coming loose and drifting away after loading a save or coming back to them."));
 
-            KeepMooringLineLength = config.Bind(
+            FixMooringLineLength = config.Bind(
                 BoatsSection,
-                "Keep mooring line length",
+                "Fix mooring line length",
                 true,
                 new ConfigDescription(
                     "Fixes mooring lines changing their length after loading a save, pausing or coming back to the " +
@@ -195,20 +195,20 @@ namespace KeeviFixes.Configuration
         {
             DisableFurnitureReachWithoutStoredItemsFix();
 
-            PreventReachingItemsStoredInCrates.SettingChanged +=
+            FixReachingIntoCrates.SettingChanged +=
                 (sender, args) => DisableFurnitureReachWithoutStoredItemsFix();
 
-            AllowPickingUpSmallItemsBehindNailedFurniture.SettingChanged += (sender, args) =>
+            FixReachingBehindFurniture.SettingChanged += (sender, args) =>
             {
-                if (AllowPickingUpSmallItemsBehindNailedFurniture.Value && !PreventReachingItemsStoredInCrates.Value)
-                    PreventReachingItemsStoredInCrates.Value = true;
+                if (FixReachingBehindFurniture.Value && !FixReachingIntoCrates.Value)
+                    FixReachingIntoCrates.Value = true;
             };
         }
 
         private static void DisableFurnitureReachWithoutStoredItemsFix()
         {
-            if (!PreventReachingItemsStoredInCrates.Value && AllowPickingUpSmallItemsBehindNailedFurniture.Value)
-                AllowPickingUpSmallItemsBehindNailedFurniture.Value = false;
+            if (!FixReachingIntoCrates.Value && FixReachingBehindFurniture.Value)
+                FixReachingBehindFurniture.Value = false;
         }
     }
 }

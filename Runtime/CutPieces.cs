@@ -46,7 +46,7 @@ namespace KeeviFixes.Runtime
             Pieces.Clear();
             cutItem = null;
             knife = cuttingKnife;
-            if (cuttingKnife.held == null || !ModConfig.PlaceCutPiecesNeatly.Value)
+            if (cuttingKnife.held == null || !ModConfig.FixCutPiecePlacement.Value)
                 return;
 
             ShipItem target = cuttingKnife.held.GetPointedAtItem();

@@ -21,7 +21,7 @@ namespace KeeviFixes.Runtime
 
         private static bool IsEnabled
         {
-            get { return ModConfig.PreventMooredBoatsComingLoose.Value && MooringFix.IsAvailable; }
+            get { return ModConfig.FixMooredBoatsComingLoose.Value && MooringFix.IsAvailable; }
         }
 
         /// <summary>

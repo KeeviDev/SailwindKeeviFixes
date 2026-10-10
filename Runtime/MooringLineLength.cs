@@ -51,7 +51,7 @@ namespace KeeviFixes.Runtime
 
             if (MooringLineFields.IsLengthDue(line))
                 ApplyOnWaking(line, spring);
-            else if (ModConfig.KeepMooringLineLength.Value)
+            else if (ModConfig.FixMooringLineLength.Value)
                 TakeInSlack(line, spring);
         }
 
@@ -59,7 +59,7 @@ namespace KeeviFixes.Runtime
         {
             float distance = MooringLineFields.MeasureDistance(line);
             float kept = KeptLength(line);
-            if (!ModConfig.KeepMooringLineLength.Value || kept <= 0f)
+            if (!ModConfig.FixMooringLineLength.Value || kept <= 0f)
             {
                 SetKeptLength(line, distance);
                 return;

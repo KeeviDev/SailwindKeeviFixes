@@ -41,7 +41,7 @@ namespace KeeviFixes.Patches
             if (___clickedButton == null || __instance.type != GoPointer.PointerType.crosshairMouse
                 || GameState.inCursorMenu || BoatCamera.on
                 || GameInput.GetKey(InputName.PickUp) || GameInput.GetKeyUp(InputName.PickUp)
-                || !ModConfig.PreventStuckClicksAfterChartingAndMenus.Value)
+                || !ModConfig.FixStuckClicks.Value)
                 return;
 
             GoPointerButton button = ___clickedButton;

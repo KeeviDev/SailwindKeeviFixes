@@ -44,7 +44,7 @@ namespace KeeviFixes.Patches
         [HarmonyPatch("PickUpItem")]
         private static void AfterPickUp(GoPointer __instance)
         {
-            if (ModConfig.DropItemsPickedUpInFrontOfOthers.Value)
+            if (ModConfig.FixDroppingAfterPickup.Value)
                 PickedUpBy.Add(__instance);
         }
 

@@ -70,7 +70,7 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(HangableItem), nameof(HangableItem.OnTriggerEnter))]
         private static bool BeforeTriggerEnter(HangableItem __instance)
         {
-            return !(__instance.IsHanging() && ModConfig.PreventHungItemsFallingAfterLoading.Value);
+            return !(__instance.IsHanging() && ModConfig.FixHungItemsFalling.Value);
         }
     }
 }

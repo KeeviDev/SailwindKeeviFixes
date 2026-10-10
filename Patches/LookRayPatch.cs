@@ -95,7 +95,7 @@ namespace KeeviFixes.Patches
         private static bool Raycast(Ray ray, out RaycastHit hit, float maxDistance, int layerMask)
         {
             bool found = Physics.Raycast(ray, out hit, maxDistance, ReachableLayers(layerMask));
-            if (found && BoatWalls.IsSupported && ModConfig.PreventReachingItemsThroughWalls.Value)
+            if (found && BoatWalls.IsSupported && ModConfig.FixReachingThroughWalls.Value)
             {
                 ShipItem item = BoatWalls.ItemFrom(hit.collider);
                 RaycastHit wall;
@@ -111,7 +111,7 @@ namespace KeeviFixes.Patches
         /// </summary>
         public static int ReachableLayers(int layerMask)
         {
-            return ModConfig.PreventReachingItemsStoredInCrates.Value ? layerMask & ~itemInCrateMask : layerMask;
+            return ModConfig.FixReachingIntoCrates.Value ? layerMask & ~itemInCrateMask : layerMask;
         }
     }
 
@@ -153,7 +153,7 @@ namespace KeeviFixes.Patches
             ref float ___currentLookDistance)
         {
             ShipItem item = ___pointedAtButton as ShipItem;
-            if (item == null || !ModConfig.PreventReachingItemsThroughWalls.Value
+            if (item == null || !ModConfig.FixReachingThroughWalls.Value
                 || item == BoatWalls.ItemFrom(___hit.collider))
                 return;
 

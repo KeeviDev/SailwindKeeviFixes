@@ -42,7 +42,7 @@ namespace KeeviFixes.Patches
         private static void Postfix(ShipItem __instance, GoPointerButton lookedAtButton, ref bool __result)
         {
             if (!__result && !__instance.big && lookedAtButton != null && lookedAtButton.allowPlacingItems
-                && ModConfig.AllowPlacingChartingKitOnFurniture.Value)
+                && ModConfig.FixChartingKitPlacement.Value)
                 __result = true;
         }
     }
