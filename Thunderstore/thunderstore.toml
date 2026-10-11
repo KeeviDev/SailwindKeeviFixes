@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "Keevi"
 name = "KeeviFixes"
-versionNumber = "1.0.1"
+versionNumber = "1.0.2"
 description = "A mod that contains a collection of fixes for bugs and rough edges in the base game"
 websiteUrl = "https://github.com/KeeviDev/SailwindKeeviFixes"
 containsNsfwContent = false

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2] - 2026-10-11
+
+### Fixed
+
+- Fixed a bug in "Fix boat shaking when cutting": new games with Sailwind Difficulty no longer start without the starter supplies
+
 ## [1.0.1] - 2026-10-10
 
 ### Changed
@@ -30,5 +36,6 @@
 - The map and other items no longer stay selected after charting or menus
 - Every fix has its own switch in the config, grouped into sections
 
+[1.0.2]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.2
 [1.0.1]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.1
 [1.0.0]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.0
