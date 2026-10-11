@@ -15,7 +15,7 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - An item picked up directly in front of another item could not be dropped or thrown until the player looked away.
 - Climbing a boat ladder, or releasing any other button after it stopped being targeted, dropped the held item.
 - Items could be picked up and used through boat walls, decks and ceilings.
-- Items stored in a closed crate could be picked up without opening it by standing right next to the crate.
+- Items stored in a closed crate could be picked up without opening it in some cases.
 - Big items rotated around a point at their base or edge instead of their centre.
 - After drinking from a barrel, it stayed held like a small item.
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
