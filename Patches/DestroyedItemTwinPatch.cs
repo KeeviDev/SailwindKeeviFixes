@@ -20,7 +20,7 @@ namespace KeeviFixes.Patches
         private static bool Prepare()
         {
             bool supported = AccessTools.Method(typeof(ShipItem), nameof(ShipItem.DestroyItem)) != null
-                && AccessTools.Method(typeof(ShipItem), nameof(ShipItem.GetItemRigidbody)) != null;
+                && AccessTools.Field(typeof(ShipItem), nameof(ShipItem.itemRigidbodyC)) != null;
             if (!supported)
             {
                 Plugin.Log.LogWarning(
@@ -60,7 +60,7 @@ namespace KeeviFixes.Patches
             if (!ModConfig.FixBoatShakingWhenCutting.Value)
                 return;
 
-            ItemRigidbody twin = item.GetItemRigidbody();
+            ItemRigidbody twin = item.itemRigidbodyC;
             if (twin != null)
                 twin.gameObject.SetActive(false);
         }
