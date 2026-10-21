@@ -3,6 +3,7 @@
 ### Fixed
 
 - Updated "Fix moored boats coming loose" for Sailwind 0.40.1
+- Fixed a bug in "Fix reaching through walls": items stuck in boat walls, decks or floors can be picked up again
 
 ## [1.0.2] - 2026-10-11
 
