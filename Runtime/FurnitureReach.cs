@@ -8,21 +8,16 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Lets an empty-handed pointer pick up a small item behind or under nailed furniture. The game's look ray stops
-    /// on nailed furniture, which can't be picked up: furniture without an action becomes no target at all, and
-    /// furniture with one (a crate, a bed, a barrel) only takes the activate button.
-    /// <list type="bullet">
-    /// <item>Behind furniture without an action, the item becomes the target.</item>
-    /// <item>Behind furniture with one, the furniture stays the target, but only the item is outlined, and the
-    /// pick-up button takes the item, unless the furniture's type has its own pick-up button action. The game draws
-    /// every outline into one shared silhouette without depth, so a lone outline shows through the furniture, while
-    /// the furniture's own outline would cover the item's.</item>
-    /// </list>
+    /// Lets an empty-handed pointer pick up a small item behind or under nailed furniture. Behind furniture with its
+    /// own action, the furniture stays the target, only the item is outlined, and the pick-up button takes the item
+    /// unless the furniture acts on that button itself.
     /// </summary>
     internal static class FurnitureReach
     {
-        /// <summary>The game's look ray layers and length.</summary>
+        /// <summary>The game's look ray layers.</summary>
         private const int LookLayers = -604165;
+
+        /// <summary>Length, in metres, of the game's look ray.</summary>
         private const float LookDistance = 1.8f;
 
         private static readonly RaycastHit[] Hits = new RaycastHit[32];
@@ -42,8 +37,8 @@ namespace KeeviFixes.Runtime
         private static ShipItem outlinedFurniture;
 
         /// <summary>
-        /// Runs after every mod has chosen the pointer's target: targets or outlines a small item behind the nailed
-        /// furniture the game's look ray hit first.
+        /// Targets or outlines a small item behind the nailed furniture the game's look ray hit first. Must run after
+        /// every other patch has chosen the pointer's target.
         /// </summary>
         public static void AfterLook(
             GoPointer pointer,
@@ -103,7 +98,7 @@ namespace KeeviFixes.Runtime
             pointedAtButton = outlinedItem;
         }
 
-        /// <summary>Mirrors the cases where the game's look ray leaves the target alone or clears it.</summary>
+        /// <summary>Returns whether the game's look ray aims for <paramref name="pointer"/> this frame.</summary>
         private static bool GameAims(GoPointer pointer)
         {
             if (pointer.type == GoPointer.PointerType.crosshairMouse && GameState.inCursorMenu)
@@ -112,8 +107,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Returns the nailed item a collider belongs to: the item's own collider or subcollider, or a part of it
-        /// without a button of its own.
+        /// Returns the nailed item a collider belongs to, as its own collider, a subcollider, or a part without a
+        /// button of its own, or null when it belongs to none.
         /// </summary>
         private static ShipItem NailedOwner(Collider collider)
         {
@@ -137,8 +132,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Follows the look ray past nailed furniture and returns the first thing behind it when that is a small item
-        /// the pointer could pick up.
+        /// Returns the first thing the look ray hits past nailed furniture when it is a small item the pointer could
+        /// pick up, or null otherwise.
         /// </summary>
         private static ShipItem FindItemBehind(Ray ray, out RaycastHit itemHit)
         {
@@ -179,7 +174,9 @@ namespace KeeviFixes.Runtime
             }
         }
 
-        /// <summary>Whether the furniture's type overrides any of the actions the pick-up button triggers.</summary>
+        /// <summary>
+        /// Returns whether the furniture's type overrides any of the actions the pick-up button triggers.
+        /// </summary>
         private static bool HasOwnClick(ShipItem furniture)
         {
             Type type = furniture.GetType();

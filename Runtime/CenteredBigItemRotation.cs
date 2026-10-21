@@ -29,7 +29,7 @@ namespace KeeviFixes.Runtime
             this.rotationInHand = rotationInHand;
         }
 
-        /// <summary>Whether the game still has every holder field this fix reads and moves.</summary>
+        /// <summary>Whether the game has every holder field this class reads and moves.</summary>
         public static bool IsSupported
         {
             get { return GoPointerFields.AreFound; }
@@ -83,8 +83,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Moves the item by <paramref name="worldShift"/>, along with where the holder keeps it and where it intends
-        /// to keep it, so the holder's later positioning and push out of colliders carry on from the new position.
+        /// Moves the item by <paramref name="worldShift"/>, along with the positions the holder keeps and intends for
+        /// it.
         /// </summary>
         private void MoveHeldItem(GoPointer holder, Vector3 worldShift)
         {
@@ -95,8 +95,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Returns the item's rotation relative to <paramref name="holder"/>, composed the way the holder applies it
-        /// to a held big item: the stored rotation, pitched by the item's held rotation offset.
+        /// Returns the item's rotation relative to <paramref name="holder"/> as the holder applies it to a held big
+        /// item.
         /// </summary>
         private static Quaternion ReadRotationInHand(GoPointer holder, PickupableItem heldItem)
         {

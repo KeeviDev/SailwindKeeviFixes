@@ -45,10 +45,7 @@ namespace KeeviFixes.Patches
             }
         }
 
-        /// <summary>
-        /// Eases a container back into its hold after drinking. Runs after the other postfixes on the holder's late
-        /// update, so it starts from the pose they leave.
-        /// </summary>
+        /// <summary>Eases a container back into its hold after drinking.</summary>
         [HarmonyPatch(typeof(GoPointer), "LateUpdate")]
         private static class HolderPatches
         {

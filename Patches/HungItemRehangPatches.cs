@@ -5,18 +5,11 @@ using UnityEngine;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Hangs loaded items back on their hooks; see <see cref="HungItemRehang"/>. Items on boats and in houses load in
-    /// one batch per boat or house when the player comes close, after a save load as well, and the rest of the world's
-    /// items load in one batch with the save. Hooks are found at the end of a batch and taken in each item's first
-    /// physics step.
-    /// </summary>
+    /// <summary>Hangs loaded items back on their hooks; see <see cref="HungItemRehang"/>.</summary>
     [HarmonyPatch]
     internal static class HungItemRehangPatches
     {
-        /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the members the fix relies on.
-        /// </summary>
+        /// <summary>Skips these patches, with a warning, when the game lacks the members they rely on.</summary>
         private static bool Prepare()
         {
             bool supported = HungItemRehang.IsSupported
@@ -63,9 +56,7 @@ namespace KeeviFixes.Patches
             HungItemRehang.BeforeFirstPhysicsStep(__instance);
         }
 
-        /// <summary>
-        /// Keeps an item that already hangs from moving to another hook its collider touches while it loads.
-        /// </summary>
+        /// <summary>Skips the game's hanging on trigger contact for an item that already hangs.</summary>
         [HarmonyPrefix]
         [HarmonyPatch(typeof(HangableItem), nameof(HangableItem.OnTriggerEnter))]
         private static bool BeforeTriggerEnter(HangableItem __instance)

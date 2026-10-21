@@ -5,23 +5,16 @@ using KeeviFixes.Configuration;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Keeps the held item when the player lets go of a click on a button that is no longer targeted, such as a boat
-    /// ladder, which switches its collider off once the player is aboard. The game drops or throws a held item when
-    /// the pick-up key is released while nothing is targeted, whether or not that press clicked a button.
-    /// </summary>
+    /// <summary>Keeps the held item when the player releases a click on a button that is no longer targeted.</summary>
     [HarmonyPatch(typeof(GoPointer), "LateUpdate")]
     internal static class ButtonClickReleasePatch
     {
         /// <summary>
-        /// A click the pointer still had while the pick-up key was up. Its release was missed, such as in a menu, so it
-        /// belongs to an earlier press, and a new press that targets nothing must not reach it.
+        /// The click the pointer held while the pick-up key was up, which belongs to an earlier press.
         /// </summary>
         private static GoPointerButton releasedClick;
 
-        /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the pointer fields the fix relies on.
-        /// </summary>
+        /// <summary>Skips this patch, with a warning, when the game lacks the pointer fields it relies on.</summary>
         private static bool Prepare()
         {
             bool supported = AccessTools.Method(typeof(GoPointer), "LateUpdate") != null
@@ -39,9 +32,8 @@ namespace KeeviFixes.Patches
         }
 
         /// <summary>
-        /// Targets the clicked button again while its click is held, so the release ends the click instead of dropping
-        /// the item. A click that picked the item up is left alone: the game drops an item when a long pick-up click
-        /// is released. So is a click from an earlier press.
+        /// Keeps the clicked button targeted while the pick-up key is held, so releasing the key ends the click instead
+        /// of dropping the held item. Applies to a click of the current press on a button other than the held item.
         /// </summary>
         private static void Prefix(
             GoPointer __instance,

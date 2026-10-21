@@ -7,29 +7,18 @@ using UnityEngine;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Keeps items hung on hooks turned with their boat. The game keeps a hung item upright by resetting its tilt every
-    /// frame and keeping whatever heading it finds; the item follows the boat's turns, but each wave that rolls and
-    /// pitches the boat at once leaves a little heading behind, so hung items slowly spin on a rocking boat. The item's
-    /// heading relative to the boat is recorded once it hangs on a boat and restored after every upright reset.
-    /// </summary>
+    /// <summary>Keeps items hung on hooks turned with their boat.</summary>
     [HarmonyPatch(typeof(HangableItem))]
     internal static class HangingYawPatches
     {
-        /// <summary>
-        /// Recorded headings of hung items. Held weakly, so items destroyed while hanging, such as on a scene change,
-        /// leave nothing behind.
-        /// </summary>
         private static readonly ConditionalWeakTable<HangableItem, HangingYaw> Headings =
             new ConditionalWeakTable<HangableItem, HangingYaw>();
 
-        /// <summary>
-        /// Bumped when the setting changes, so headings recorded before it was turned off are recorded again.
-        /// </summary>
+        /// <summary>Counts changes of the setting; a heading recorded under an older count is recorded again.</summary>
         private static int settingVersion;
 
         /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the hanging members the fix relies on.
+        /// Skips these patches, with a warning, when the game lacks the hanging members they rely on.
         /// </summary>
         private static bool Prepare()
         {
@@ -51,7 +40,8 @@ namespace KeeviFixes.Patches
         }
 
         /// <summary>
-        /// Runs after the game, or HooksHangMore in its place, has set the hung item upright.
+        /// Sets an upright hung item's heading to the one recorded relative to its boat, and records that heading
+        /// whenever the item's hook, its boat or the setting changes.
         /// </summary>
         [HarmonyPostfix]
         [HarmonyPatch("LateUpdate")]
@@ -61,7 +51,6 @@ namespace KeeviFixes.Patches
             bool ___lockX,
             bool ___lockZ)
         {
-            // Most hangables are not hanging; a plain reference check keeps their frames free of calls into Unity.
             if (ReferenceEquals(___currentHook, null) || !ModConfig.FixHungItemFacing.Value || !___currentHook)
                 return;
 
@@ -86,7 +75,6 @@ namespace KeeviFixes.Patches
                 return;
             }
 
-            // An item hung without the upright lock turns rigidly with the boat and never drifts.
             if (!heading.Upright)
                 return;
 
@@ -95,10 +83,7 @@ namespace KeeviFixes.Patches
             item.eulerAngles = eulerAngles;
         }
 
-        /// <summary>
-        /// Forgets the heading once the item comes off its hook, so hanging it again, even on the same hook, records
-        /// the heading it is hung with then.
-        /// </summary>
+        /// <summary>Forgets the item's recorded heading.</summary>
         [HarmonyPostfix]
         [HarmonyPatch(nameof(HangableItem.DisconnectJoint))]
         private static void AfterDisconnectJoint(HangableItem __instance)

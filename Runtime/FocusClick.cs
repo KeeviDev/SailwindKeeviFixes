@@ -5,13 +5,12 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Hides the mouse click that brings the game window to the front. Windows passes that click on to the game, which
-    /// took it as an ordinary click: releasing it dropped or threw the held item. A mouse button pressed shortly after
-    /// the game gains focus, or already held when it does, reads as up until it is released.
+    /// Hides the mouse click that brings the game window to the front: a mouse button pressed shortly after the game
+    /// gains focus, or already held when it does, reads as up until it is released.
     /// </summary>
     internal static class FocusClick
     {
-        /// <summary>How long after gaining focus a press still counts as the click that gave it.</summary>
+        /// <summary>Seconds after gaining focus during which a press counts as the focusing click.</summary>
         private const float FocusClickWindow = 0.15f;
 
         private const int MouseButtonCount = 7;
@@ -53,43 +52,46 @@ namespace KeeviFixes.Runtime
             }
         }
 
-        /// <summary>The game's input read for a pressed button, without hidden mouse buttons.</summary>
+        /// <summary>Returns the game's input read for a pressed button, without hidden mouse buttons.</summary>
         public static bool GetKeyDown(InputName inputName)
         {
             return Read(inputName, KeyDown);
         }
 
-        /// <summary>The game's input read for a held button, without hidden mouse buttons.</summary>
+        /// <summary>Returns the game's input read for a held button, without hidden mouse buttons.</summary>
         public static bool GetKey(InputName inputName)
         {
             return Read(inputName, Key);
         }
 
-        /// <summary>The game's input read for a released button, without hidden mouse buttons.</summary>
+        /// <summary>Returns the game's input read for a released button, without hidden mouse buttons.</summary>
         public static bool GetKeyUp(InputName inputName)
         {
             return Read(inputName, KeyUp);
         }
 
-        /// <summary><see cref="Input.GetMouseButtonDown"/>, false for a hidden button.</summary>
+        /// <summary>Returns <see cref="Input.GetMouseButtonDown"/>, or false for a hidden button.</summary>
         public static bool GetMouseButtonDown(int button)
         {
             return Input.GetMouseButtonDown(button) && !IsSwallowed(KeyCode.Mouse0 + button);
         }
 
-        /// <summary><see cref="Input.GetMouseButton"/>, false for a hidden button.</summary>
+        /// <summary>Returns <see cref="Input.GetMouseButton"/>, or false for a hidden button.</summary>
         public static bool GetMouseButton(int button)
         {
             return Input.GetMouseButton(button) && !IsSwallowed(KeyCode.Mouse0 + button);
         }
 
-        /// <summary><see cref="Input.GetMouseButtonUp"/>, false for a hidden button.</summary>
+        /// <summary>Returns <see cref="Input.GetMouseButtonUp"/>, or false for a hidden button.</summary>
         public static bool GetMouseButtonUp(int button)
         {
             return Input.GetMouseButtonUp(button) && !IsSwallowed(KeyCode.Mouse0 + button);
         }
 
-        /// <summary>Mirrors <see cref="GameInput"/>: both key bindings, and the controller one when it is on.</summary>
+        /// <summary>
+        /// Returns <paramref name="read"/> for the input's two key bindings and, when it is on, its controller binding,
+        /// as <see cref="GameInput"/> reads them.
+        /// </summary>
         private static bool Read(InputName inputName, Func<KeyCode, bool> read)
         {
             return ReadKey(GameInput.GetKeyCode(inputName, false, false), read)
@@ -110,8 +112,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Once a frame, hides mouse buttons pressed within the focus click window and shows hidden ones again the
-        /// frame after their release.
+        /// Hides mouse buttons pressed within the focus click window and shows hidden ones again the frame after their
+        /// release, once a frame.
         /// </summary>
         private static void Refresh()
         {

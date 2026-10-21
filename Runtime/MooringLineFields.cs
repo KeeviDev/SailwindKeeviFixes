@@ -29,16 +29,13 @@ namespace KeeviFixes.Runtime
         private static readonly Func<PickupableBoatMooringRope, float> CurrentDistanceSquared =
             FindDistanceMeasure();
 
-        /// <summary>Whether the game still has every one of these members.</summary>
+        /// <summary>Whether the game has every one of these members.</summary>
         public static bool AreFound
         {
             get { return MooredSpring != null && HomeParent != null && IsLengthDue != null && CurrentDistanceSquared != null; }
         }
 
-        /// <summary>
-        /// Returns how far the tied line's end is from its place aboard, the distance the game sets a line's length
-        /// to when it measures it.
-        /// </summary>
+        /// <summary>Returns how far the tied line's end is from its place aboard.</summary>
         public static float MeasureDistance(PickupableBoatMooringRope line)
         {
             return Mathf.Sqrt(CurrentDistanceSquared(line));
@@ -54,8 +51,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Returns an accessor for a private <see cref="PickupableBoatMooringRope"/> field, or null when the game no
-        /// longer has a field of that name and type.
+        /// Returns an accessor for a private <see cref="PickupableBoatMooringRope"/> field, or null when the game has
+        /// no field of that name and type.
         /// </summary>
         private static AccessTools.FieldRef<PickupableBoatMooringRope, T> Find<T>(string name)
         {

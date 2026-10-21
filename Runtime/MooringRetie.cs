@@ -6,15 +6,12 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Keeps moored boats tied. Loading puts a tied line's end back where it was saved and ties it only if it touches a
-    /// switched-on cleat; a far port's cleats are switched off, and the world shifts right after loading, so those
-    /// lines stay loose. They are tied here by position instead: islands only move up and down, so the cleat under a
-    /// line's end is its cleat. Separately, a cleat switched on while its boat is switched off ends up with a spring
-    /// attached to nothing, so a boat's springs are attached again whenever the boat is switched on.
+    /// Ties loaded mooring lines to the cleats under their ends, and attaches a boat's springs again whenever the boat
+    /// is switched on.
     /// </summary>
     internal static class MooringRetie
     {
-        /// <summary>How far, seen from above, a loaded line's end may be from its cleat.</summary>
+        /// <summary>Distance, in metres, seen from above, a loaded line's end may be from its cleat.</summary>
         private const float MatchDistance = 0.5f;
 
         private static readonly List<LoadedLine> LoadedLines = new List<LoadedLine>();
@@ -118,8 +115,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Returns the free cleat nearest to the line's end seen from above, within <see cref="MatchDistance"/>, or
-        /// null when there is none. Cleats on the line's own boat are skipped.
+        /// Returns the free cleat off the line's own boat nearest to the line's end seen from above, within <see
+        /// cref="MatchDistance"/>, or null when there is none.
         /// </summary>
         private static GPButtonDockMooring FindCleatUnder(PickupableBoatMooringRope line, GPButtonDockMooring[] cleats)
         {

@@ -5,18 +5,13 @@ using UnityEngine;
 
 namespace KeeviFixes.Runtime
 {
-    /// <summary>
-    /// Places the pieces of an item cut with a knife. The game, and mods that cut more items the same way, put every
-    /// piece at the cut item's pivot, 2 cm apart along its x axis. A pivot can sit at one end or at the bottom of an
-    /// item, as on barrels, so pieces appeared half inside the surface it lay on and could fall through it, and pieces
-    /// thicker than 2 cm pushed each other apart.
-    /// </summary>
+    /// <summary>Places the pieces of an item cut with a knife in a row through the cut item's centre.</summary>
     internal static class CutPieces
     {
-        /// <summary>The space left between pieces.</summary>
+        /// <summary>Space, in metres, left between pieces.</summary>
         private const float PieceGap = 0.01f;
 
-        /// <summary>How far apart the game puts pieces, used for pieces without a collider.</summary>
+        /// <summary>Spacing, in metres, of pieces without a collider.</summary>
         private const float GameSpacing = 0.02f;
 
         /// <summary>
@@ -33,7 +28,7 @@ namespace KeeviFixes.Runtime
         /// <summary>The item being cut, or null outside a cut the fix handles.</summary>
         private static ShipItem cutItem;
 
-        /// <summary>The knife cutting it, which registers itself for saving when bought by the same click.</summary>
+        /// <summary>The knife doing the cut.</summary>
         private static ShipItemKnife knife;
 
         private static bool loggedFailure;
@@ -65,8 +60,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Moves the collected pieces once the cut is done, before their physics twins take their places from them.
-        /// Pieces made before another mod's patch failed are placed as well.
+        /// Lays out the pieces collected during the cut and ends the cut. Logs an error, once per session, when placing
+        /// fails.
         /// </summary>
         public static void AfterCut()
         {
@@ -140,7 +135,7 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// The centre and half height of the cut item's own collider in the world, and the item's axis to lay the row
+        /// Returns the centre and half height of the item's collider in the world, and the item's axis to lay the row
         /// along.
         /// </summary>
         private static Shape ShapeOf(ShipItem item, Transform template)
@@ -157,9 +152,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Picks the item's axis to lay the pieces along, so they lie side by side as the game turns them: of the axes
-        /// that don't point up or down, the one most across the pieces' long side, then the longer one; the longest
-        /// axis when all of them are steep.
+        /// Returns the index of the item's axis to lay the pieces along: the level axis most across the pieces' long
+        /// side, the longer of two equally across, or the longest axis when none is level.
         /// </summary>
         private static int SpreadAxis(Vector3 size, Vector3[] directions, Vector3 pieceLength)
         {
@@ -187,7 +181,9 @@ namespace KeeviFixes.Runtime
             return best >= 0 ? best : longest;
         }
 
-        /// <summary>The direction of a piece's longest side in the world, or zero without a piece.</summary>
+        /// <summary>
+        /// Returns the direction of a piece's longest side in the world, or zero when the piece has no collider.
+        /// </summary>
         private static Vector3 PieceLength(Transform piece)
         {
             Box box;
@@ -200,8 +196,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// The box an object's collider fills, in its own space with its scale applied. A box collider counts first,
-        /// then a capsule, then a mesh, since the game keeps the box or capsule of an item that has a mesh as well.
+        /// Gets the box an object's collider fills, in its own space with its scale applied, preferring a box collider,
+        /// then a capsule, then a mesh. Returns false when the object has none of them.
         /// </summary>
         private static bool TryGetBox(Transform transform, out Box box)
         {
@@ -250,7 +246,9 @@ namespace KeeviFixes.Runtime
                 Size = size;
             }
 
-            /// <summary>How far the box reaches along a direction in the world, as its object is turned now.</summary>
+            /// <summary>
+            /// Returns how far the box reaches along a direction in the world, as its object is turned now.
+            /// </summary>
             public float Extent(Transform transform, Vector3 direction)
             {
                 return Mathf.Abs(Vector3.Dot(direction, transform.right)) * Size.x
@@ -259,9 +257,7 @@ namespace KeeviFixes.Runtime
             }
         }
 
-        /// <summary>
-        /// Where the row of pieces goes: the cut item's centre and half height, and the row's direction.
-        /// </summary>
+        /// <summary>The cut item's centre and half height, and the row's direction.</summary>
         private struct Shape
         {
             public readonly Vector3 Center;

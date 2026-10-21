@@ -3,8 +3,8 @@ using BepInEx.Bootstrap;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Decides whether the mooring line fixes may run: the game must still have the members they rely on, and
-    /// MooringLineFix, which fixes the same, must not be installed.
+    /// Decides whether the mooring line fixes may run: the game must have the members they rely on, and MooringLineFix
+    /// must not be installed.
     /// </summary>
     internal static class MooringFix
     {

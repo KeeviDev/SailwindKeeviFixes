@@ -13,9 +13,7 @@ namespace KeeviFixes.Patches
     [HarmonyPatch(typeof(GameInput))]
     internal static class FocusClickInputPatches
     {
-        /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the button reads the fix relies on.
-        /// </summary>
+        /// <summary>Skips these patches, with a warning, when the game lacks the button reads they rely on.</summary>
         private static bool Prepare()
         {
             bool supported = AccessTools.Method(typeof(GameInput), nameof(GameInput.GetKeyDown)) != null
@@ -67,8 +65,8 @@ namespace KeeviFixes.Patches
     }
 
     /// <summary>
-    /// Hides the click that focuses the game from the inventory, menus and map view, which read the mouse directly
-    /// besides the game's button reads.
+    /// Hides the click that focuses the game from the inventory, menu and map view methods that read the mouse
+    /// directly.
     /// </summary>
     [HarmonyPatch]
     internal static class FocusClickMousePatches
@@ -80,9 +78,7 @@ namespace KeeviFixes.Patches
             { MouseRead(nameof(Input.GetMouseButtonUp)), Replacement(nameof(FocusClick.GetMouseButtonUp)) },
         };
 
-        /// <summary>
-        /// The inventory and menu pointer and the map view methods that read the mouse directly.
-        /// </summary>
+        /// <summary>Returns the inventory, menu and map view methods that read the mouse directly.</summary>
         private static IEnumerable<MethodBase> TargetMethods()
         {
             return new[] { typeof(MouseButtonPointer), typeof(MapTableCamera) }
@@ -91,9 +87,7 @@ namespace KeeviFixes.Patches
                 .Cast<MethodBase>();
         }
 
-        /// <summary>
-        /// Skips this patch, with a warning, when none of those methods reads the mouse any more.
-        /// </summary>
+        /// <summary>Skips this patch, with a warning, when none of those methods reads the mouse.</summary>
         private static bool Prepare(MethodBase original)
         {
             if (original != null)

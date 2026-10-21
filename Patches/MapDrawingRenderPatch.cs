@@ -3,16 +3,12 @@ using KeeviFixes.Configuration;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Renders a map's lines into its own texture as soon as the game updates it. The game draws every map through one
-    /// shared camera, which renders once per frame into the map updated last, so when several maps update in the same
-    /// frame, as they can when a save or a boat's items load, the others stay blank until drawn on again.
-    /// </summary>
+    /// <summary>Renders a map's lines into its own texture as soon as the game updates it.</summary>
     [HarmonyPatch(typeof(MapChartTextureRenderer), "UpdateTexture")]
     internal static class MapDrawingRenderPatch
     {
         /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the map renderer members the fix relies on.
+        /// Skips this patch, with a warning, when the game lacks the map renderer members it relies on.
         /// </summary>
         private static bool Prepare()
         {

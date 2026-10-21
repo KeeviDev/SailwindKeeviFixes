@@ -52,10 +52,7 @@ namespace KeeviFixes
             }
         }
 
-        /// <summary>
-        /// Applies every Harmony patch in this assembly. A transpiler that can't find its target
-        /// IL doesn't throw; it logs its own error instead.
-        /// </summary>
+        /// <summary>Applies every Harmony patch in this assembly and logs each patched method.</summary>
         private static void ApplyHarmonyPatches()
         {
             var harmony = new Harmony(PLUGIN_GUID);

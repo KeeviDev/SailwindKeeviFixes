@@ -4,8 +4,7 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Sits on a boat with tied lines and attaches their springs again one frame after the game switches the boat on,
-    /// once the boat's physics body is back.
+    /// Attaches the springs of a boat's tied lines again one frame after the game switches the boat on.
     /// </summary>
     internal sealed class MooredBoat : MonoBehaviour
     {

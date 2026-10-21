@@ -4,11 +4,8 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Keeps the length a mooring line was tied or set to. The game sets a tied line's length to the boat's current
-    /// distance whenever the boat wakes up, after being far away, paused or loaded, so a boat pressed against the dock at
-    /// that moment ends up tied tighter. A waking boat instead keeps the line's length, or the boat's distance when that
-    /// is longer so the spring never yanks the boat, and the line then takes in its slack as the boat comes closer. The
-    /// length is saved with the line, in a value the game does not use for lines.
+    /// Keeps the length a mooring line was tied or set to when its boat wakes up, unless the boat lies farther away,
+    /// and takes in the slack as the boat comes closer. Saves the length with the line.
     /// </summary>
     internal static class MooringLineLength
     {
@@ -37,7 +34,7 @@ namespace KeeviFixes.Runtime
 
         /// <summary>
         /// Applies the kept length when the line's boat has woken up, and takes in slack above it. Must run before the
-        /// line's own update, which would otherwise measure the length again.
+        /// line's own update.
         /// </summary>
         public static void BeforeLineUpdate(PickupableBoatMooringRope line)
         {

@@ -4,16 +4,13 @@ using KeeviFixes.Runtime;
 namespace KeeviFixes.Patches
 {
     /// <summary>
-    /// Keeps moored boats tied and mooring lines at their length; see <see cref="MooringRetie"/> and
-    /// <see cref="MooringLineLength"/>. Every tie, by hand, by the game while loading or by this fix, goes through
-    /// <see cref="PickupableBoatMooringRope.MoorTo"/>.
+    /// Keeps moored boats tied and mooring lines at their length; see <see cref="MooringRetie"/> and <see
+    /// cref="MooringLineLength"/>.
     /// </summary>
     [HarmonyPatch]
     internal static class MooringPatches
     {
-        /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the members the fixes rely on.
-        /// </summary>
+        /// <summary>Skips these patches, with a warning, when the game lacks the members they rely on.</summary>
         private static bool Prepare()
         {
             bool supported = MooringLineFields.AreFound

@@ -5,17 +5,12 @@ using KeeviFixes.Configuration;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Takes a destroyed item's physics twin out of the physics before the item leaves its boat. Leaving the boat
-    /// moves the twin from the boat's walk copy into the world at the item's place, which is inside the boat itself,
-    /// and the twin lives on for one more physics step. A twin that had settled is kinematic and pushed the whole boat
-    /// out of itself: cutting a fish or a barrel that had lain for a while shook the boat with a thud.
-    /// </summary>
+    /// <summary>Deactivates a destroyed item's physics twin before the item leaves its boat.</summary>
     [HarmonyPatch(typeof(ShipItem), nameof(ShipItem.DestroyItem))]
     internal static class DestroyedItemTwinPatch
     {
         /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the item removal the fix relies on.
+        /// Skips this patch, with a warning, when the game lacks the item removal members it relies on.
         /// </summary>
         private static bool Prepare()
         {
@@ -31,9 +26,7 @@ namespace KeeviFixes.Patches
             return supported;
         }
 
-        /// <summary>
-        /// Puts the twin away at the start of the game's own removal, so mods that skip removing an item keep its twin.
-        /// </summary>
+        /// <summary>Inserts a call to <see cref="DeactivateTwin"/> at the start of the game's item removal.</summary>
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var codes = new List<CodeInstruction>(instructions);
@@ -51,10 +44,6 @@ namespace KeeviFixes.Patches
             return codes;
         }
 
-        /// <summary>
-        /// Deactivates the twin, as the game does to freeze an item; it is destroyed with the item at the end of the
-        /// frame either way.
-        /// </summary>
         private static void DeactivateTwin(ShipItem item)
         {
             if (!ModConfig.FixBoatShakingWhenCutting.Value)

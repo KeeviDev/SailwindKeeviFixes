@@ -18,15 +18,15 @@ namespace KeeviFixes.Runtime
         /// <summary>The item's rotation before its held rotation offset is applied.</summary>
         public static readonly AccessTools.FieldRef<GoPointer, Quaternion> BigItemLocalRot = Find<Quaternion>("bigItemLocalRot");
 
-        /// <summary>Whether the game still has every one of these fields.</summary>
+        /// <summary>Whether the game has every one of these fields.</summary>
         public static bool AreFound
         {
             get { return BigItemLocalPos != null && DecolLocalPos != null && BigItemLocalRot != null; }
         }
 
         /// <summary>
-        /// Returns an accessor for a private <see cref="GoPointer"/> field, or null when the game no longer has a
-        /// field of that name and type.
+        /// Returns an accessor for a private <see cref="GoPointer"/> field, or null when the game has no field of that
+        /// name and type.
         /// </summary>
         private static AccessTools.FieldRef<GoPointer, T> Find<T>(string name)
         {

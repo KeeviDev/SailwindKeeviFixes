@@ -4,17 +4,11 @@ using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Places the pieces of items cut with a knife; see <see cref="CutPieces"/>. The knife's alternate use cuts in the
-    /// game and in mods that patch it, and every piece is registered for saving, so the pieces are the items registered
-    /// during that call.
-    /// </summary>
+    /// <summary>Places the pieces of items cut with a knife; see <see cref="CutPieces"/>.</summary>
     [HarmonyPatch]
     internal static class CutPiecesPatches
     {
-        /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the members the fix relies on.
-        /// </summary>
+        /// <summary>Skips these patches, with a warning, when the game lacks the members they rely on.</summary>
         private static bool Prepare()
         {
             bool supported = AccessTools.Method(typeof(ShipItemKnife), nameof(ShipItemKnife.OnAltActivate)) != null
@@ -38,7 +32,7 @@ namespace KeeviFixes.Patches
         }
 
         /// <summary>
-        /// Runs after every postfix, so the pieces mods cut in their own postfixes are placed as well.
+        /// Places the pieces registered during the cut, including pieces cut by other patches on the same method.
         /// </summary>
         [HarmonyFinalizer]
         [HarmonyPatch(typeof(ShipItemKnife), nameof(ShipItemKnife.OnAltActivate))]

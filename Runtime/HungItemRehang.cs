@@ -8,18 +8,15 @@ using UnityEngine;
 
 namespace KeeviFixes.Runtime
 {
-    /// <summary>
-    /// Hangs loaded items back on their hooks by position. The game doesn't save which hook an item hangs on and hangs
-    /// it again only if its collider touches the hook's in its first physics steps, which items below ceiling hooks
-    /// often miss, so they fall. A hook and the item on it are saved relative to the same boat and come back in the
-    /// same batch, so a hung item loads exactly at its hook's hanging point, where an item resting nearby never is.
-    /// </summary>
+    /// <summary>Hangs loaded items back on the hooks at whose hanging points they loaded.</summary>
     internal static class HungItemRehang
     {
-        /// <summary>How far a loaded item may sit from a hook's hanging point and still hang on it.</summary>
+        /// <summary>
+        /// Distance, in metres, a loaded item may sit from a hook's hanging point and still hang on it.
+        /// </summary>
         private const float MatchDistance = 0.01f;
 
-        /// <summary>How far out from its hook the game hangs an item.</summary>
+        /// <summary>Distance, in metres, out from its hook at which the game hangs an item.</summary>
         private const float HangingDistance = 0.128f;
 
         private static readonly AccessTools.FieldRef<ShipItemLampHook, bool> Occupied =
@@ -36,15 +33,13 @@ namespace KeeviFixes.Runtime
         private static IDictionary hooksHangMoreOffsets;
         private static MethodInfo hooksHangMorePosition;
 
-        /// <summary>Whether the game still has the hook field the fix relies on.</summary>
+        /// <summary>Whether the game has the hook field this class relies on.</summary>
         public static bool IsSupported
         {
             get { return Occupied != null; }
         }
 
-        /// <summary>
-        /// Remembers a loaded hook or item that can hang, unless it was loaded into a crate or the inventory.
-        /// </summary>
+        /// <summary>Remembers a hook or hangable item loaded outside crates and the inventory.</summary>
         public static void OnLoaded(SaveablePrefab prefab, SavePrefabData data)
         {
             if (data == null || data.crateId > 0 || data.inventorySlot > -1
@@ -64,8 +59,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Once a batch of items has loaded, finds the hook of each item that sits at the hanging point of a hook from
-        /// the same batch, while the items are still where they were saved.
+        /// Finds, for each item of the batch just loaded, the hook from the same batch at whose hanging point it sits.
+        /// Must run once the batch has loaded, before its items move.
         /// </summary>
         public static void AfterBatch()
         {
@@ -87,9 +82,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Hangs the item on the hook found for it, in its first physics step. Hanging needs the physics bodies the
-        /// item and the hook only get in their first frame, and the game's own re-hanging runs after that step, so
-        /// the item hangs before it could fall or touch another hook.
+        /// Hangs the item on the hook found for it, restores its saved rotation and logs it. Must run at the start of
+        /// the item's first physics step.
         /// </summary>
         public static void BeforeFirstPhysicsStep(HangableItem item)
         {
@@ -153,7 +147,7 @@ namespace KeeviFixes.Runtime
             return false;
         }
 
-        /// <summary>Drops items destroyed before their first physics step, such as by leaving a boat at once.</summary>
+        /// <summary>Removes destroyed items from the pending hangs.</summary>
         private static void ForgetDestroyedItems()
         {
             if (Pending.Count == 0)
@@ -171,8 +165,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Where an item hangs on a hook: the game's point, moved by the item's HooksHangMore offset the way that mod
-        /// moves it, with the offset's y along the world's up axis.
+        /// Returns where an item with the given HooksHangMore offset hangs on a hook, with the offset applied as that
+        /// mod applies it.
         /// </summary>
         private static Vector3 HangingPoint(Transform hook, Vector3 offset)
         {
@@ -181,7 +175,9 @@ namespace KeeviFixes.Runtime
             return point;
         }
 
-        /// <summary>The item's hanging offset from HooksHangMore, or zero for an item it doesn't move.</summary>
+        /// <summary>
+        /// Returns the item's hanging offset from HooksHangMore, or zero for an item that mod doesn't move.
+        /// </summary>
         private static Vector3 HangingOffset(HangableItem item)
         {
             ResolveHooksHangMore();
@@ -193,8 +189,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Finds HooksHangMore's public table of hanging offsets on first use, after every plugin has loaded. Without
-        /// that mod, or when its table changed shape, items it moves are left to the game's own re-hanging.
+        /// Looks up HooksHangMore's table of hanging offsets on the first call. Logs a warning when that mod is loaded
+        /// but its table can't be read.
         /// </summary>
         private static void ResolveHooksHangMore()
         {
@@ -229,11 +225,7 @@ namespace KeeviFixes.Runtime
                 : null;
         }
 
-        /// <summary>
-        /// The hook found for a loaded item, and the rotation it was saved with. Hanging restores that rotation, since
-        /// mods such as HooksHangMore turn an item as it is hung by hand, and the saved rotation already includes that
-        /// turn.
-        /// </summary>
+        /// <summary>The hook found for a loaded item, and the rotation it was saved with.</summary>
         private struct PendingHang
         {
             public readonly ShipItemLampHook Hook;

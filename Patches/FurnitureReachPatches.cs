@@ -14,7 +14,7 @@ namespace KeeviFixes.Patches
     internal static class FurnitureReachPatches
     {
         /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the pointer members the fix relies on.
+        /// Skips these patches, with a warning, when the game lacks the pointer members they rely on.
         /// </summary>
         private static bool Prepare()
         {
@@ -36,7 +36,10 @@ namespace KeeviFixes.Patches
             return supported;
         }
 
-        /// <summary>Runs after every other mod's look fixes, so it sees the target they chose.</summary>
+        /// <summary>
+        /// Retargets the pointer past nailed furniture after every other look patch; see <see
+        /// cref="FurnitureReach.AfterLook"/>.
+        /// </summary>
         [HarmonyPostfix]
         [HarmonyPatch("DoRaycast")]
         [HarmonyPriority(Priority.Last)]

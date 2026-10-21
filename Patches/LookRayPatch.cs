@@ -8,17 +8,7 @@ using UnityEngine;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Routes the pointer's look ray through <see cref="Raycast"/>, which fixes what the ray can reach.
-    /// <list type="bullet">
-    /// <item>It leaves out the items stored in crates. The game moves them to the ItemInCrate layer, which collides
-    /// with nothing, but its look ray still hits that layer. Stored items sit at the crate's base, so a player who
-    /// stepped right up to the crate, with the ray starting inside it, picked them up without opening the crate
-    /// and without taking them out of it.</item>
-    /// <item>It stops at a boat's walls, decks and hull before an item. Those exist only in the boat's walk copy, so
-    /// the game's ray passed through them; a ray that reaches an item behind one now hits that wall instead.</item>
-    /// </list>
-    /// </summary>
+    /// <summary>Routes the pointer's look ray through <see cref="Raycast"/>.</summary>
     [HarmonyPatch(typeof(GoPointer), "DoRaycast")]
     internal static class LookRayPatch
     {
@@ -30,8 +20,8 @@ namespace KeeviFixes.Patches
         private static int itemInCrateMask;
 
         /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the raycast the fixes rely on, and warns for
-        /// each fix whose own parts are gone.
+        /// Skips this patch, with a warning, when the game lacks the look raycast; warns for each fix whose own members
+        /// are missing.
         /// </summary>
         private static bool Prepare(MethodBase original)
         {
@@ -89,8 +79,8 @@ namespace KeeviFixes.Patches
         }
 
         /// <summary>
-        /// The game's look raycast, without the items stored in crates and stopped by boat walls when the settings are
-        /// on.
+        /// Casts the game's look ray, leaving out items stored in crates and stopping at boat walls when those settings
+        /// are on. Returns whether the ray hit anything.
         /// </summary>
         private static bool Raycast(Ray ray, out RaycastHit hit, float maxDistance, int layerMask)
         {
@@ -107,7 +97,7 @@ namespace KeeviFixes.Patches
         }
 
         /// <summary>
-        /// The look ray's layers without the items stored in crates when that setting is on.
+        /// Returns the look ray's layers without the layer of items stored in crates when that setting is on.
         /// </summary>
         public static int ReachableLayers(int layerMask)
         {
@@ -115,18 +105,13 @@ namespace KeeviFixes.Patches
         }
     }
 
-    /// <summary>
-    /// Clears an item target behind a boat wall that another mod chose after the game's own look ray, such as an item
-    /// on a stove or a hook found further along the ray.
-    /// </summary>
+    /// <summary>Clears an item target behind a boat wall that other patches chose after the game's look ray.</summary>
     [HarmonyPatch(typeof(GoPointer), "DoRaycast")]
     internal static class WallTargetCheckPatch
     {
         private const float MaxLookDistance = 1.8f;
 
-        /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the pointer fields the check relies on.
-        /// </summary>
+        /// <summary>Skips this patch, with a warning, when the game lacks the pointer fields it relies on.</summary>
         private static bool Prepare()
         {
             bool supported = BoatWalls.IsSupported

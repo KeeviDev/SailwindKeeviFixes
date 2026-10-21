@@ -2,9 +2,7 @@ using BepInEx.Configuration;
 
 namespace KeeviFixes.Configuration
 {
-    /// <summary>
-    /// Mod's user-facing settings. <see cref="Bind"/> must run before any setting is read.
-    /// </summary>
+    /// <summary>Holds the mod's settings. <see cref="Bind"/> must run before any setting is read.</summary>
     internal static class ModConfig
     {
         private const string AllItemsSection = "All Items";
@@ -187,9 +185,9 @@ namespace KeeviFixes.Configuration
         }
 
         /// <summary>
-        /// Keeps picking up small items behind nailed furniture enabled only together with keeping stored items out of
-        /// reach, since a look past nailed storage furniture would otherwise reach the items stored inside it: turning
-        /// the stored items fix off turns the furniture one off, and turning the furniture one on turns it back on.
+        /// Keeps <see cref="FixReachingBehindFurniture"/> on only while <see cref="FixReachingIntoCrates"/> is on:
+        /// turning the crates setting off turns the furniture setting off, and turning the furniture setting on turns
+        /// the crates setting on.
         /// </summary>
         private static void KeepFurnitureReachDependentOnStoredItems()
         {

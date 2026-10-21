@@ -9,9 +9,7 @@ namespace KeeviFixes.Patches
     [HarmonyPatch(typeof(GoPointer), "LateUpdate")]
     internal static class CenteredBigItemRotationPatch
     {
-        /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the holder fields the fix relies on.
-        /// </summary>
+        /// <summary>Skips this patch, with a warning, when the game lacks the holder fields it relies on.</summary>
         private static bool Prepare()
         {
             if (!CenteredBigItemRotation.IsSupported)

@@ -6,17 +6,12 @@ using KeeviFixes.Configuration;
 namespace KeeviFixes.Patches
 {
     /// <summary>
-    /// Ends a click whose release the game missed. The mouse pointer ignores the pick-up key while a menu, the map view
-    /// or the boat camera is open, so a button let go of there stays clicked: it keeps its outline, which shows through
-    /// walls, a winch keeps turning with the mouse, and a press that targets nothing later reaches it instead. Drawing
-    /// on a map does this every time, since the click on the map opens the map view.
+    /// Ends a click whose release the game missed while a menu, the map view or the boat camera was open.
     /// </summary>
     [HarmonyPatch(typeof(GoPointer), "LateUpdate")]
     internal static class MissedClickReleasePatch
     {
-        /// <summary>
-        /// Skips this patch, with a warning, when the game no longer has the pointer field the fix relies on.
-        /// </summary>
+        /// <summary>Skips this patch, with a warning, when the game lacks the pointer field it relies on.</summary>
         private static bool Prepare()
         {
             bool supported = AccessTools.Method(typeof(GoPointer), "LateUpdate") != null
@@ -32,8 +27,8 @@ namespace KeeviFixes.Patches
         }
 
         /// <summary>
-        /// Once the pointer handles the pick-up key again, ends a click that is still on while the key is up, the way
-        /// the game ends one on release. Runs before other prefixes, so none of them sees the stale click.
+        /// Ends a click still held while the pick-up key is up, the way the game ends one on release, once the pointer
+        /// handles the key again.
         /// </summary>
         [HarmonyPriority(Priority.High)]
         private static void Prefix(GoPointer __instance, ref GoPointerButton ___clickedButton)

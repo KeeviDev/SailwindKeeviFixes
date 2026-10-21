@@ -6,23 +6,15 @@ using KeeviFixes.Configuration;
 
 namespace KeeviFixes.Patches
 {
-    /// <summary>
-    /// Clears the pointer's target after it picks an item up. The game drops or throws a held item only while nothing
-    /// is targeted, and while an item is held its raycast keeps the previous target whenever it hits an item the held
-    /// one can't be used on. An item picked up in front of another stayed the target itself, and one taken from the
-    /// inventory left the target the player looked at before opening it, until the player looked away.
-    /// </summary>
+    /// <summary>Clears the pointer's target after it picks an item up.</summary>
     [HarmonyPatch(typeof(GoPointer))]
     internal static class PickupLookTargetPatches
     {
-        /// <summary>
-        /// Pointers that picked an item up since their last late update. The game can still use the target right
-        /// after a pickup in the same frame, so it's cleared only at the end of the pointer's late update.
-        /// </summary>
+        /// <summary>Pointers that picked an item up since their last late update.</summary>
         private static readonly HashSet<GoPointer> PickedUpBy = new HashSet<GoPointer>();
 
         /// <summary>
-        /// Skips these patches, with a warning, when the game no longer has the pointer members the fix relies on.
+        /// Skips these patches, with a warning, when the game lacks the pointer members they rely on.
         /// </summary>
         private static bool Prepare()
         {

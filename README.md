@@ -12,24 +12,24 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 
 ## What it fixes
 
+- Lines drawn on some maps disappeared after loading.
+- Moored boats came loose and drifted away after loading a save away from them, or after coming back to them.
+- Mooring lines were tightened or loosened to wherever the boat happened to be after loading, pausing or coming back to the boat.
 - An item picked up directly in front of another item could not be dropped or thrown until the player looked away.
 - Climbing a boat ladder, or releasing any other button after it stopped being targeted, dropped the held item.
 - Items could be picked up and used through boat walls, decks and ceilings.
-- Items stored in a closed crate could be picked up without opening it in some cases.
 - Big items rotated around a point at their base or edge instead of their centre.
-- After drinking from a barrel, it stayed held like a small item.
-- Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
-- The charting kit could not be placed on tables and other furniture.
-- Items hung on ceiling hooks, such as pots or Windicators anemometers, fell off after loading a save or returning to the boat.
-- Hung items slowly rotated relative to the boat while it rocked in waves.
 - Cutting an item that had been lying on the boat for a while shook the boat with a thud.
 - Cut pieces appeared at one end or at the bottom of the item, so they could fall through the deck or push each other apart.
-- Lines drawn on some maps disappeared after loading.
-- Pausing while operating the bilge pump knocked its handle off its axis.
-- Moored boats came loose and drifted away after loading a save away from them, or after coming back to them.
-- Mooring lines were tightened or loosened to wherever the boat happened to be after loading, pausing or coming back to the boat.
+- Items hung on ceiling hooks, such as pots or Windicators anemometers, fell off after loading a save or returning to the boat.
+- Hung items slowly rotated relative to the boat while it rocked in waves.
+- Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
+- Items stored in a closed crate could be picked up without opening it in some cases.
+- After drinking from a barrel, it stayed held like a small item.
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
 - After charting, the map stayed selected: it remained outlined through walls and opened again when the charting kit was placed next to it. Other items and buttons could stay selected after menus as well, such as a winch after a pause.
+- The charting kit could not be placed on tables and other furniture.
+- Pausing while operating the bilge pump knocked its handle off its axis.
 
 ## Installation
 

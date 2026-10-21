@@ -4,16 +4,15 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Gives a barrel back the big-item hold it had before the player drank from it, once the drinking ends,
-    /// and eases it from the drinking pose back into that hold. The game turns a barrel into a small item when
-    /// drinking starts and makes it big again only on drop.
+    /// Gives a barrel back the big-item hold it had before the player drank from it once the drinking ends, and eases
+    /// it from the drinking pose back into that hold.
     /// </summary>
     internal sealed class BigContainerDrinking
     {
         /// <summary>Seconds the container takes to move from the drinking pose back into its hold.</summary>
         private const float ReturnDuration = 0.35f;
 
-        /// <summary>The container being drunk from; only the held item drinks, so there is at most one.</summary>
+        /// <summary>The container being drunk from.</summary>
         private static BigContainerDrinking current;
 
         /// <summary>The container easing back into its hold after drinking, if any.</summary>
@@ -41,15 +40,15 @@ namespace KeeviFixes.Runtime
             heldRotationOffset = item.heldRotationOffset;
         }
 
-        /// <summary>Whether the game still has every holder field this fix restores.</summary>
+        /// <summary>Whether the game has every holder field this class restores.</summary>
         public static bool IsSupported
         {
             get { return GoPointerFields.AreFound; }
         }
 
         /// <summary>
-        /// Captures the hold of <paramref name="item"/> before a drinking step, or returns null when the item is not
-        /// held as a big item, so no step can turn it small.
+        /// Returns the hold of <paramref name="item"/> captured before a drinking step, or null when the item is not
+        /// held as a big item.
         /// </summary>
         public static BigContainerDrinking CaptureBeforeDrinkingStep(PickupableItem item)
         {
@@ -86,8 +85,8 @@ namespace KeeviFixes.Runtime
 
         /// <summary>
         /// Draws the container <paramref name="holder"/> holds part of the way between the drinking pose it left and
-        /// the pose the holder has just given it, until the return is over. Must run after the holder and other
-        /// fixes have positioned the item for the frame.
+        /// the pose the holder has just given it, until the return is over. Must run after the holder and other patches
+        /// have positioned the item for the frame.
         /// </summary>
         public static void EaseReturningItem(GoPointer holder)
         {
