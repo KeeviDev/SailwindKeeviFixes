@@ -1,5 +1,9 @@
 # Changelog
 
+### Fixed
+
+- Fishing rods on hooks or lying around no longer swing out of place when a fish bites; they now stay put and bend toward the fish ("Fix fishing rods turning")
+
 ## [1.0.4] - 2026-11-04
 
 ### Changed

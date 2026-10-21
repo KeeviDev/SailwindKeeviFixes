@@ -21,6 +21,7 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - Big items rotated around a point at their base or edge instead of their centre.
 - Cutting an item that had been lying on the boat for a while shook the boat with a thud.
 - Cut pieces appeared at one end or at the bottom of the item, so they could fall through the deck or push each other apart.
+- When a fish bit, a fishing rod on a hook or lying on the deck swung out of its place, its handle left the hook, and picking it up still meant aiming at where it had been.
 - Items hung on ceiling hooks, such as pots or Windicators anemometers, fell off after loading a save or returning to the boat.
 - Hung items slowly rotated relative to the boat while it rocked in waves.
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
@@ -63,6 +64,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
 | Boats | Fix moored boats coming loose ² | Moored boats stay tied after loading or coming back. |
 | Boats | Fix mooring line length ² | Mooring lines keep the length you gave them. |
+| Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Interface | Fix focus click | Clicking back into the game no longer acts in it. |
 | Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 
