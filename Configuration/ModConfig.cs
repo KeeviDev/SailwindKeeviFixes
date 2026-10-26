@@ -24,6 +24,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixBarrelsAfterDrinking { get; private set; }
 
+        public static ConfigEntry<bool> FixBarrelsFromTheCart { get; private set; }
+
         public static ConfigEntry<bool> FixBilgePumpHandle { get; private set; }
 
         public static ConfigEntry<bool> FixDroppingAfterPickup { get; private set; }
@@ -83,6 +85,14 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes barrels being held like small items after you drink from them."));
+
+            FixBarrelsFromTheCart = config.Bind(
+                BigItemsSection,
+                "Fix barrels from the cart",
+                true,
+                new ConfigDescription(
+                    "Fixes barrels taken from the cart, or right-clicked before you pick them up, being held like " +
+                    "small items."));
 
             FixBilgePumpHandle = config.Bind(
                 BoatsSection,

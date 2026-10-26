@@ -27,6 +27,7 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - Hung items slowly rotated relative to the boat while it rocked in waves.
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
 - Items stored in a closed crate could be picked up without opening it in some cases.
+- A barrel taken from the cart, or right-clicked before being picked up, was held like a small item.
 - After drinking from a barrel, it stayed held like a small item.
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
 - After charting, the map stayed selected: it remained outlined through walls and opened again when the charting kit was placed next to it. Other items and buttons could stay selected after menus as well, such as a winch after a pause.
@@ -56,6 +57,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
 | Big Items | Fix rotation center | Big items turn around their middle. |
 | Big Items | Fix barrels after drinking | Barrels are held like barrels again after drinking. |
+| Big Items | Fix barrels from the cart | Barrels from the cart behave like big items. |
 | Furniture | Fix reaching behind furniture ¹ | Small items behind or under furniture can be picked up. |
 | Furniture | Fix charting kit placement | The charting kit goes on tables and other furniture. |
 | Hooks | Fix hung item facing | Hung items stop slowly spinning in waves. |
