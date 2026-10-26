@@ -31,6 +31,7 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
 - After charting, the map stayed selected: it remained outlined through walls and opened again when the charting kit was placed next to it. Other items and buttons could stay selected after menus as well, such as a winch after a pause.
 - The charting kit could not be placed on tables and other furniture.
+- The islands shown in the main menu stayed loaded while a save loaded, adding work and sounds no one could hear to the end of loading.
 - Pausing while operating the bilge pump knocked its handle off its axis.
 
 ## Installation
@@ -66,6 +67,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Boats | Fix moored boats coming loose ² | Moored boats stay tied after loading or coming back. |
 | Boats | Fix mooring line length ² | Mooring lines keep the length you gave them. |
 | Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
+| Saving and Loading | Fix menu islands staying loaded | Lighter end of loading, without sounds no one can hear. |
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
 | Interface | Fix focus click | Clicking back into the game no longer acts in it. |
 | Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |

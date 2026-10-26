@@ -15,6 +15,7 @@ namespace KeeviFixes.Configuration
         private const string BoatsSection = "Boats";
         private const string FishingSection = "Fishing";
         private const string SoundSection = "Sound";
+        private const string SavingAndLoadingSection = "Saving and Loading";
         private const string InterfaceSection = "Interface";
 
         public static ConfigEntry<bool> FixRotationCenter { get; private set; }
@@ -56,6 +57,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> FixFishingRodsTurning { get; private set; }
 
         public static ConfigEntry<bool> FixSoundDirection { get; private set; }
+
+        public static ConfigEntry<bool> FixMenuIslandsStayingLoaded { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -201,6 +204,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes footsteps and other sounds near you coming from one side after loading a save. Requires " +
                     "a game restart."));
+
+            FixMenuIslandsStayingLoaded = config.Bind(
+                SavingAndLoadingSection,
+                "Fix menu islands staying loaded",
+                true,
+                new ConfigDescription(
+                    "Fixes the islands shown in the main menu staying loaded while a save loads: unloading them " +
+                    "early lightens the end of loading and removes sounds you can't hear."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }

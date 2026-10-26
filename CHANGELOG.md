@@ -4,6 +4,7 @@
 
 - Footsteps and other sounds near you no longer come from one side (can be turned off with the new "Fix sound direction" setting)
 - Fishing rods on hooks or lying around no longer swing out of place when a fish bites; they now stay put and bend toward the fish ("Fix fishing rods turning")
+- The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
 
 ## [1.0.4] - 2026-11-04
 
