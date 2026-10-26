@@ -15,6 +15,7 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - Lines drawn on some maps disappeared after loading.
 - Moored boats came loose and drifted away after loading a save away from them, or after coming back to them.
 - Mooring lines were tightened or loosened to wherever the boat happened to be after loading, pausing or coming back to the boat.
+- After loading a save, footsteps and other sounds near the player could come from one side.
 - An item picked up directly in front of another item could not be dropped or thrown until the player looked away.
 - Climbing a boat ladder, or releasing any other button after it stopped being targeted, dropped the held item.
 - Items could be picked up and used through boat walls, decks and ceilings.
@@ -65,9 +66,12 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Boats | Fix moored boats coming loose ² | Moored boats stay tied after loading or coming back. |
 | Boats | Fix mooring line length ² | Mooring lines keep the length you gave them. |
 | Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
+| Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
 | Interface | Fix focus click | Clicking back into the game no longer acts in it. |
 | Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 
 ¹ "Fix reaching behind furniture" requires "Fix reaching into crates" to be enabled.
 
 ² "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
+
+³ Changes to "Fix sound direction" take effect when the game starts.

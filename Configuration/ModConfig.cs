@@ -14,6 +14,7 @@ namespace KeeviFixes.Configuration
         private const string MapsSection = "Maps";
         private const string BoatsSection = "Boats";
         private const string FishingSection = "Fishing";
+        private const string SoundSection = "Sound";
         private const string InterfaceSection = "Interface";
 
         public static ConfigEntry<bool> FixRotationCenter { get; private set; }
@@ -53,6 +54,9 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> FixMooringLineLength { get; private set; }
 
         public static ConfigEntry<bool> FixFishingRodsTurning { get; private set; }
+
+        public static ConfigEntry<bool> FixSoundDirection { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             FixRotationCenter = config.Bind(
@@ -189,6 +193,15 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes fishing rods on hooks or lying around turning out of place when a fish bites."));
+
+            FixSoundDirection = config.Bind(
+                SoundSection,
+                "Fix sound direction",
+                true,
+                new ConfigDescription(
+                    "Fixes footsteps and other sounds near you coming from one side after loading a save. Requires " +
+                    "a game restart."));
+
             KeepFurnitureReachDependentOnStoredItems();
         }
 

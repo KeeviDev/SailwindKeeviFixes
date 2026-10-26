@@ -28,6 +28,8 @@ namespace KeeviFixes
                 ModConfig.Bind(Config);
                 LogSettings();
                 ApplyHarmonyPatches();
+                if (ModConfig.FixSoundDirection.Value)
+                    SpatializerVoices.Raise();
             }
             catch (Exception ex)
             {
