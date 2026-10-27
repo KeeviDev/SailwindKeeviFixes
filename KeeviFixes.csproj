@@ -63,6 +63,10 @@
       <HintPath>..\lib\UnityEngine.AudioModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\lib\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\lib\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
@@ -83,6 +87,7 @@
     <Compile Include="Patches\MenuIslandsPatches.cs" />
     <Compile Include="Patches\HangingYawPatches.cs" />
     <Compile Include="Patches\HungItemRehangPatches.cs" />
+    <Compile Include="Patches\ItemSpawnSmokePatches.cs" />
     <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Patches\MissedClickReleasePatch.cs" />

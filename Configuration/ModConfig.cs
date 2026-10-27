@@ -8,6 +8,7 @@ namespace KeeviFixes.Configuration
         private const string AllItemsSection = "All Items";
         private const string CratesSection = "Crates";
         private const string BigItemsSection = "Big Items";
+        private const string SmallItemsSection = "Small Items";
         private const string FurnitureSection = "Furniture";
         private const string HooksSection = "Hooks";
         private const string KnivesSection = "Knives";
@@ -61,6 +62,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> FixSoundDirection { get; private set; }
 
         public static ConfigEntry<bool> FixMenuIslandsStayingLoaded { get; private set; }
+
+        public static ConfigEntry<bool> FixSmokeOnItemSpawn { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -222,6 +225,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the islands shown in the main menu staying loaded while a save loads: unloading them " +
                     "early lightens the end of loading and removes sounds you can't hear."));
+
+            FixSmokeOnItemSpawn = config.Bind(
+                SmallItemsSection,
+                "Fix smoke on item spawn",
+                true,
+                new ConfigDescription(
+                    "Fixes food, pipes, pots and kettles giving off a puff of smoke when they appear, such as " +
+                    "in shops or after loading a save."));
 
             KeepFurnitureReachDependentOnStoredItems();
         }

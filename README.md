@@ -30,6 +30,7 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - A barrel taken from the cart, or right-clicked before being picked up, was held like a small item.
 - After drinking from a barrel, it stayed held like a small item.
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
+- Food, pipes, pots and kettles gave off a puff of smoke when they appeared, such as in shops or after loading a save.
 - After charting, the map stayed selected: it remained outlined through walls and opened again when the charting kit was placed next to it. Other items and buttons could stay selected after menus as well, such as a winch after a pause.
 - The charting kit could not be placed on tables and other furniture.
 - The islands shown in the main menu stayed loaded while a save loaded, adding work and sounds no one could hear to the end of loading.
@@ -70,6 +71,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Boats | Fix mooring line length ² | Mooring lines keep the length you gave them. |
 | Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Saving and Loading | Fix menu islands staying loaded | Lighter end of loading, without sounds no one can hear. |
+| Small Items | Fix smoke on item spawn | Food, pipes, pots and kettles no longer puff smoke when they appear. |
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
 | Interface | Fix focus click | Clicking back into the game no longer acts in it. |
 | Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
