@@ -4,12 +4,6 @@
 
 **Keevi Fixes** is a collection of fixes for bugs and rough edges in the base game of Sailwind. Each fix addresses one specific problem, is enabled by default and can be turned off separately in the settings.
 
-## Rotation around the centre of big items
-
-In the base game, rotating a crate, barrel or piece of furniture swings it around a point at its base or edge, so it lurches across your view instead of turning in place. With Keevi Fixes it turns around its own middle, just like you'd expect.
-
-Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and rotating items becomes a different game.
-
 ## What it fixes
 
 - Lines drawn on some maps disappeared after loading.
@@ -36,6 +30,12 @@ Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and
 - The islands shown in the main menu stayed loaded while a save loaded, adding work and sounds no one could hear to the end of loading.
 - Pausing while operating the bilge pump knocked its handle off its axis.
 
+## Rotation around the centre of big items
+
+In the base game, rotating a crate, barrel or piece of furniture swings it around a point at its base or edge, so it lurches across your view instead of turning in place. With Keevi Fixes it turns around its own middle, just like you'd expect.
+
+Pair it with **[Deft Hands](https://github.com/KeeviDev/SailwindDeftHands)** and rotating items becomes a different game.
+
 ## Installation
 
 **With a mod manager:** grab Keevi Fixes from Thunderstore with r2modman or Thunderstore Mod Manager — BepInEx comes along automatically.
@@ -55,29 +55,29 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | All Items | Fix dropping after pickup | Items picked up in front of others can be dropped right away. |
 | All Items | Fix dropping while interacting | Ladders and buttons no longer make you drop what you hold. |
 | All Items | Fix reaching through walls | No picking up or using items through boat walls, decks and ceilings. |
-| Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
-| Big Items | Fix rotation center | Big items turn around their middle. |
 | Big Items | Fix barrels after drinking | Barrels are held like barrels again after drinking. |
 | Big Items | Fix barrels from the cart | Barrels from the cart behave like big items. |
-| Furniture | Fix reaching behind furniture ¹ | Small items behind or under furniture can be picked up. |
+| Big Items | Fix rotation center | Big items turn around their middle. |
+| Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
+| Boats | Fix moored boats coming loose ¹ | Moored boats stay tied after loading or coming back. |
+| Boats | Fix mooring line length ¹ | Mooring lines keep the length you gave them. |
+| Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
+| Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Furniture | Fix charting kit placement | The charting kit goes on tables and other furniture. |
+| Furniture | Fix reaching behind furniture ² | Small items behind or under furniture can be picked up. |
 | Hooks | Fix hung item facing | Hung items stop slowly spinning in waves. |
 | Hooks | Fix hung items falling | Hung items stay on their hooks after loading or coming back. |
+| Interface | Fix focus click | Clicking back into the game no longer acts in it. |
+| Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 | Knives | Fix boat shaking when cutting | Cutting no longer shakes the boat. |
 | Knives | Fix cut piece placement | Cut pieces no longer fly apart or fall through the deck. |
 | Maps | Fix map drawings disappearing | Drawings no longer disappear from maps. |
-| Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
-| Boats | Fix moored boats coming loose ² | Moored boats stay tied after loading or coming back. |
-| Boats | Fix mooring line length ² | Mooring lines keep the length you gave them. |
-| Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Saving and Loading | Fix menu islands staying loaded | Lighter end of loading, without sounds no one can hear. |
 | Small Items | Fix smoke on item spawn | Food, pipes, pots and kettles no longer puff smoke when they appear. |
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
-| Interface | Fix focus click | Clicking back into the game no longer acts in it. |
-| Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 
-¹ "Fix reaching behind furniture" requires "Fix reaching into crates" to be enabled.
+¹ "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
 
-² "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
+² "Fix reaching behind furniture" requires "Fix reaching into crates" to be enabled.
 
 ³ Changes to "Fix sound direction" take effect when the game starts.
