@@ -76,6 +76,7 @@
     <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
     <Compile Include="Patches\MissedClickReleasePatch.cs" />
+    <Compile Include="Patches\MooringLineSavePatch.cs" />
     <Compile Include="Patches\MooringPatches.cs" />
     <Compile Include="Patches\PickupLookTargetPatches.cs" />
     <Compile Include="Plugin.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Runtime\MooringFix.cs" />
     <Compile Include="Runtime\MooringLineFields.cs" />
     <Compile Include="Runtime\MooringLineLength.cs" />
+    <Compile Include="Runtime\MooringLineSave.cs" />
     <Compile Include="Runtime\MooringRetie.cs" />
   </ItemGroup>
   <ItemGroup>

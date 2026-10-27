@@ -31,7 +31,7 @@ namespace KeeviFixes.Runtime
 
             PickupableBoatMooringRope line = saveable.GetComponent<PickupableBoatMooringRope>();
             if (line != null && IsEnabled && IsLeftLoose(line))
-                LoadedLines.Add(new LoadedLine(line, data.extraValue));
+                LoadedLines.Add(new LoadedLine(line, saveable.sceneIndex, data.extraValue));
         }
 
         /// <summary>
@@ -48,10 +48,11 @@ namespace KeeviFixes.Runtime
                 GPButtonDockMooring[] cleats = Resources.FindObjectsOfTypeAll<GPButtonDockMooring>()
                     .Where(cleat => cleat != null && cleat.gameObject.scene.IsValid())
                     .ToArray();
+                Dictionary<int, float> savedLengths = MooringLineSave.IsSupported ? MooringLineSave.Read() : null;
                 int tied = 0;
                 foreach (LoadedLine line in LoadedLines)
                 {
-                    if (Retie(line, cleats))
+                    if (Retie(line, cleats, savedLengths))
                         tied++;
                 }
 
@@ -115,7 +116,7 @@ namespace KeeviFixes.Runtime
             return !line.IsMoored() && line.transform.parent != MooringLineFields.HomeParent(line);
         }
 
-        private static bool Retie(LoadedLine loaded, GPButtonDockMooring[] cleats)
+        private static bool Retie(LoadedLine loaded, GPButtonDockMooring[] cleats, Dictionary<int, float> savedLengths)
         {
             PickupableBoatMooringRope line = loaded.Line;
             if (line == null || line.IsMoored())
@@ -129,8 +130,21 @@ namespace KeeviFixes.Runtime
             }
 
             line.MoorTo(cleat);
-            MooringLineLength.RestoreAfterLoading(line, loaded.SavedLength);
+            MooringLineLength.RestoreAfterLoading(line, SavedLength(loaded, savedLengths));
             return true;
+        }
+
+        /// <summary>
+        /// Returns the length saved for the loaded line: from <paramref name="savedLengths"/> when the save has them,
+        /// otherwise from the line's extra value; 0 when the save holds none.
+        /// </summary>
+        private static float SavedLength(LoadedLine loaded, Dictionary<int, float> savedLengths)
+        {
+            if (savedLengths == null)
+                return loaded.ExtraValueLength;
+
+            float length;
+            return savedLengths.TryGetValue(loaded.SceneIndex, out length) ? length : 0f;
         }
 
         /// <summary>
@@ -177,13 +191,17 @@ namespace KeeviFixes.Runtime
         {
             public readonly PickupableBoatMooringRope Line;
 
-            /// <summary>The length saved with the line, or 0 for a save made without this fix.</summary>
-            public readonly float SavedLength;
+            /// <summary>The line's scene index in the save.</summary>
+            public readonly int SceneIndex;
 
-            public LoadedLine(PickupableBoatMooringRope line, float savedLength)
+            /// <summary>The length the save holds in the line's extra value, or 0 when it holds none.</summary>
+            public readonly float ExtraValueLength;
+
+            public LoadedLine(PickupableBoatMooringRope line, int sceneIndex, float extraValueLength)
             {
                 Line = line;
-                SavedLength = savedLength;
+                SceneIndex = sceneIndex;
+                ExtraValueLength = extraValueLength;
             }
         }
     }

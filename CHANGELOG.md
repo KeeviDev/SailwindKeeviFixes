@@ -1,5 +1,9 @@
 # Changelog
 
+### Changed
+
+- Mooring line lengths are now saved apart from the game's own data, so a future game update can't overwrite them; saves from earlier versions keep their lengths
+
 ### Fixed
 
 - Fixed a bug in "Fix moored boats coming loose": mooring lines no longer disappear after loading a save, leaving the boat loose

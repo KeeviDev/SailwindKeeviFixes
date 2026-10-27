@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using KeeviFixes.Configuration;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace KeeviFixes.Runtime
 {
     /// <summary>
     /// Keeps the length a mooring line was tied or set to when its boat wakes up, unless the boat lies farther away,
-    /// and takes in the slack as the boat comes closer. Saves the length with the line.
+    /// and takes in the slack as the boat comes closer.
     /// </summary>
     internal static class MooringLineLength
     {
@@ -13,6 +14,9 @@ namespace KeeviFixes.Runtime
 
         /// <summary>Longest length, in metres, a saved line length is accepted at.</summary>
         private const float LongestSavedLength = 50f;
+
+        private static readonly Dictionary<PickupableBoatMooringRope, float> KeptLengths =
+            new Dictionary<PickupableBoatMooringRope, float>();
 
         /// <summary>
         /// Remembers the length the game or the player just gave a tied line.
@@ -84,17 +88,18 @@ namespace KeeviFixes.Runtime
                 MooringLineFields.SetLength(line, spring, Mathf.Max(kept, distance));
         }
 
-        private static float KeptLength(PickupableBoatMooringRope line)
+        /// <summary>
+        /// Returns the length kept for <paramref name="line"/>, or 0 when none is kept.
+        /// </summary>
+        public static float KeptLength(PickupableBoatMooringRope line)
         {
-            SaveableObject saveable = line.GetComponent<SaveableObject>();
-            return saveable != null ? saveable.extraValue : 0f;
+            float length;
+            return KeptLengths.TryGetValue(line, out length) ? length : 0f;
         }
 
         private static void SetKeptLength(PickupableBoatMooringRope line, float length)
         {
-            SaveableObject saveable = line.GetComponent<SaveableObject>();
-            if (saveable != null)
-                saveable.extraValue = length;
+            KeptLengths[line] = length;
         }
     }
 }
