@@ -78,6 +78,8 @@
     <Compile Include="Patches\BilgePumpPausePatch.cs" />
     <Compile Include="Patches\ButtonClickReleasePatch.cs" />
     <Compile Include="Patches\CenteredBigItemRotationPatch.cs" />
+    <Compile Include="Patches\CrateContentsPatches.cs" />
+    <Compile Include="Patches\CrateLeavingOwnerPatches.cs" />
     <Compile Include="Patches\CutPiecesPatches.cs" />
     <Compile Include="Patches\DestroyedItemTwinPatch.cs" />
     <Compile Include="Patches\FishingRodRollPatches.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Runtime\BigContainerDrinking.cs" />
     <Compile Include="Runtime\BoatWalls.cs" />
     <Compile Include="Runtime\CenteredBigItemRotation.cs" />
+    <Compile Include="Runtime\CrateContents.cs" />
     <Compile Include="Runtime\CutPieces.cs" />
     <Compile Include="Runtime\FishingRodRoll.cs" />
     <Compile Include="Runtime\FocusClick.cs" />

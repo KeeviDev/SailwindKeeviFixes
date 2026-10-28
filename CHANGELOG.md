@@ -1,11 +1,16 @@
 # Changelog
 
+### Changed
+
+- "Fix reaching behind furniture" now also needs "Fix items falling out of crates" turned on
+
 ### Fixed
 
 - Footsteps and other sounds near you no longer come from one side (can be turned off with the new "Fix sound direction" setting)
 - Fishing rods on hooks or lying around no longer swing out of place when a fish bites; they now stay put and bend toward the fish ("Fix fishing rods turning")
 - Food, pipes, pots and kettles no longer give off a puff of smoke when they appear, such as in shops or after loading a save ("Fix smoke on item spawn")
 - Barrels taken from the cart, or right-clicked before you pick them up, are no longer held like small items ("Fix barrels from the cart")
+- Items stored in a crate no longer end up outside it or go missing from it after loading a save or coming back to your boat ("Fix items falling out of crates")
 - The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
 
 ## [1.0.4] - 2026-11-04

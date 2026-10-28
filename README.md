@@ -21,6 +21,7 @@
 - Hung items slowly rotated relative to the boat while it rocked in waves.
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
 - Items stored in a closed crate could be picked up without opening it in some cases.
+- Items stored in a crate ended up outside it or went missing from it after loading a save or coming back to the boat.
 - A barrel taken from the cart, or right-clicked before being picked up, was held like a small item.
 - After drinking from a barrel, it stayed held like a small item.
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
@@ -61,6 +62,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
 | Boats | Fix moored boats coming loose ¹ | Moored boats stay tied after loading or coming back. |
 | Boats | Fix mooring line length ¹ | Mooring lines keep the length you gave them. |
+| Crates | Fix items falling out of crates | Items stay in their crate after loading or coming back. |
 | Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
 | Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Furniture | Fix charting kit placement | The charting kit goes on tables and other furniture. |
@@ -78,6 +80,6 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 
 ¹ "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
 
-² "Fix reaching behind furniture" requires "Fix reaching into crates" to be enabled.
+² "Fix reaching behind furniture" requires "Fix reaching into crates" and "Fix items falling out of crates" to be enabled.
 
 ³ Changes to "Fix sound direction" take effect when the game starts.

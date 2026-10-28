@@ -35,6 +35,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixReachingIntoCrates { get; private set; }
 
+        public static ConfigEntry<bool> FixItemsFallingOutOfCrates { get; private set; }
+
         public static ConfigEntry<bool> FixReachingThroughWalls { get; private set; }
 
         public static ConfigEntry<bool> FixReachingBehindFurniture { get; private set; }
@@ -125,6 +127,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes picking up items stored in a crate or other storage without opening it."));
 
+            FixItemsFallingOutOfCrates = config.Bind(
+                CratesSection,
+                "Fix items falling out of crates",
+                true,
+                new ConfigDescription(
+                    "Fixes items stored in a crate or other storage ending up outside it or missing from it after " +
+                    "loading a save or coming back to your boat."));
+
             FixReachingThroughWalls = config.Bind(
                 AllItemsSection,
                 "Fix reaching through walls",
@@ -137,7 +147,8 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Lets you pick up small items behind or under nailed furniture, such as a cup that fell behind a " +
-                    "table or under a bed. Needs \"Fix reaching into crates\" turned on."));
+                    "table or under a bed. Needs \"Fix reaching into crates\" and \"Fix items falling out of " +
+                    "crates\" turned on."));
 
             FixStuckClicks = config.Bind(
                 InterfaceSection,
@@ -234,31 +245,37 @@ namespace KeeviFixes.Configuration
                     "Fixes food, pipes, pots and kettles giving off a puff of smoke when they appear, such as " +
                     "in shops or after loading a save."));
 
-            KeepFurnitureReachDependentOnStoredItems();
+            KeepFurnitureReachDependentOnCrateFixes();
         }
 
         /// <summary>
-        /// Keeps <see cref="FixReachingBehindFurniture"/> on only while <see cref="FixReachingIntoCrates"/> is on:
-        /// turning the crates setting off turns the furniture setting off, and turning the furniture setting on turns
-        /// the crates setting on.
+        /// Keeps <see cref="FixReachingBehindFurniture"/> on only while <see cref="FixReachingIntoCrates"/> and
+        /// <see cref="FixItemsFallingOutOfCrates"/> are on: turning either crate setting off turns the furniture
+        /// setting off, and turning the furniture setting on turns both crate settings on.
         /// </summary>
-        private static void KeepFurnitureReachDependentOnStoredItems()
+        private static void KeepFurnitureReachDependentOnCrateFixes()
         {
-            DisableFurnitureReachWithoutStoredItemsFix();
+            DisableFurnitureReachWithoutCrateFixes();
 
-            FixReachingIntoCrates.SettingChanged +=
-                (sender, args) => DisableFurnitureReachWithoutStoredItemsFix();
+            FixReachingIntoCrates.SettingChanged += (sender, args) => DisableFurnitureReachWithoutCrateFixes();
+            FixItemsFallingOutOfCrates.SettingChanged += (sender, args) => DisableFurnitureReachWithoutCrateFixes();
 
             FixReachingBehindFurniture.SettingChanged += (sender, args) =>
             {
-                if (FixReachingBehindFurniture.Value && !FixReachingIntoCrates.Value)
+                if (!FixReachingBehindFurniture.Value)
+                    return;
+
+                if (!FixReachingIntoCrates.Value)
                     FixReachingIntoCrates.Value = true;
+                if (!FixItemsFallingOutOfCrates.Value)
+                    FixItemsFallingOutOfCrates.Value = true;
             };
         }
 
-        private static void DisableFurnitureReachWithoutStoredItemsFix()
+        private static void DisableFurnitureReachWithoutCrateFixes()
         {
-            if (!FixReachingIntoCrates.Value && FixReachingBehindFurniture.Value)
+            if (FixReachingBehindFurniture.Value
+                && (!FixReachingIntoCrates.Value || !FixItemsFallingOutOfCrates.Value))
                 FixReachingBehindFurniture.Value = false;
         }
     }
