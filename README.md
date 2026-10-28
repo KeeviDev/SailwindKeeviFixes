@@ -17,6 +17,8 @@
 - Cutting an item that had been lying on the boat for a while shook the boat with a thud.
 - Cut pieces appeared at one end or at the bottom of the item, so they could fall through the deck or push each other apart.
 - When a fish bit, a fishing rod on a hook or lying on the deck swung out of its place, its handle left the hook, and picking it up still meant aiming at where it had been.
+- Saving stopped when an item could not be saved.
+- Loading got stuck or duplicated items when an item or boat in the save could not be loaded.
 - Items hung on ceiling hooks, such as pots or Windicators anemometers, fell off after loading a save or returning to the boat.
 - Hung items slowly rotated relative to the boat while it rocked in waves.
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
@@ -74,6 +76,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Knives | Fix boat shaking when cutting | Cutting no longer shakes the boat. |
 | Knives | Fix cut piece placement | Cut pieces no longer fly apart or fall through the deck. |
 | Maps | Fix map drawings disappearing | Drawings no longer disappear from maps. |
+| Saving and Loading | Fix failed saves and loads | Saving and loading keep working when an item can't be saved or loaded. |
 | Saving and Loading | Fix menu islands staying loaded | Lighter end of loading, without sounds no one can hear. |
 | Small Items | Fix smoke on item spawn | Food, pipes, pots and kettles no longer puff smoke when they appear. |
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |

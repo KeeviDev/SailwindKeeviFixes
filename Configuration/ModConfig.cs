@@ -67,6 +67,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixSmokeOnItemSpawn { get; private set; }
 
+        public static ConfigEntry<bool> FixFailedSavesAndLoads { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             FixRotationCenter = config.Bind(
@@ -244,6 +246,15 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes food, pipes, pots and kettles giving off a puff of smoke when they appear, such as " +
                     "in shops or after loading a save."));
+
+            FixFailedSavesAndLoads = config.Bind(
+                SavingAndLoadingSection,
+                "Fix failed saves and loads",
+                true,
+                new ConfigDescription(
+                    "Fixes saving silently stopping, and loading getting stuck or duplicating items, when " +
+                    "something in the save can't be saved or loaded, such as an item or boat from a mod you " +
+                    "removed."));
 
             KeepFurnitureReachDependentOnCrateFixes();
         }

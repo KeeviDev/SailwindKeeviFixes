@@ -82,7 +82,10 @@
     <Compile Include="Patches\CrateContentsPatches.cs" />
     <Compile Include="Patches\CrateLeavingOwnerPatches.cs" />
     <Compile Include="Patches\CutPiecesPatches.cs" />
+    <Compile Include="Patches\DestroyedItemRegistrationPatches.cs" />
     <Compile Include="Patches\DestroyedItemTwinPatch.cs" />
+    <Compile Include="Patches\FailedLoadPatches.cs" />
+    <Compile Include="Patches\FailedSavePatch.cs" />
     <Compile Include="Patches\FishingRodRollPatches.cs" />
     <Compile Include="Patches\FocusClickPatches.cs" />
     <Compile Include="Patches\FurniturePlacingPatch.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Patches\MenuIslandsPatches.cs" />
     <Compile Include="Patches\HangingYawPatches.cs" />
     <Compile Include="Patches\HungItemRehangPatches.cs" />
+    <Compile Include="Patches\ItemSaveDataPatch.cs" />
     <Compile Include="Patches\ItemSpawnSmokePatches.cs" />
     <Compile Include="Patches\LookRayPatch.cs" />
     <Compile Include="Patches\MapDrawingRenderPatch.cs" />
@@ -106,6 +110,7 @@
     <Compile Include="Runtime\CenteredBigItemRotation.cs" />
     <Compile Include="Runtime\CrateContents.cs" />
     <Compile Include="Runtime\CutPieces.cs" />
+    <Compile Include="Runtime\DestroyedItemRegistration.cs" />
     <Compile Include="Runtime\FishingRodRoll.cs" />
     <Compile Include="Runtime\FocusClick.cs" />
     <Compile Include="Runtime\FurnitureReach.cs" />
@@ -118,6 +123,9 @@
     <Compile Include="Runtime\MooringLineLength.cs" />
     <Compile Include="Runtime\MooringLineSave.cs" />
     <Compile Include="Runtime\MooringRetie.cs" />
+    <Compile Include="Runtime\SaveRepair.cs" />
+    <Compile Include="Runtime\SaveRepairNotice.cs" />
+    <Compile Include="Runtime\SaveRepairReport.cs" />
     <Compile Include="Runtime\SpatializerVoices.cs" />
   </ItemGroup>
   <ItemGroup>
