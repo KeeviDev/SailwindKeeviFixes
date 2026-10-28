@@ -85,12 +85,19 @@ namespace KeeviFixes.Patches
         private static bool Raycast(Ray ray, out RaycastHit hit, float maxDistance, int layerMask)
         {
             bool found = Physics.Raycast(ray, out hit, maxDistance, ReachableLayers(layerMask));
-            if (found && BoatWalls.IsSupported && ModConfig.FixReachingThroughWalls.Value)
+            if (!found || !BoatWalls.IsSupported || !FixGuard.IsOn(ModConfig.FixReachingThroughWalls))
+                return found;
+
+            try
             {
                 ShipItem item = BoatWalls.ItemFrom(hit.collider);
                 RaycastHit wall;
                 if (item != null && BoatWalls.FindWall(ray.origin, hit.point, item, out wall))
                     hit = wall;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixReachingThroughWalls, ex);
             }
 
             return found;
@@ -101,7 +108,7 @@ namespace KeeviFixes.Patches
         /// </summary>
         public static int ReachableLayers(int layerMask)
         {
-            return ModConfig.FixReachingIntoCrates.Value ? layerMask & ~itemInCrateMask : layerMask;
+            return FixGuard.IsOn(ModConfig.FixReachingIntoCrates) ? layerMask & ~itemInCrateMask : layerMask;
         }
     }
 
@@ -137,28 +144,35 @@ namespace KeeviFixes.Patches
             ref GoPointerButton ___pointedAtButton,
             ref float ___currentLookDistance)
         {
-            ShipItem item = ___pointedAtButton as ShipItem;
-            if (item == null || !ModConfig.FixReachingThroughWalls.Value
-                || item == BoatWalls.ItemFrom(___hit.collider))
-                return;
+            try
+            {
+                ShipItem item = ___pointedAtButton as ShipItem;
+                if (item == null || !FixGuard.IsOn(ModConfig.FixReachingThroughWalls)
+                    || item == BoatWalls.ItemFrom(___hit.collider))
+                    return;
 
-            Vector3 point;
-            RaycastHit itemHit;
-            Collider collider = item.GetComponent<Collider>();
-            if (collider != null && collider.Raycast(___raycastRay, out itemHit, MaxLookDistance))
-                point = itemHit.point;
-            else if (___currentLookDistance > 0f)
-                point = ___raycastRay.origin + ___raycastRay.direction.normalized * ___currentLookDistance;
-            else
-                return;
+                Vector3 point;
+                RaycastHit itemHit;
+                Collider collider = item.GetComponent<Collider>();
+                if (collider != null && collider.Raycast(___raycastRay, out itemHit, MaxLookDistance))
+                    point = itemHit.point;
+                else if (___currentLookDistance > 0f)
+                    point = ___raycastRay.origin + ___raycastRay.direction.normalized * ___currentLookDistance;
+                else
+                    return;
 
-            RaycastHit wall;
-            if (!BoatWalls.FindWall(___raycastRay.origin, point, item, out wall))
-                return;
+                RaycastHit wall;
+                if (!BoatWalls.FindWall(___raycastRay.origin, point, item, out wall))
+                    return;
 
-            ___pointedAtButton.ForceUnlook();
-            ___pointedAtButton = null;
-            ___currentLookDistance = 0f;
+                ___pointedAtButton.ForceUnlook();
+                ___pointedAtButton = null;
+                ___currentLookDistance = 0f;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixReachingThroughWalls, ex);
+            }
         }
 
         private static bool HasField(string name, Type type)

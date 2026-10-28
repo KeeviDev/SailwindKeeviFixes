@@ -35,9 +35,16 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(ShipItem), ExitHouseMethod)]
         private static void AfterExitHouse(ShipItem __instance, Collider house)
         {
-            SaveableObject owner = house != null ? house.GetComponent<SaveableObject>() : null;
-            if (owner != null)
-                CrateContents.FollowCrate(__instance, owner.sceneIndex);
+            try
+            {
+                SaveableObject owner = house != null ? house.GetComponent<SaveableObject>() : null;
+                if (owner != null)
+                    CrateContents.FollowCrate(__instance, owner.sceneIndex);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
 
         [HarmonyPrefix]
@@ -45,15 +52,29 @@ namespace KeeviFixes.Patches
         private static void BeforeExitBoat(ShipItem __instance, out int __state)
         {
             __state = 0;
-            if (ModConfig.FixItemsFallingOutOfCrates.Value)
-                __state = CrateContents.ParentOfFilledCrate(__instance);
+            try
+            {
+                if (FixGuard.IsOn(ModConfig.FixItemsFallingOutOfCrates))
+                    __state = CrateContents.ParentOfFilledCrate(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ShipItem), ExitBoatMethod)]
         private static void AfterExitBoat(ShipItem __instance, int __state)
         {
-            CrateContents.FollowCrate(__instance, __state);
+            try
+            {
+                CrateContents.FollowCrate(__instance, __state);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
     }
 }

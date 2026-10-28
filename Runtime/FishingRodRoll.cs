@@ -88,7 +88,7 @@ namespace KeeviFixes.Runtime
                 return;
 
             bool fighting = !fish.fishDead && fish.currentFish != null;
-            if (!fighting || rod.held != null || !ModConfig.FixFishingRodsTurning.Value)
+            if (!fighting || rod.held != null || !FixGuard.IsOn(ModConfig.FixFishingRodsTurning))
             {
                 pose.Rolling = false;
                 EaseBack(rotator, pose);

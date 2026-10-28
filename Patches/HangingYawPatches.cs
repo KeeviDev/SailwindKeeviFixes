@@ -51,36 +51,44 @@ namespace KeeviFixes.Patches
             bool ___lockX,
             bool ___lockZ)
         {
-            if (ReferenceEquals(___currentHook, null) || !ModConfig.FixHungItemFacing.Value || !___currentHook)
-                return;
-
-            HangingYaw heading =
-                Headings.GetValue(__instance, hangable => new HangingYaw(hangable.GetComponent<ShipItem>()));
-            Transform boat = heading.Item.currentActualBoat;
-            if (ReferenceEquals(boat, null))
+            try
             {
-                heading.Hook = null;
-                return;
-            }
+                if (ReferenceEquals(___currentHook, null) || !FixGuard.IsOn(ModConfig.FixHungItemFacing)
+                    || !___currentHook)
+                    return;
 
-            Transform item = __instance.transform;
-            if (!ReferenceEquals(heading.Hook, ___currentHook) || !ReferenceEquals(heading.Boat, boat)
-                || heading.SettingVersion != settingVersion)
+                HangingYaw heading =
+                    Headings.GetValue(__instance, hangable => new HangingYaw(hangable.GetComponent<ShipItem>()));
+                Transform boat = heading.Item.currentActualBoat;
+                if (ReferenceEquals(boat, null))
+                {
+                    heading.Hook = null;
+                    return;
+                }
+
+                Transform item = __instance.transform;
+                if (!ReferenceEquals(heading.Hook, ___currentHook) || !ReferenceEquals(heading.Boat, boat)
+                    || heading.SettingVersion != settingVersion)
+                {
+                    heading.Hook = ___currentHook;
+                    heading.Boat = boat;
+                    heading.SettingVersion = settingVersion;
+                    heading.Upright = ___lockX || ___lockZ;
+                    heading.YawOnBoat = Mathf.DeltaAngle(boat.eulerAngles.y, item.eulerAngles.y);
+                    return;
+                }
+
+                if (!heading.Upright)
+                    return;
+
+                Vector3 eulerAngles = item.eulerAngles;
+                eulerAngles.y = boat.eulerAngles.y + heading.YawOnBoat;
+                item.eulerAngles = eulerAngles;
+            }
+            catch (Exception ex)
             {
-                heading.Hook = ___currentHook;
-                heading.Boat = boat;
-                heading.SettingVersion = settingVersion;
-                heading.Upright = ___lockX || ___lockZ;
-                heading.YawOnBoat = Mathf.DeltaAngle(boat.eulerAngles.y, item.eulerAngles.y);
-                return;
+                FixGuard.Stop(ModConfig.FixHungItemFacing, ex);
             }
-
-            if (!heading.Upright)
-                return;
-
-            Vector3 eulerAngles = item.eulerAngles;
-            eulerAngles.y = boat.eulerAngles.y + heading.YawOnBoat;
-            item.eulerAngles = eulerAngles;
         }
 
         /// <summary>Forgets the item's recorded heading.</summary>

@@ -28,8 +28,7 @@ namespace KeeviFixes
                 ModConfig.Bind(Config);
                 LogSettings();
                 ApplyHarmonyPatches();
-                if (ModConfig.FixSoundDirection.Value)
-                    SpatializerVoices.Raise();
+                RaiseSpatializerVoices();
             }
             catch (Exception ex)
             {
@@ -38,6 +37,19 @@ namespace KeeviFixes
             }
 
             Log.LogInfo(string.Format("{0} v{1} loaded.", PLUGIN_NAME, PLUGIN_VERSION));
+        }
+
+        private static void RaiseSpatializerVoices()
+        {
+            try
+            {
+                if (FixGuard.IsOn(ModConfig.FixSoundDirection))
+                    SpatializerVoices.Raise();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixSoundDirection, ex);
+            }
         }
 
         private void OnApplicationFocus(bool hasFocus)
@@ -54,11 +66,27 @@ namespace KeeviFixes
             }
         }
 
-        /// <summary>Applies every Harmony patch in this assembly and logs each patched method.</summary>
+        /// <summary>
+        /// Applies every Harmony patch class in this assembly, logs each class that fails to apply, and logs each
+        /// patched method.
+        /// </summary>
         private static void ApplyHarmonyPatches()
         {
             var harmony = new Harmony(PLUGIN_GUID);
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            foreach (Type patchClass in AccessTools.GetTypesFromAssembly(Assembly.GetExecutingAssembly()))
+            {
+                try
+                {
+                    harmony.CreateClassProcessor(patchClass).Patch();
+                }
+                catch (Exception ex)
+                {
+                    Log.LogError(string.Format(
+                        "Could not apply the patches in {0} - the game may have updated. The fix may not work: {1}",
+                        patchClass.Name,
+                        ex));
+                }
+            }
 
             foreach (MethodBase method in harmony.GetPatchedMethods())
             {

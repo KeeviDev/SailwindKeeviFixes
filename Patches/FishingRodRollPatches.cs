@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 using UnityEngine;
 
@@ -38,7 +39,14 @@ namespace KeeviFixes.Patches
         [HarmonyPatch("Awake")]
         private static void AfterAwake(FishingRodFish __instance, Transform ___rodRotator, ShipItemFishingRod ___rod)
         {
-            FishingRodRoll.OnAwake(__instance, ___rodRotator, ___rod);
+            try
+            {
+                FishingRodRoll.OnAwake(__instance, ___rodRotator, ___rod);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixFishingRodsTurning, ex);
+            }
         }
 
         [HarmonyPrefix]
@@ -58,8 +66,15 @@ namespace KeeviFixes.Patches
             Quaternion ___initialRotatorRot,
             Quaternion __state)
         {
-            FishingRodRoll.AfterUpdate(
-                __instance, ___rodRotator, ___rod, ___bobber.transform, ___initialRotatorRot, __state);
+            try
+            {
+                FishingRodRoll.AfterUpdate(
+                    __instance, ___rodRotator, ___rod, ___bobber.transform, ___initialRotatorRot, __state);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixFishingRodsTurning, ex);
+            }
         }
 
         private static bool HasField(string name, Type type)

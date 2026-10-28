@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using KeeviFixes.Configuration;
 
@@ -26,9 +27,16 @@ namespace KeeviFixes.Patches
 
         private static void Postfix(MapChartTextureRenderer __instance)
         {
-            if (ModConfig.FixMapDrawingsDisappearing.Value)
+            try
             {
-                __instance.renderCam.Render();
+                if (FixGuard.IsOn(ModConfig.FixMapDrawingsDisappearing))
+                {
+                    __instance.renderCam.Render();
+                }
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMapDrawingsDisappearing, ex);
             }
         }
     }

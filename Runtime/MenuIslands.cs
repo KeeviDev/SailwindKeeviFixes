@@ -50,7 +50,7 @@ namespace KeeviFixes.Runtime
             bool release = saveAppliedFrame != NoSaveApplied
                 && Time.frameCount > saveAppliedFrame
                 && island.startingIsland
-                && ModConfig.FixMenuIslandsStayingLoaded.Value;
+                && FixGuard.IsOn(ModConfig.FixMenuIslandsStayingLoaded);
             if (release && SceneLoaded(island) == SceneManager.GetSceneByBuildIndex(island.islandIndex).isLoaded)
                 LoadUnloadCooldown(island) = 0f;
             return release;

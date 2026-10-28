@@ -51,7 +51,7 @@ namespace KeeviFixes.Runtime
             if (outliningPointer == pointer)
                 outliningPointer = null;
 
-            if (heldItem != null || !ModConfig.FixReachingBehindFurniture.Value || !GameAims(pointer))
+            if (heldItem != null || !FixGuard.IsOn(ModConfig.FixReachingBehindFurniture) || !GameAims(pointer))
                 return;
 
             ShipItem furniture = NailedOwner(hit.collider);
@@ -64,7 +64,7 @@ namespace KeeviFixes.Runtime
                 return;
 
             RaycastHit wall;
-            if (BoatWalls.IsSupported && ModConfig.FixReachingThroughWalls.Value
+            if (BoatWalls.IsSupported && FixGuard.IsOn(ModConfig.FixReachingThroughWalls)
                 && BoatWalls.FindWall(ray.origin, itemHit.point, item, out wall))
                 return;
 

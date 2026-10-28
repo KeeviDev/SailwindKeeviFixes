@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
@@ -32,28 +33,56 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(SaveablePrefab), nameof(SaveablePrefab.Load))]
         private static void AfterLoad(SaveablePrefab __instance, SavePrefabData data)
         {
-            HungItemRehang.OnLoaded(__instance, data);
+            try
+            {
+                HungItemRehang.OnLoaded(__instance, data);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixHungItemsFalling, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(BoatLocalItems), "SpawnCachedItems")]
         private static void AfterSpawnCachedItems()
         {
-            HungItemRehang.AfterBatch();
+            try
+            {
+                HungItemRehang.AfterBatch();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixHungItemsFalling, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.LoadGame))]
         private static void AfterLoadGame()
         {
-            HungItemRehang.AfterBatch();
+            try
+            {
+                HungItemRehang.AfterBatch();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixHungItemsFalling, ex);
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(HangableItem), "FixedUpdate")]
         private static void BeforeFixedUpdate(HangableItem __instance)
         {
-            HungItemRehang.BeforeFirstPhysicsStep(__instance);
+            try
+            {
+                HungItemRehang.BeforeFirstPhysicsStep(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixHungItemsFalling, ex);
+            }
         }
 
         /// <summary>Skips the game's hanging on trigger contact for an item that already hangs.</summary>
@@ -61,7 +90,7 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(HangableItem), nameof(HangableItem.OnTriggerEnter))]
         private static bool BeforeTriggerEnter(HangableItem __instance)
         {
-            return !(__instance.IsHanging() && ModConfig.FixHungItemsFalling.Value);
+            return !(__instance.IsHanging() && FixGuard.IsOn(ModConfig.FixHungItemsFalling));
         }
     }
 }

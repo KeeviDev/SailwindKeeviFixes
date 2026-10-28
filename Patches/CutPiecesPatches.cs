@@ -1,5 +1,6 @@
 using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -28,7 +29,14 @@ namespace KeeviFixes.Patches
         [HarmonyPriority(Priority.First)]
         private static void BeforeCut(ShipItemKnife __instance)
         {
-            CutPieces.BeforeCut(__instance);
+            try
+            {
+                CutPieces.BeforeCut(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixCutPiecePlacement, ex);
+            }
         }
 
         /// <summary>
@@ -38,7 +46,15 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(ShipItemKnife), nameof(ShipItemKnife.OnAltActivate))]
         private static Exception AfterCut(Exception __exception)
         {
-            CutPieces.AfterCut();
+            try
+            {
+                CutPieces.AfterCut();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixCutPiecePlacement, ex);
+            }
+
             return __exception;
         }
 
@@ -46,7 +62,14 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(SaveablePrefab), nameof(SaveablePrefab.RegisterToSave))]
         private static void AfterRegisterToSave(SaveablePrefab __instance)
         {
-            CutPieces.OnRegistered(__instance);
+            try
+            {
+                CutPieces.OnRegistered(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixCutPiecePlacement, ex);
+            }
         }
     }
 }

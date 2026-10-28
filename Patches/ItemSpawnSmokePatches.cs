@@ -54,35 +54,64 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(CookableFood), "Awake")]
         private static void AfterFoodAwake(CookableFood __instance, ParticleSystem ___particles)
         {
-            if (___particles != null && ModConfig.FixSmokeOnItemSpawn.Value)
-                UpdateFoodSmoke(__instance);
+            try
+            {
+                if (___particles != null && FixGuard.IsOn(ModConfig.FixSmokeOnItemSpawn))
+                    UpdateFoodSmoke(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixSmokeOnItemSpawn, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CookableFoodSoup), "Awake")]
         private static void AfterSoupAwake(CookableFoodSoup __instance, ParticleSystem ___particles)
         {
-            if (___particles != null && ModConfig.FixSmokeOnItemSpawn.Value)
-                UpdateSoupSmoke(__instance);
+            try
+            {
+                if (___particles != null && FixGuard.IsOn(ModConfig.FixSmokeOnItemSpawn))
+                    UpdateSoupSmoke(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixSmokeOnItemSpawn, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CookableFoodKettle), "Awake")]
         private static void AfterKettleAwake(ParticleSystem ___boilParticles, float ___currentHeat)
         {
-            if (___boilParticles == null || !ModConfig.FixSmokeOnItemSpawn.Value)
-                return;
+            try
+            {
+                if (___boilParticles == null || !FixGuard.IsOn(ModConfig.FixSmokeOnItemSpawn))
+                    return;
 
-            ParticleSystem.EmissionModule emission = ___boilParticles.emission;
-            emission.enabled = ___currentHeat >= 1f;
+                ParticleSystem.EmissionModule emission = ___boilParticles.emission;
+                emission.enabled = ___currentHeat >= 1f;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixSmokeOnItemSpawn, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ShipItem), "Awake")]
         private static void AfterItemAwake(ShipItem __instance)
         {
-            if (__instance is ShipItemPipe pipe && PipeSmoke(pipe) != null && ModConfig.FixSmokeOnItemSpawn.Value)
-                UpdatePipeSmoke(pipe);
+            try
+            {
+                if (__instance is ShipItemPipe pipe && PipeSmoke(pipe) != null
+                    && FixGuard.IsOn(ModConfig.FixSmokeOnItemSpawn))
+                    UpdatePipeSmoke(pipe);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixSmokeOnItemSpawn, ex);
+            }
         }
 
         /// <summary>

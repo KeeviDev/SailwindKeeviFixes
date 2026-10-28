@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\FixGuard.cs" />
     <Compile Include="Configuration\ModConfig.cs" />
     <Compile Include="Patches\BigContainerDrinkingPatches.cs" />
     <Compile Include="Patches\BilgePumpPausePatch.cs" />

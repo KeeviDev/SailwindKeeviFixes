@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -46,12 +47,19 @@ namespace KeeviFixes.Patches
 
         private static void DeactivateTwin(ShipItem item)
         {
-            if (!ModConfig.FixBoatShakingWhenCutting.Value)
-                return;
+            try
+            {
+                if (!FixGuard.IsOn(ModConfig.FixBoatShakingWhenCutting))
+                    return;
 
-            ItemRigidbody twin = item.itemRigidbodyC;
-            if (twin != null)
-                twin.gameObject.SetActive(false);
+                ItemRigidbody twin = item.itemRigidbodyC;
+                if (twin != null)
+                    twin.gameObject.SetActive(false);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixBoatShakingWhenCutting, ex);
+            }
         }
     }
 }

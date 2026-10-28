@@ -52,7 +52,7 @@ namespace KeeviFixes.Patches
 
             if (___clickedButton == null || ___clickedButton == releasedClick || ___pointedAtButton != null
                 || ___heldItem == null || ___clickedButton == ___heldItem
-                || !ModConfig.FixDroppingWhileInteracting.Value)
+                || !FixGuard.IsOn(ModConfig.FixDroppingWhileInteracting))
                 return;
 
             ___pointedAtButton = ___clickedButton;

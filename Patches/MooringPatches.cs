@@ -1,4 +1,6 @@
+using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -33,36 +35,79 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(SaveableObject), nameof(SaveableObject.Load))]
         private static void AfterLoad(SaveableObject __instance, SaveObjectData data)
         {
-            MooringRetie.OnLoaded(__instance, data);
+            try
+            {
+                MooringRetie.OnLoaded(__instance, data);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooredBoatsComingLoose, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.LoadGame))]
         private static void AfterLoadGame()
         {
-            MooringRetie.AfterLoadGame();
+            try
+            {
+                MooringRetie.AfterLoadGame();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooredBoatsComingLoose, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PickupableBoatMooringRope), nameof(PickupableBoatMooringRope.MoorTo))]
         private static void AfterMoorTo(PickupableBoatMooringRope __instance)
         {
-            MooringRetie.OnTied(__instance);
-            MooringLineLength.Remember(__instance);
+            try
+            {
+                MooringRetie.OnTied(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooredBoatsComingLoose, ex);
+            }
+
+            try
+            {
+                MooringLineLength.Remember(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PickupableBoatMooringRope), nameof(PickupableBoatMooringRope.ChangeRopeLength))]
         private static void AfterChangeRopeLength(PickupableBoatMooringRope __instance)
         {
-            MooringLineLength.Remember(__instance);
+            try
+            {
+                MooringLineLength.Remember(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(PickupableBoatMooringRope), "Update")]
         private static void BeforeUpdate(PickupableBoatMooringRope __instance)
         {
-            MooringLineLength.BeforeLineUpdate(__instance);
+            try
+            {
+                MooringLineLength.BeforeLineUpdate(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+            }
         }
     }
 }

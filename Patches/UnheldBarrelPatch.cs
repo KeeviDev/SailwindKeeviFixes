@@ -38,7 +38,7 @@ namespace KeeviFixes.Patches
         /// <summary>Makes a bottle that nobody held a big item again when the call made it small.</summary>
         private static void Postfix(ShipItemBottle __instance, bool __state)
         {
-            if (__state && !__instance.big && ModConfig.FixBarrelsFromTheCart.Value)
+            if (__state && !__instance.big && FixGuard.IsOn(ModConfig.FixBarrelsFromTheCart))
                 __instance.big = true;
         }
     }

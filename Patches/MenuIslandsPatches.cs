@@ -1,5 +1,6 @@
 using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -32,16 +33,32 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.LoadGame))]
         private static void AfterLoadGame()
         {
-            MenuIslands.OnSaveApplied();
+            try
+            {
+                MenuIslands.OnSaveApplied();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMenuIslandsStayingLoaded, ex);
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(IslandHorizon), "LateUpdate")]
         private static void BeforeLateUpdate(IslandHorizon __instance, out bool __state)
         {
-            __state = MenuIslands.ShouldRelease(__instance);
-            if (__state)
-                __instance.startingIsland = false;
+            __state = false;
+
+            try
+            {
+                __state = MenuIslands.ShouldRelease(__instance);
+                if (__state)
+                    __instance.startingIsland = false;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMenuIslandsStayingLoaded, ex);
+            }
         }
 
         [HarmonyFinalizer]

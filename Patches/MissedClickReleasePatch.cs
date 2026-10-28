@@ -33,17 +33,24 @@ namespace KeeviFixes.Patches
         [HarmonyPriority(Priority.High)]
         private static void Prefix(GoPointer __instance, ref GoPointerButton ___clickedButton)
         {
-            if (___clickedButton == null || __instance.type != GoPointer.PointerType.crosshairMouse
-                || GameState.inCursorMenu || BoatCamera.on
-                || GameInput.GetKey(InputName.PickUp) || GameInput.GetKeyUp(InputName.PickUp)
-                || !ModConfig.FixStuckClicks.Value)
-                return;
+            try
+            {
+                if (___clickedButton == null || __instance.type != GoPointer.PointerType.crosshairMouse
+                    || GameState.inCursorMenu || BoatCamera.on
+                    || GameInput.GetKey(InputName.PickUp) || GameInput.GetKeyUp(InputName.PickUp)
+                    || !FixGuard.IsOn(ModConfig.FixStuckClicks))
+                    return;
 
-            GoPointerButton button = ___clickedButton;
-            button.OnUnactivate();
-            button.OnUnactivate(__instance);
-            button.Unclick();
-            ___clickedButton = null;
+                GoPointerButton button = ___clickedButton;
+                button.OnUnactivate();
+                button.OnUnactivate(__instance);
+                button.Unclick();
+                ___clickedButton = null;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixStuckClicks, ex);
+            }
         }
 
         private static bool HasField(string name, Type type)

@@ -1,4 +1,6 @@
+using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -24,8 +26,15 @@ namespace KeeviFixes.Patches
 
         private static void Postfix()
         {
-            if (MooringFix.IsAvailable)
-                MooringLineSave.Write();
+            try
+            {
+                if (MooringFix.IsAvailable)
+                    MooringLineSave.Write();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+            }
         }
     }
 }

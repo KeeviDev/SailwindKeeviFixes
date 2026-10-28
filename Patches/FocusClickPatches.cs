@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 using UnityEngine;
 
@@ -34,33 +36,57 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(nameof(GameInput.GetKeyDown))]
         private static bool BeforeGetKeyDown(InputName inputName, ref bool __result)
         {
-            if (!FocusClick.IsSwallowing)
-                return true;
+            try
+            {
+                if (!FocusClick.IsSwallowing)
+                    return true;
 
-            __result = FocusClick.GetKeyDown(inputName);
-            return false;
+                __result = FocusClick.GetKeyDown(inputName);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixFocusClick, ex);
+                return true;
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(nameof(GameInput.GetKey))]
         private static bool BeforeGetKey(InputName inputName, ref bool __result)
         {
-            if (!FocusClick.IsSwallowing)
-                return true;
+            try
+            {
+                if (!FocusClick.IsSwallowing)
+                    return true;
 
-            __result = FocusClick.GetKey(inputName);
-            return false;
+                __result = FocusClick.GetKey(inputName);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixFocusClick, ex);
+                return true;
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(nameof(GameInput.GetKeyUp))]
         private static bool BeforeGetKeyUp(InputName inputName, ref bool __result)
         {
-            if (!FocusClick.IsSwallowing)
-                return true;
+            try
+            {
+                if (!FocusClick.IsSwallowing)
+                    return true;
 
-            __result = FocusClick.GetKeyUp(inputName);
-            return false;
+                __result = FocusClick.GetKeyUp(inputName);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixFocusClick, ex);
+                return true;
+            }
         }
     }
 

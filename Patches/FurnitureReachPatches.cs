@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 using UnityEngine;
 
@@ -52,13 +53,20 @@ namespace KeeviFixes.Patches
             ref GoPointerButton ___pointedAtButton,
             ref float ___currentLookDistance)
         {
-            FurnitureReach.AfterLook(
-                __instance,
-                ___heldItem,
-                ___raycastRay,
-                ___hit,
-                ref ___pointedAtButton,
-                ref ___currentLookDistance);
+            try
+            {
+                FurnitureReach.AfterLook(
+                    __instance,
+                    ___heldItem,
+                    ___raycastRay,
+                    ___hit,
+                    ref ___pointedAtButton,
+                    ref ___currentLookDistance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixReachingBehindFurniture, ex);
+            }
         }
 
         [HarmonyPrefix]
@@ -68,7 +76,14 @@ namespace KeeviFixes.Patches
             PickupableItem ___heldItem,
             ref GoPointerButton ___pointedAtButton)
         {
-            FurnitureReach.BeforeClicks(__instance, ___heldItem, ref ___pointedAtButton);
+            try
+            {
+                FurnitureReach.BeforeClicks(__instance, ___heldItem, ref ___pointedAtButton);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixReachingBehindFurniture, ex);
+            }
         }
 
         private static bool HasField(string name, Type type)

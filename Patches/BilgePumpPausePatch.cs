@@ -26,7 +26,7 @@ namespace KeeviFixes.Patches
         {
             return !(Time.deltaTime == 0f
                 && __instance.IsStickyClicked()
-                && ModConfig.FixBilgePumpHandle.Value);
+                && FixGuard.IsOn(ModConfig.FixBilgePumpHandle));
         }
     }
 }

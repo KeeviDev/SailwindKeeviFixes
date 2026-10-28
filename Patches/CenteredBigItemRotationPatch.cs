@@ -1,4 +1,6 @@
+using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -24,7 +26,14 @@ namespace KeeviFixes.Patches
 
         private static void Postfix(GoPointer __instance)
         {
-            CenteredBigItemRotation.KeepHeldItemCentered(__instance);
+            try
+            {
+                CenteredBigItemRotation.KeepHeldItemCentered(__instance);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixRotationCenter, ex);
+            }
         }
     }
 }

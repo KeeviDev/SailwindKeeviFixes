@@ -1,4 +1,6 @@
+using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -27,21 +29,44 @@ namespace KeeviFixes.Patches
             [HarmonyPatch(nameof(ShipItemBottle.OnAltHeld))]
             private static void BeforeDrinkingStep(ShipItemBottle __instance, out BigContainerDrinking __state)
             {
-                __state = BigContainerDrinking.CaptureBeforeDrinkingStep(__instance);
+                __state = null;
+
+                try
+                {
+                    __state = BigContainerDrinking.CaptureBeforeDrinkingStep(__instance);
+                }
+                catch (Exception ex)
+                {
+                    FixGuard.Stop(ModConfig.FixBarrelsAfterDrinking, ex);
+                }
             }
 
             [HarmonyPostfix]
             [HarmonyPatch(nameof(ShipItemBottle.OnAltHeld))]
             private static void AfterDrinkingStep(ShipItemBottle __instance, BigContainerDrinking __state)
             {
-                BigContainerDrinking.TrackIfTurnedSmall(__instance, __state);
+                try
+                {
+                    BigContainerDrinking.TrackIfTurnedSmall(__instance, __state);
+                }
+                catch (Exception ex)
+                {
+                    FixGuard.Stop(ModConfig.FixBarrelsAfterDrinking, ex);
+                }
             }
 
             [HarmonyPostfix]
             [HarmonyPatch(nameof(ShipItemBottle.ExtraLateUpdate))]
             private static void AfterLateUpdate(ShipItemBottle __instance)
             {
-                BigContainerDrinking.RestoreWhenDrinkingEnds(__instance, __instance.IsDrinking());
+                try
+                {
+                    BigContainerDrinking.RestoreWhenDrinkingEnds(__instance, __instance.IsDrinking());
+                }
+                catch (Exception ex)
+                {
+                    FixGuard.Stop(ModConfig.FixBarrelsAfterDrinking, ex);
+                }
             }
         }
 
@@ -58,7 +83,14 @@ namespace KeeviFixes.Patches
             [HarmonyPriority(Priority.Low)]
             private static void AfterHolderLateUpdate(GoPointer __instance)
             {
-                BigContainerDrinking.EaseReturningItem(__instance);
+                try
+                {
+                    BigContainerDrinking.EaseReturningItem(__instance);
+                }
+                catch (Exception ex)
+                {
+                    FixGuard.Stop(ModConfig.FixBarrelsAfterDrinking, ex);
+                }
             }
         }
     }

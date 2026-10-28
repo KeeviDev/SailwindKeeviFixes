@@ -52,7 +52,7 @@ namespace KeeviFixes.Runtime
         /// </summary>
         public static BigContainerDrinking CaptureBeforeDrinkingStep(PickupableItem item)
         {
-            if (!item.big || item.held == null || !ModConfig.FixBarrelsAfterDrinking.Value)
+            if (!item.big || item.held == null || !FixGuard.IsOn(ModConfig.FixBarrelsAfterDrinking))
                 return null;
 
             return new BigContainerDrinking(item, item.held);
@@ -79,7 +79,7 @@ namespace KeeviFixes.Runtime
 
             BigContainerDrinking holdBefore = current;
             current = null;
-            if (item.held == holdBefore.holder && ModConfig.FixBarrelsAfterDrinking.Value)
+            if (item.held == holdBefore.holder && FixGuard.IsOn(ModConfig.FixBarrelsAfterDrinking))
                 holdBefore.Restore();
         }
 

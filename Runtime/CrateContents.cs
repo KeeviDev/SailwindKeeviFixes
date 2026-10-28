@@ -18,7 +18,7 @@ namespace KeeviFixes.Runtime
         /// </summary>
         public static void RepairSave(List<SavePrefabData> savedItems)
         {
-            if (savedItems == null || !ModConfig.FixItemsFallingOutOfCrates.Value)
+            if (savedItems == null || !FixGuard.IsOn(ModConfig.FixItemsFallingOutOfCrates))
                 return;
 
             Dictionary<int, SavePrefabData> savedById = IndexByInstanceId(savedItems);
@@ -55,7 +55,7 @@ namespace KeeviFixes.Runtime
         /// <summary>Gives every item stored in a loaded crate that crate's save parent.</summary>
         public static void MatchCrateParents()
         {
-            if (!ModConfig.FixItemsFallingOutOfCrates.Value || SaveLoadManager.instance == null)
+            if (!FixGuard.IsOn(ModConfig.FixItemsFallingOutOfCrates) || SaveLoadManager.instance == null)
                 return;
 
             foreach (SaveablePrefab saveable in SaveLoadManager.instance.GetCurrentPrefabs())
@@ -76,7 +76,7 @@ namespace KeeviFixes.Runtime
         /// </summary>
         public static void FollowCrate(ShipItem crate, int previousParent)
         {
-            if (previousParent <= 0 || !ModConfig.FixItemsFallingOutOfCrates.Value)
+            if (previousParent <= 0 || !FixGuard.IsOn(ModConfig.FixItemsFallingOutOfCrates))
                 return;
 
             CrateInventory inventory = crate.GetComponent<CrateInventory>();

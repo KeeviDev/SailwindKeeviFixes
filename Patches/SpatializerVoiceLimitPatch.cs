@@ -37,8 +37,15 @@ namespace KeeviFixes.Patches
 
         private static void Postfix()
         {
-            if (ModConfig.FixSoundDirection.Value)
-                SpatializerVoices.RaiseAgain();
+            try
+            {
+                if (FixGuard.IsOn(ModConfig.FixSoundDirection))
+                    SpatializerVoices.RaiseAgain();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixSoundDirection, ex);
+            }
         }
 
         private static MethodInfo Setup()

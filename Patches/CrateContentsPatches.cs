@@ -1,4 +1,6 @@
+using System;
 using HarmonyLib;
+using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
 
 namespace KeeviFixes.Patches
@@ -35,28 +37,56 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(SaveLoadManager), ReadSaveMethod)]
         private static void AfterSaveRead(SaveContainer save)
         {
-            CrateContents.RepairSave(save.savedPrefabs);
+            try
+            {
+                CrateContents.RepairSave(save.savedPrefabs);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.SaveGame))]
         private static void BeforeSaving()
         {
-            CrateContents.MatchCrateParents();
+            try
+            {
+                CrateContents.MatchCrateParents();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BoatLocalItems), CacheMethod)]
         private static void BeforeCaching()
         {
-            CrateContents.MatchCrateParents();
+            try
+            {
+                CrateContents.MatchCrateParents();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BoatLocalItems), nameof(BoatLocalItems.CacheItemsOnSinking))]
         private static void BeforeSinking()
         {
-            CrateContents.MatchCrateParents();
+            try
+            {
+                CrateContents.MatchCrateParents();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixItemsFallingOutOfCrates, ex);
+            }
         }
     }
 }
