@@ -2,7 +2,7 @@ using System;
 
 namespace KeeviFixes.Runtime
 {
-    /// <summary>Tells the player what <see cref="SaveRepair"/> removed from the loaded save.</summary>
+    /// <summary>Tells the player what Keevi Fixes removed from or repaired in the loaded save.</summary>
     internal static class SaveRepairNotice
     {
         private const float ShownSeconds = 6f;
@@ -19,7 +19,7 @@ namespace KeeviFixes.Runtime
             }
             catch (Exception ex)
             {
-                Plugin.Log.LogError("Could not show what was removed from the save: " + ex);
+                Plugin.Log.LogError("Could not show what was repaired in the save: " + ex);
             }
         }
     }

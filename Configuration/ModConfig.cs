@@ -78,6 +78,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixWarehouseYard { get; private set; }
 
+        public static ConfigEntry<bool> FixTradeBookTrading { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             FixRotationCenter = config.Bind(
@@ -294,6 +296,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the trade book showing the wrong goods in the warehouse yard and failing when you " +
                     "sell them."));
+
+            FixTradeBookTrading = config.Bind(
+                TradeSection,
+                "Fix trade book trading",
+                true,
+                new ConfigDescription(
+                    "Fixes buying or selling through the trade book only changing the price at a port whose price " +
+                    "data in the save is broken."));
 
             KeepFurnitureReachDependentOnCrateFixes();
         }

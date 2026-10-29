@@ -105,6 +105,7 @@
     <Compile Include="Patches\MooringPatches.cs" />
     <Compile Include="Patches\PickupLookTargetPatches.cs" />
     <Compile Include="Patches\SpatializerVoiceLimitPatch.cs" />
+    <Compile Include="Patches\TradeBookTradingPatch.cs" />
     <Compile Include="Patches\TradeBookYardPatches.cs" />
     <Compile Include="Patches\UnheldBarrelPatch.cs" />
     <Compile Include="Plugin.cs" />

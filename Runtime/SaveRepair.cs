@@ -277,6 +277,13 @@ namespace KeeviFixes.Runtime
             return extracted;
         }
 
+        /// <summary>Adds <paramref name="count"/> repaired markets to the notice of the save being loaded.</summary>
+        public static void ReportRepairedMarkets(int count)
+        {
+            if (loadReport != null)
+                loadReport.Markets += count;
+        }
+
         private static void AddToReport(int items, int boats, int duplicates)
         {
             if (loadReport == null)

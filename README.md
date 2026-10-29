@@ -27,6 +27,7 @@
 - Food and firewood in an open crate could be pulled into a nearby stove or smoker.
 - Items picked up on an island vanished from the inventory after sailing away.
 - The trade book could show the wrong goods in the warehouse yard and fail when selling them.
+- Buying or selling through the trade book at some ports only changed the price.
 - A barrel taken from the cart, or right-clicked before being picked up, was held like a small item.
 - After drinking from a barrel, it stayed held like a small item.
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
@@ -87,6 +88,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Small Items | Fix inventory items vanishing | Items in your inventory no longer vanish after sailing away. |
 | Small Items | Fix smoke on item spawn | Food, pipes, pots and kettles no longer puff smoke when they appear. |
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
+| Trade | Fix trade book trading | Buying or selling in the trade book no longer does nothing but change the price. |
 | Trade | Fix warehouse yard | The trade book counts only goods that really exist in the warehouse yard. |
 
 ¹ "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
