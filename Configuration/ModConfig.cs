@@ -73,6 +73,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixInventoryItemsVanishing { get; private set; }
 
+        public static ConfigEntry<bool> FixStovesTakingCrateItems { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             FixRotationCenter = config.Bind(
@@ -274,6 +276,13 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes items in your inventory vanishing when you sail away from an island where you picked " +
                     "them up."));
+
+            FixStovesTakingCrateItems = config.Bind(
+                CratesSection,
+                "Fix stoves taking crate items",
+                true,
+                new ConfigDescription(
+                    "Fixes food and firewood in an open crate being pulled into a nearby stove or smoker."));
 
             KeepFurnitureReachDependentOnCrateFixes();
         }

@@ -24,6 +24,7 @@
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
 - Items stored in a closed crate could be picked up without opening it in some cases.
 - Items stored in a crate ended up outside it or went missing from it after loading a save or coming back to the boat.
+- Food and firewood in an open crate could be pulled into a nearby stove or smoker.
 - Items picked up on an island vanished from the inventory after sailing away.
 - A barrel taken from the cart, or right-clicked before being picked up, was held like a small item.
 - After drinking from a barrel, it stayed held like a small item.
@@ -69,6 +70,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Boats | Fix mooring line length ¹ | Mooring lines keep the length you gave them. |
 | Crates | Fix items falling out of crates | Items stay in their crate after loading or coming back. |
 | Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
+| Crates | Fix stoves taking crate items | Stoves no longer take food and firewood from an open crate. |
 | Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Furniture | Fix charting kit placement | The charting kit goes on tables and other furniture. |
 | Furniture | Fix reaching behind furniture ² | Small items behind or under furniture can be picked up. |
