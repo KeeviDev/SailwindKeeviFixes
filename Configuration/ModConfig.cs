@@ -16,6 +16,7 @@ namespace KeeviFixes.Configuration
         private const string BoatsSection = "Boats";
         private const string FishingSection = "Fishing";
         private const string SoundSection = "Sound";
+        private const string TradeSection = "Trade";
         private const string SavingAndLoadingSection = "Saving and Loading";
         private const string InterfaceSection = "Interface";
 
@@ -74,6 +75,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> FixInventoryItemsVanishing { get; private set; }
 
         public static ConfigEntry<bool> FixStovesTakingCrateItems { get; private set; }
+
+        public static ConfigEntry<bool> FixWarehouseYard { get; private set; }
 
         public static void Bind(ConfigFile config)
         {
@@ -283,6 +286,14 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes food and firewood in an open crate being pulled into a nearby stove or smoker."));
+
+            FixWarehouseYard = config.Bind(
+                TradeSection,
+                "Fix warehouse yard",
+                true,
+                new ConfigDescription(
+                    "Fixes the trade book showing the wrong goods in the warehouse yard and failing when you " +
+                    "sell them."));
 
             KeepFurnitureReachDependentOnCrateFixes();
         }

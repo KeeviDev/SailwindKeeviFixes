@@ -14,6 +14,7 @@
 - Items stored in a crate no longer end up outside it or go missing from it after loading a save or coming back to your boat ("Fix items falling out of crates")
 - Food and firewood in an open crate are no longer pulled into a nearby stove or smoker ("Fix stoves taking crate items")
 - Items in your inventory no longer vanish when you sail away from an island where you picked them up ("Fix inventory items vanishing")
+- The trade book no longer shows the wrong goods in the warehouse yard or fails when you sell them ("Fix warehouse yard")
 - Big items no longer occasionally vanish while you carry them ("Fix carried items vanishing")
 - The game no longer stops saving, gets stuck loading or duplicates items when an item or boat can't be saved or loaded, such as one from a mod you removed ("Fix failed saves and loads")
 - The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
