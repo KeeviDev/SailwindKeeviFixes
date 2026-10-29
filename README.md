@@ -61,9 +61,9 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Section | Setting | What it fixes |
 |---|---|---|
 | All Items | Fix dropping after pickup | Items picked up in front of others can be dropped right away. |
-| All Items | Fix dropping while interacting | Ladders and buttons no longer make you drop what you hold. |
+| All Items | Fix dropping while interacting | Climbing a ladder or pressing a button no longer drops what you hold. |
 | All Items | Fix reaching through walls | No picking up or using items through boat walls, decks and ceilings. |
-| Big Items | Fix barrels after drinking | Barrels are held like barrels again after drinking. |
+| Big Items | Fix barrels after drinking | Barrels behave like big items again after drinking. |
 | Big Items | Fix barrels from the cart | Barrels from the cart behave like big items. |
 | Big Items | Fix carried items vanishing ³ | Big items no longer vanish while you carry them. |
 | Big Items | Fix rotation center | Big items turn around their middle. |
@@ -78,7 +78,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Furniture | Fix reaching behind furniture ² | Small items behind or under furniture can be picked up. |
 | Hooks | Fix hung item facing | Hung items stop slowly spinning in waves. |
 | Hooks | Fix hung items falling | Hung items stay on their hooks after loading or coming back. |
-| Interface | Fix focus click | Clicking back into the game no longer acts in it. |
+| Interface | Fix focus click | Clicking into the game window no longer drops or uses what you hold. |
 | Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 | Knives | Fix boat shaking when cutting | Cutting no longer shakes the boat. |
 | Knives | Fix cut piece placement | Cut pieces no longer fly apart or fall through the deck. |
