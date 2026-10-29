@@ -71,6 +71,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixCarriedItemsVanishing { get; private set; }
 
+        public static ConfigEntry<bool> FixInventoryItemsVanishing { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             FixRotationCenter = config.Bind(
@@ -264,6 +266,14 @@ namespace KeeviFixes.Configuration
                 true,
                 new ConfigDescription(
                     "Fixes big items that may vanish in some cases while you carry them. Requires a game restart."));
+
+            FixInventoryItemsVanishing = config.Bind(
+                SmallItemsSection,
+                "Fix inventory items vanishing",
+                true,
+                new ConfigDescription(
+                    "Fixes items in your inventory vanishing when you sail away from an island where you picked " +
+                    "them up."));
 
             KeepFurnitureReachDependentOnCrateFixes();
         }

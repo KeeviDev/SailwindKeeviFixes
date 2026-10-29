@@ -94,6 +94,7 @@
     <Compile Include="Patches\MenuIslandsPatches.cs" />
     <Compile Include="Patches\HangingYawPatches.cs" />
     <Compile Include="Patches\HungItemRehangPatches.cs" />
+    <Compile Include="Patches\InventoryItemsPatches.cs" />
     <Compile Include="Patches\ItemSaveDataPatch.cs" />
     <Compile Include="Patches\ItemSpawnSmokePatches.cs" />
     <Compile Include="Patches\LookRayPatch.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Runtime\FurnitureReach.cs" />
     <Compile Include="Runtime\GoPointerFields.cs" />
     <Compile Include="Runtime\HungItemRehang.cs" />
+    <Compile Include="Runtime\InventoryItems.cs" />
     <Compile Include="Runtime\MenuIslands.cs" />
     <Compile Include="Runtime\MooredBoat.cs" />
     <Compile Include="Runtime\MooringFix.cs" />

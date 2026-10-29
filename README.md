@@ -24,6 +24,7 @@
 - Small items that fell behind or under nailed furniture, such as a table or a bed, could not be picked up.
 - Items stored in a closed crate could be picked up without opening it in some cases.
 - Items stored in a crate ended up outside it or went missing from it after loading a save or coming back to the boat.
+- Items picked up on an island vanished from the inventory after sailing away.
 - A barrel taken from the cart, or right-clicked before being picked up, was held like a small item.
 - After drinking from a barrel, it stayed held like a small item.
 - The click that switched to the game window from another window was registered in the game, for example dropping the held item.
@@ -80,6 +81,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Maps | Fix map drawings disappearing | Drawings no longer disappear from maps. |
 | Saving and Loading | Fix failed saves and loads | Saving and loading keep working when an item can't be saved or loaded. |
 | Saving and Loading | Fix menu islands staying loaded | Lighter end of loading, without sounds no one can hear. |
+| Small Items | Fix inventory items vanishing | Items in your inventory no longer vanish after sailing away. |
 | Small Items | Fix smoke on item spawn | Food, pipes, pots and kettles no longer puff smoke when they appear. |
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
 
