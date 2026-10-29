@@ -30,6 +30,7 @@
 - Food, pipes, pots and kettles gave off a puff of smoke when they appeared, such as in shops or after loading a save.
 - After charting, the map stayed selected: it remained outlined through walls and opened again when the charting kit was placed next to it. Other items and buttons could stay selected after menus as well, such as a winch after a pause.
 - The charting kit could not be placed on tables and other furniture.
+- Big items may vanish in some cases while being carried.
 - The islands shown in the main menu stayed loaded while a save loaded, adding work and sounds no one could hear to the end of loading.
 - Pausing while operating the bilge pump knocked its handle off its axis.
 
@@ -60,6 +61,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | All Items | Fix reaching through walls | No picking up or using items through boat walls, decks and ceilings. |
 | Big Items | Fix barrels after drinking | Barrels are held like barrels again after drinking. |
 | Big Items | Fix barrels from the cart | Barrels from the cart behave like big items. |
+| Big Items | Fix carried items vanishing ³ | Big items no longer vanish while you carry them. |
 | Big Items | Fix rotation center | Big items turn around their middle. |
 | Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
 | Boats | Fix moored boats coming loose ¹ | Moored boats stay tied after loading or coming back. |
@@ -85,4 +87,4 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 
 ² "Fix reaching behind furniture" requires "Fix reaching into crates" and "Fix items falling out of crates" to be enabled.
 
-³ Changes to "Fix sound direction" take effect when the game starts.
+³ Changes to "Fix carried items vanishing" and "Fix sound direction" take effect when the game starts.

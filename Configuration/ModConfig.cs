@@ -69,6 +69,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixFailedSavesAndLoads { get; private set; }
 
+        public static ConfigEntry<bool> FixCarriedItemsVanishing { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
             FixRotationCenter = config.Bind(
@@ -255,6 +257,13 @@ namespace KeeviFixes.Configuration
                     "Fixes saving silently stopping, and loading getting stuck or duplicating items, when " +
                     "something in the save can't be saved or loaded, such as an item or boat from a mod you " +
                     "removed."));
+
+            FixCarriedItemsVanishing = config.Bind(
+                BigItemsSection,
+                "Fix carried items vanishing",
+                true,
+                new ConfigDescription(
+                    "Fixes big items that may vanish in some cases while you carry them. Requires a game restart."));
 
             KeepFurnitureReachDependentOnCrateFixes();
         }
