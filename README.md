@@ -35,6 +35,7 @@
 - After charting, the map stayed selected: it remained outlined through walls and opened again when the charting kit was placed next to it. Other items and buttons could stay selected after menus as well, such as a winch after a pause.
 - The charting kit could not be placed on tables and other furniture.
 - Big items may vanish in some cases while being carried.
+- The controls hint of the held item, or of the last thing looked at, showed on a ladder, door or anything else looked at.
 - The islands shown in the main menu stayed loaded while a save loaded, adding work and sounds no one could hear to the end of loading.
 - Pausing while operating the bilge pump knocked its handle off its axis.
 
@@ -79,6 +80,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Hooks | Fix hung item facing | Hung items stop slowly spinning in waves. |
 | Hooks | Fix hung items falling | Hung items stay on their hooks after loading or coming back. |
 | Interface | Fix focus click | Clicking into the game window no longer drops or uses what you hold. |
+| Interface | Fix leftover controls hint | A ladder, door or button no longer shows the controls hint of the item you hold, or of the last thing you looked at. |
 | Interface | Fix stuck clicks | The map and other items no longer stay selected after charting or menus. |
 | Knives | Fix boat shaking when cutting | Cutting no longer shakes the boat. |
 | Knives | Fix cut piece placement | Cut pieces no longer fly apart or fall through the deck. |

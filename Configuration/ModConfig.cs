@@ -52,6 +52,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixFocusClick { get; private set; }
 
+        public static ConfigEntry<bool> FixLeftoverControlsHint { get; private set; }
+
         public static ConfigEntry<bool> FixBoatShakingWhenCutting { get; private set; }
 
         public static ConfigEntry<bool> FixCutPiecePlacement { get; private set; }
@@ -197,6 +199,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the click that switches to the game window acting in game, such as dropping the item you " +
                     "hold."));
+
+            FixLeftoverControlsHint = config.Bind(
+                InterfaceSection,
+                "Fix leftover controls hint",
+                true,
+                new ConfigDescription(
+                    "Fixes the controls hint of the item you hold, or of the last thing you looked at, showing on a " +
+                    "ladder, door or anything else you look at."));
 
             FixBoatShakingWhenCutting = config.Bind(
                 KnivesSection,

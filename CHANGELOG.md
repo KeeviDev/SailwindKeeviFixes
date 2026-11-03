@@ -18,6 +18,7 @@
 - Buying or selling through the trade book no longer only changes the price ("Fix trade book trading")
 - Big items no longer occasionally vanish while you carry them ("Fix carried items vanishing")
 - The game no longer stops saving, gets stuck loading or duplicates items when an item or boat can't be saved or loaded, such as one from a mod you removed ("Fix failed saves and loads")
+- The controls hint of the item you hold, or of the last thing you looked at, no longer shows on a ladder, door or anything else you look at ("Fix leftover controls hint")
 - The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
 
 ## [1.0.4] - 2026-11-04
