@@ -12,6 +12,7 @@
 - After loading a save, footsteps and other sounds near the player could come from one side.
 - An item picked up directly in front of another item could not be dropped or thrown until the player looked away.
 - Climbing a boat ladder, or releasing any other button after it stopped being targeted, dropped the held item.
+- Items that attach to walls could not be put on a free spot of a wall when the item in hand touched something.
 - Items could be picked up and used through boat walls, decks and ceilings.
 - Big items rotated around a point at their base or edge instead of their centre.
 - Cutting an item that had been lying on the boat for a while shook the boat with a thud.
@@ -92,6 +93,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
 | Trade | Fix trade book trading | Buying or selling in the trade book no longer does nothing but change the price. |
 | Trade | Fix warehouse yard | The trade book counts only goods that really exist in the warehouse yard. |
+| Wall Attachment | Fix blocked attachment | Items that attach to walls go on a free spot of a wall even when the item in your hand touches something. |
 
 ¹ "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
 

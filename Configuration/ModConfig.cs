@@ -19,6 +19,7 @@ namespace KeeviFixes.Configuration
         private const string TradeSection = "Trade";
         private const string SavingAndLoadingSection = "Saving and Loading";
         private const string InterfaceSection = "Interface";
+        private const string WallAttachmentSection = "Wall Attachment";
 
         public static ConfigEntry<bool> FixRotationCenter { get; private set; }
 
@@ -39,6 +40,8 @@ namespace KeeviFixes.Configuration
         public static ConfigEntry<bool> FixItemsFallingOutOfCrates { get; private set; }
 
         public static ConfigEntry<bool> FixReachingThroughWalls { get; private set; }
+
+        public static ConfigEntry<bool> FixBlockedAttachment { get; private set; }
 
         public static ConfigEntry<bool> FixReachingBehindFurniture { get; private set; }
 
@@ -155,6 +158,14 @@ namespace KeeviFixes.Configuration
                 "Fix reaching through walls",
                 true,
                 new ConfigDescription("Fixes picking up and using items through walls, floors and ceilings on boats."));
+
+            FixBlockedAttachment = config.Bind(
+                WallAttachmentSection,
+                "Fix blocked attachment",
+                true,
+                new ConfigDescription(
+                    "Fixes items that attach to walls refusing to go on a free spot of a wall when the item in your " +
+                    "hand touches something."));
 
             FixReachingBehindFurniture = config.Bind(
                 FurnitureSection,

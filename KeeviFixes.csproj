@@ -113,6 +113,7 @@
     <Compile Include="Patches\TradeBookTradingPatch.cs" />
     <Compile Include="Patches\TradeBookYardPatches.cs" />
     <Compile Include="Patches\UnheldBarrelPatch.cs" />
+    <Compile Include="Patches\WallAttachmentPatches.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\BigContainerDrinking.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Runtime\SaveRepairNotice.cs" />
     <Compile Include="Runtime\SaveRepairReport.cs" />
     <Compile Include="Runtime\SpatializerVoices.cs" />
+    <Compile Include="Runtime\WallAttachment.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BepInEx.BaseLib">
