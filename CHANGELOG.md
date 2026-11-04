@@ -22,6 +22,7 @@
 - The game no longer stops saving, gets stuck loading or duplicates items when an item or boat can't be saved or loaded, such as one from a mod you removed ("Fix failed saves and loads")
 - The controls hint of the item you hold, or of the last thing you looked at, no longer shows on a ladder, door or anything else you look at ("Fix leftover controls hint")
 - The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
+- Fixed a bug in "Fix mooring line length": mooring lines keep their length after loading a save also when "Fix moored boats coming loose" is turned off
 
 ## [1.0.4] - 2026-11-04
 

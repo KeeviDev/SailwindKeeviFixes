@@ -12,9 +12,9 @@ namespace KeeviFixes.Runtime
     internal static class MooringRetie
     {
         /// <summary>Distance, in metres, seen from above, a loaded line's end may be from its cleat.</summary>
-        private const float MatchDistance = 0.5f;
+        internal const float MatchDistance = 0.5f;
 
-        private static readonly List<LoadedLine> LoadedLines = new List<LoadedLine>();
+        private static readonly List<PickupableBoatMooringRope> LoadedLines = new List<PickupableBoatMooringRope>();
 
         private static bool IsEnabled
         {
@@ -31,7 +31,7 @@ namespace KeeviFixes.Runtime
 
             PickupableBoatMooringRope line = saveable.GetComponent<PickupableBoatMooringRope>();
             if (line != null && IsEnabled && IsLeftLoose(line))
-                LoadedLines.Add(new LoadedLine(line, saveable.sceneIndex, data.extraValue));
+                LoadedLines.Add(line);
         }
 
         /// <summary>
@@ -48,11 +48,10 @@ namespace KeeviFixes.Runtime
                 GPButtonDockMooring[] cleats = Resources.FindObjectsOfTypeAll<GPButtonDockMooring>()
                     .Where(cleat => cleat != null && cleat.gameObject.scene.IsValid())
                     .ToArray();
-                Dictionary<int, float> savedLengths = MooringLineSave.IsSupported ? MooringLineSave.Read() : null;
                 int tied = 0;
-                foreach (LoadedLine line in LoadedLines)
+                foreach (PickupableBoatMooringRope line in LoadedLines)
                 {
-                    if (Retie(line, cleats, savedLengths))
+                    if (Retie(line, cleats))
                         tied++;
                 }
 
@@ -83,9 +82,7 @@ namespace KeeviFixes.Runtime
             if (!IsEnabled)
                 return;
 
-            Vector3 cleat = spring.transform.position;
-            if (line.transform.position != cleat)
-                line.transform.position = cleat;
+            line.transform.position = spring.transform.position;
         }
 
         /// <summary>
@@ -116,9 +113,8 @@ namespace KeeviFixes.Runtime
             return !line.IsMoored() && line.transform.parent != MooringLineFields.HomeParent(line);
         }
 
-        private static bool Retie(LoadedLine loaded, GPButtonDockMooring[] cleats, Dictionary<int, float> savedLengths)
+        private static bool Retie(PickupableBoatMooringRope line, GPButtonDockMooring[] cleats)
         {
-            PickupableBoatMooringRope line = loaded.Line;
             if (line == null || line.IsMoored())
                 return false;
 
@@ -130,21 +126,7 @@ namespace KeeviFixes.Runtime
             }
 
             line.MoorTo(cleat);
-            MooringLineLength.RestoreAfterLoading(line, SavedLength(loaded, savedLengths));
             return true;
-        }
-
-        /// <summary>
-        /// Returns the length saved for the loaded line: from <paramref name="savedLengths"/> when the save has them,
-        /// otherwise from the line's extra value; 0 when the save holds none.
-        /// </summary>
-        private static float SavedLength(LoadedLine loaded, Dictionary<int, float> savedLengths)
-        {
-            if (savedLengths == null)
-                return loaded.ExtraValueLength;
-
-            float length;
-            return savedLengths.TryGetValue(loaded.SceneIndex, out length) ? length : 0f;
         }
 
         /// <summary>
@@ -185,24 +167,6 @@ namespace KeeviFixes.Runtime
                 "Found no free cleat under the loaded mooring line {0} of {1}, so it goes back aboard.",
                 line.name,
                 line.GetBoatRigidbody().name));
-        }
-
-        private struct LoadedLine
-        {
-            public readonly PickupableBoatMooringRope Line;
-
-            /// <summary>The line's scene index in the save.</summary>
-            public readonly int SceneIndex;
-
-            /// <summary>The length the save holds in the line's extra value, or 0 when it holds none.</summary>
-            public readonly float ExtraValueLength;
-
-            public LoadedLine(PickupableBoatMooringRope line, int sceneIndex, float extraValueLength)
-            {
-                Line = line;
-                SceneIndex = sceneIndex;
-                ExtraValueLength = extraValueLength;
-            }
         }
     }
 }

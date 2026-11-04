@@ -35,6 +35,16 @@ namespace KeeviFixes.Runtime
             get { return MooredSpring != null && HomeParent != null && IsLengthDue != null && CurrentDistanceSquared != null; }
         }
 
+        /// <summary>
+        /// Returns the spring of a tied line whose boat is awake, or null when the line is untied or its boat sleeps.
+        /// </summary>
+        public static SpringJoint AwakeSpring(PickupableBoatMooringRope line)
+        {
+            SpringJoint spring = MooredSpring(line);
+            Rigidbody boat = spring != null ? line.GetBoatRigidbody() : null;
+            return boat != null && !boat.isKinematic ? spring : null;
+        }
+
         /// <summary>Returns how far the tied line's end is from its place aboard.</summary>
         public static float MeasureDistance(PickupableBoatMooringRope line)
         {

@@ -2,6 +2,7 @@ using System;
 using HarmonyLib;
 using KeeviFixes.Configuration;
 using KeeviFixes.Runtime;
+using UnityEngine;
 
 namespace KeeviFixes.Patches
 {
@@ -43,12 +44,30 @@ namespace KeeviFixes.Patches
             {
                 FixGuard.Stop(ModConfig.FixMooredBoatsComingLoose, ex);
             }
+
+            try
+            {
+                MooringLineLength.OnLoaded(__instance, data);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+            }
         }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(SaveLoadManager), nameof(SaveLoadManager.LoadGame))]
         private static void AfterLoadGame()
         {
+            try
+            {
+                MooringLineLength.AfterLoadGame();
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+            }
+
             try
             {
                 MooringRetie.AfterLoadGame();
@@ -74,7 +93,7 @@ namespace KeeviFixes.Patches
 
             try
             {
-                MooringLineLength.Remember(__instance);
+                MooringLineLength.OnTied(__instance);
             }
             catch (Exception ex)
             {
@@ -100,9 +119,36 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(PickupableBoatMooringRope), "Update")]
         private static void BeforeUpdate(PickupableBoatMooringRope __instance)
         {
+            SpringJoint spring = MooringFix.IsAvailable ? MooringLineFields.AwakeSpring(__instance) : null;
+            if (spring == null)
+                return;
+
+            if (!MooringLineFields.IsLengthDue(__instance))
+            {
+                try
+                {
+                    MooringLineLength.TakeInSlack(__instance, spring);
+                }
+                catch (Exception ex)
+                {
+                    FixGuard.Stop(ModConfig.FixMooringLineLength, ex);
+                }
+
+                return;
+            }
+
             try
             {
-                MooringLineLength.BeforeLineUpdate(__instance);
+                MooringRetie.PutEndOnCleat(__instance, spring);
+            }
+            catch (Exception ex)
+            {
+                FixGuard.Stop(ModConfig.FixMooredBoatsComingLoose, ex);
+            }
+
+            try
+            {
+                MooringLineLength.OnBoatWoken(__instance, spring);
             }
             catch (Exception ex)
             {
