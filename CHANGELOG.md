@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.4] - 2026-11-04
+
 ### Changed
 
 - Mooring line lengths are now saved apart from the game's own data, so a future game update can't overwrite them; saves from earlier versions keep their lengths
@@ -51,6 +53,7 @@
 - The map and other items no longer stay selected after charting or menus
 - Every fix has its own switch in the config, grouped into sections
 
+[1.0.4]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.4
 [1.0.3]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.3
 [1.0.2]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.2
 [1.0.1]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.1
