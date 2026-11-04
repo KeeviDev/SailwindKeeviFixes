@@ -11,6 +11,9 @@ namespace KeeviFixes.Runtime
     {
         private const float Tolerance = 0.01f;
 
+        /// <summary>Longest length, in metres, a saved line length is accepted at.</summary>
+        private const float LongestSavedLength = 50f;
+
         /// <summary>
         /// Remembers the length the game or the player just gave a tied line.
         /// </summary>
@@ -24,17 +27,18 @@ namespace KeeviFixes.Runtime
         /// <summary>
         /// Gives a line tied again after loading the length it was saved with, applied on its boat's first awake update.
         /// </summary>
-        /// <param name="savedLength">The length saved with the line; 0 for a save made without this fix, whose line
-        /// is then measured from the boat's distance as the game does.</param>
+        /// <param name="savedLength">The length saved with the line. With 0, as in a save made without this fix, or a
+        /// length above <see cref="LongestSavedLength"/>, the line is measured from the boat's distance as the game
+        /// does.</param>
         public static void RestoreAfterLoading(PickupableBoatMooringRope line, float savedLength)
         {
-            SetKeptLength(line, savedLength);
+            SetKeptLength(line, savedLength <= LongestSavedLength ? savedLength : 0f);
             MooringLineFields.IsLengthDue(line) = true;
         }
 
         /// <summary>
-        /// Applies the kept length when the line's boat has woken up, and takes in slack above it. Must run before the
-        /// line's own update.
+        /// Puts the line's end back on its cleat and applies the kept length when the line's boat has woken up, and
+        /// takes in slack above the kept length. Must run before the line's own update.
         /// </summary>
         public static void BeforeLineUpdate(PickupableBoatMooringRope line)
         {
@@ -47,7 +51,10 @@ namespace KeeviFixes.Runtime
                 return;
 
             if (MooringLineFields.IsLengthDue(line))
+            {
+                MooringRetie.PutEndOnCleat(line, spring);
                 ApplyOnWaking(line, spring);
+            }
             else if (ModConfig.FixMooringLineLength.Value)
                 TakeInSlack(line, spring);
         }

@@ -75,6 +75,19 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
+        /// Moves the end of a tied line onto the cleat it is tied to.
+        /// </summary>
+        public static void PutEndOnCleat(PickupableBoatMooringRope line, SpringJoint spring)
+        {
+            if (!IsEnabled)
+                return;
+
+            Vector3 cleat = spring.transform.position;
+            if (line.transform.position != cleat)
+                line.transform.position = cleat;
+        }
+
+        /// <summary>
         /// Attaches the spring of each of the boat's tied lines to the boat again.
         /// </summary>
         public static void AttachSprings(BoatMooringRopes boatLines)

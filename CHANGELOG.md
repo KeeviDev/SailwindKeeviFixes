@@ -1,5 +1,9 @@
 # Changelog
 
+### Fixed
+
+- Fixed a bug in "Fix moored boats coming loose": mooring lines no longer disappear after loading a save, leaving the boat loose
+
 ## [1.0.3] - 2026-11-04
 
 ### Fixed
