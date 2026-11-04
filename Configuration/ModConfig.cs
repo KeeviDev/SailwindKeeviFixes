@@ -43,6 +43,8 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixBlockedAttachment { get; private set; }
 
+        public static ConfigEntry<bool> FixPreviewMismatch { get; private set; }
+
         public static ConfigEntry<bool> FixReachingBehindFurniture { get; private set; }
 
         public static ConfigEntry<bool> FixStuckClicks { get; private set; }
@@ -166,6 +168,14 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes items that attach to walls refusing to go on a free spot of a wall when the item in your " +
                     "hand touches something."));
+
+            FixPreviewMismatch = config.Bind(
+                WallAttachmentSection,
+                "Fix preview mismatch",
+                true,
+                new ConfigDescription(
+                    "Fixes the preview of items that attach to walls jittering and showing a different spot than the " +
+                    "one they attach to on a moving boat."));
 
             FixReachingBehindFurniture = config.Bind(
                 FurnitureSection,

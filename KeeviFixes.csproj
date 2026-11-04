@@ -113,6 +113,7 @@
     <Compile Include="Patches\TradeBookTradingPatch.cs" />
     <Compile Include="Patches\TradeBookYardPatches.cs" />
     <Compile Include="Patches\UnheldBarrelPatch.cs" />
+    <Compile Include="Patches\WallAttachmentAimPatches.cs" />
     <Compile Include="Patches\WallAttachmentPatches.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

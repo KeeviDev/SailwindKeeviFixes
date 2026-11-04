@@ -8,6 +8,7 @@
 ### Fixed
 
 - Footsteps and other sounds near you no longer come from one side (can be turned off with the new "Fix sound direction" setting)
+- On a moving boat, the preview of items that attach to walls no longer jitters, and the items no longer land away from where it shows ("Fix preview mismatch")
 - Items that attach to walls are no longer refused on a free spot of a wall when the item in your hand touches something ("Fix blocked attachment")
 - Fishing rods on hooks or lying around no longer swing out of place when a fish bites; they now stay put and bend toward the fish ("Fix fishing rods turning")
 - Food, pipes, pots and kettles no longer give off a puff of smoke when they appear, such as in shops or after loading a save ("Fix smoke on item spawn")
