@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.3] - 2026-11-04
+
 ### Fixed
 
 - Updated "Fix moored boats coming loose" for Sailwind 0.40.1
@@ -41,6 +43,7 @@
 - The map and other items no longer stay selected after charting or menus
 - Every fix has its own switch in the config, grouped into sections
 
+[1.0.3]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.3
 [1.0.2]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.2
 [1.0.1]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.1
 [1.0.0]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.0
