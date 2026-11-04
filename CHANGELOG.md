@@ -1,5 +1,9 @@
 # Changelog
 
+### Fixed
+
+- Updated "Fix moored boats coming loose" for Sailwind 0.40.1
+
 ## [1.0.2] - 2026-10-11
 
 ### Fixed

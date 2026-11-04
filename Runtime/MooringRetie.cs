@@ -26,11 +26,11 @@ namespace KeeviFixes.Runtime
         /// </summary>
         public static void OnLoaded(SaveableObject saveable, SaveObjectData data)
         {
-            if (data == null || !data.extraSetting || saveable.transform.parent != null)
+            if (data == null || !data.extraSetting)
                 return;
 
             PickupableBoatMooringRope line = saveable.GetComponent<PickupableBoatMooringRope>();
-            if (line != null && !line.IsMoored() && IsEnabled)
+            if (line != null && IsEnabled && IsLeftLoose(line))
                 LoadedLines.Add(new LoadedLine(line, data.extraValue));
         }
 
@@ -94,6 +94,12 @@ namespace KeeviFixes.Runtime
                 spring.connectedBody = boat;
                 spring.connectedAnchor = anchor;
             }
+        }
+
+        /// <summary>Returns whether the line is off its place aboard and tied to no cleat.</summary>
+        private static bool IsLeftLoose(PickupableBoatMooringRope line)
+        {
+            return !line.IsMoored() && line.transform.parent != MooringLineFields.HomeParent(line);
         }
 
         private static bool Retie(LoadedLine loaded, GPButtonDockMooring[] cleats)
