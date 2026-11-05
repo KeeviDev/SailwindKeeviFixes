@@ -27,7 +27,7 @@ namespace KeeviFixes.Runtime
         /// </summary>
         public static void OnLoaded(SaveableObject saveable, SaveObjectData data)
         {
-            if (data == null || !data.extraSetting || !MooringFix.IsAvailable)
+            if (data == null || !data.extraSetting)
                 return;
 
             PickupableBoatMooringRope line = saveable.GetComponent<PickupableBoatMooringRope>();
@@ -57,7 +57,7 @@ namespace KeeviFixes.Runtime
         public static void OnTied(PickupableBoatMooringRope line)
         {
             SpringJoint spring = MooringLineFields.MooredSpring(line);
-            if (spring == null || !MooringFix.IsAvailable)
+            if (spring == null)
                 return;
 
             LoadedLine loaded;
@@ -81,7 +81,7 @@ namespace KeeviFixes.Runtime
         public static void Remember(PickupableBoatMooringRope line)
         {
             SpringJoint spring = MooringLineFields.MooredSpring(line);
-            if (spring != null && MooringFix.IsAvailable)
+            if (spring != null)
                 SetKeptLength(line, spring.maxDistance);
         }
 

@@ -68,17 +68,17 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | All Items | Fix reaching through walls | No picking up or using items through boat walls, decks and ceilings. |
 | Big Items | Fix barrels after drinking | Barrels behave like big items again after drinking. |
 | Big Items | Fix barrels from the cart | Barrels from the cart behave like big items. |
-| Big Items | Fix carried items vanishing ³ | Big items no longer vanish while you carry them. |
+| Big Items | Fix carried items vanishing ² | Big items no longer vanish while you carry them. |
 | Big Items | Fix rotation center | Big items turn around their middle. |
 | Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
-| Boats | Fix moored boats coming loose ¹ | Moored boats stay tied after loading or coming back. |
-| Boats | Fix mooring line length ¹ | Mooring lines keep the length you gave them. |
+| Boats | Fix moored boats coming loose | Moored boats stay tied after loading or coming back. |
+| Boats | Fix mooring line length | Mooring lines keep the length you gave them. |
 | Crates | Fix items falling out of crates | Items stay in their crate after loading or coming back. |
 | Crates | Fix reaching into crates | No taking items out of a closed crate without opening it. |
 | Crates | Fix stoves taking crate items | Stoves no longer take food and firewood from an open crate. |
 | Fishing | Fix fishing rods turning | Rods on hooks or the deck stay in place when a fish bites. |
 | Furniture | Fix charting kit placement | The charting kit goes on tables and other furniture. |
-| Furniture | Fix reaching behind furniture ² | Small items behind or under furniture can be picked up. |
+| Furniture | Fix reaching behind furniture ¹ | Small items behind or under furniture can be picked up. |
 | Hooks | Fix hung item facing | Hung items stop slowly spinning in waves. |
 | Hooks | Fix hung items falling | Hung items stay on their hooks after loading or coming back. |
 | Interface | Fix focus click | Clicking into the game window no longer drops or uses what you hold. |
@@ -91,14 +91,12 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Saving and Loading | Fix menu islands staying loaded | Lighter end of loading, without sounds no one can hear. |
 | Small Items | Fix inventory items vanishing | Items in your inventory no longer vanish after sailing away. |
 | Small Items | Fix smoke on item spawn | Food, pipes, pots and kettles no longer puff smoke when they appear. |
-| Sound | Fix sound direction ³ | Footsteps and other sounds no longer come from one side after loading. |
+| Sound | Fix sound direction ² | Footsteps and other sounds no longer come from one side after loading. |
 | Trade | Fix trade book trading | Buying or selling in the trade book no longer does nothing but change the price. |
 | Trade | Fix warehouse yard | The trade book counts only goods that really exist in the warehouse yard. |
 | Wall Attachment | Fix blocked attachment | Items that attach to walls go on a free spot of a wall even when the item in your hand touches something. |
 | Wall Attachment | Fix preview mismatch | On a moving boat, the preview of items that attach to walls stays steady, and they land where it shows. |
 
-¹ "Fix moored boats coming loose" and "Fix mooring line length" are turned off when **Mooring Line Fix** (DogEggz.Moorlinefix) is installed.
+¹ "Fix reaching behind furniture" requires "Fix reaching into crates" and "Fix items falling out of crates" to be enabled.
 
-² "Fix reaching behind furniture" requires "Fix reaching into crates" and "Fix items falling out of crates" to be enabled.
-
-³ Changes to "Fix carried items vanishing" and "Fix sound direction" take effect when the game starts.
+² Changes to "Fix carried items vanishing" and "Fix sound direction" take effect when the game starts.

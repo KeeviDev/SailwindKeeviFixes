@@ -4,6 +4,7 @@
 
 - "Fix reaching behind furniture" now also needs "Fix items falling out of crates" turned on
 - A fix that runs into an error now turns itself off until you restart the game and writes the error to the log, instead of breaking what the game was doing
+- "Fix moored boats coming loose" and "Fix mooring line length" are no longer turned off when Mooring Line Fix is installed
 
 ### Fixed
 

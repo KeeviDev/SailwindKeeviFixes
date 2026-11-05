@@ -22,7 +22,7 @@ namespace KeeviFixes.Runtime
 
         private static bool IsEnabled
         {
-            get { return FixGuard.IsOn(ModConfig.FixMooredBoatsComingLoose) && MooringFix.IsAvailable; }
+            get { return FixGuard.IsOn(ModConfig.FixMooredBoatsComingLoose); }
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace KeeviFixes.Runtime
         {
             Rigidbody boat = line.GetBoatRigidbody();
             BoatMooringRopes boatLines = boat != null ? boat.GetComponent<BoatMooringRopes>() : null;
-            if (boatLines != null && MooringFix.IsAvailable)
+            if (boatLines != null)
                 MooredBoat.AttachTo(boatLines);
         }
 

@@ -119,7 +119,7 @@ namespace KeeviFixes.Patches
         [HarmonyPatch(typeof(PickupableBoatMooringRope), "Update")]
         private static void BeforeUpdate(PickupableBoatMooringRope __instance)
         {
-            SpringJoint spring = MooringFix.IsAvailable ? MooringLineFields.AwakeSpring(__instance) : null;
+            SpringJoint spring = MooringLineFields.AwakeSpring(__instance);
             if (spring == null)
                 return;
 

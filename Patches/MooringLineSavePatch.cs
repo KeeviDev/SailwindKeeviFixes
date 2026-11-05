@@ -21,15 +21,14 @@ namespace KeeviFixes.Patches
                     "Mooring lines may not keep their length after loading.");
             }
 
-            return MooringLineSave.IsSupported;
+            return MooringLineSave.IsSupported && MooringLineFields.AreFound;
         }
 
         private static void Postfix()
         {
             try
             {
-                if (MooringFix.IsAvailable)
-                    MooringLineSave.Write();
+                MooringLineSave.Write();
             }
             catch (Exception ex)
             {

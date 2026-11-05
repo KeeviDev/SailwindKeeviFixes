@@ -131,7 +131,6 @@
     <Compile Include="Runtime\InventoryItems.cs" />
     <Compile Include="Runtime\MenuIslands.cs" />
     <Compile Include="Runtime\MooredBoat.cs" />
-    <Compile Include="Runtime\MooringFix.cs" />
     <Compile Include="Runtime\MooringLineFields.cs" />
     <Compile Include="Runtime\MooringLineLength.cs" />
     <Compile Include="Runtime\MooringLineSave.cs" />
