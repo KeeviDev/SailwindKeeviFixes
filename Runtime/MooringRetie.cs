@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using HarmonyLib;
 using KeeviFixes.Configuration;
 using UnityEngine;
 
@@ -15,6 +17,8 @@ namespace KeeviFixes.Runtime
         internal const float MatchDistance = 0.5f;
 
         private static readonly List<PickupableBoatMooringRope> LoadedLines = new List<PickupableBoatMooringRope>();
+
+        private static readonly AccessTools.FieldRef<RopeEffect, float> RopeRangeCheckTimer = FindRopeRangeCheckTimer();
 
         private static bool IsEnabled
         {
@@ -75,7 +79,8 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Moves the end of a tied line onto the cleat it is tied to.
+        /// Moves the end of a tied line onto the cleat it is tied to, and has the game decide on its next update
+        /// whether the line's rope is close enough to draw.
         /// </summary>
         public static void PutEndOnCleat(PickupableBoatMooringRope line, SpringJoint spring)
         {
@@ -83,6 +88,9 @@ namespace KeeviFixes.Runtime
                 return;
 
             line.transform.position = spring.transform.position;
+            RopeEffect rope = line.GetComponent<RopeEffect>();
+            if (rope != null && RopeRangeCheckTimer != null)
+                RopeRangeCheckTimer(rope) = 0f;
         }
 
         /// <summary>
@@ -157,6 +165,18 @@ namespace KeeviFixes.Runtime
             if (cleat.spring == null)
                 cleat.spring = cleat.GetComponent<SpringJoint>();
             return cleat.spring != null && cleat.spring.connectedBody == null;
+        }
+
+        /// <summary>
+        /// Returns an accessor for the time left until a rope next checks its distance to the player, or null when the
+        /// game has no such field.
+        /// </summary>
+        private static AccessTools.FieldRef<RopeEffect, float> FindRopeRangeCheckTimer()
+        {
+            FieldInfo field = AccessTools.Field(typeof(RopeEffect), "distanceCheckTimer");
+            return field != null && field.FieldType == typeof(float)
+                ? AccessTools.FieldRefAccess<RopeEffect, float>(field)
+                : null;
         }
 
         private static void ReturnAboard(PickupableBoatMooringRope line)

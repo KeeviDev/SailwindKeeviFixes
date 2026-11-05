@@ -23,6 +23,7 @@
 - The controls hint of the item you hold, or of the last thing you looked at, no longer shows on a ladder, door or anything else you look at ("Fix leftover controls hint")
 - The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
 - Fixed a bug in "Fix mooring line length": mooring lines keep their length after loading a save also when "Fix moored boats coming loose" is turned off
+- Fixed a bug in "Fix moored boats coming loose": the ropes of moored boats no longer take several seconds longer to appear after loading a save
 
 ## [1.0.4] - 2026-11-04
 
