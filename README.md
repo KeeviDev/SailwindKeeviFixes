@@ -14,6 +14,7 @@
 - Climbing a boat ladder, or releasing any other button after it stopped being targeted, dropped the held item.
 - On a moving boat, the preview of items that attach to walls jittered, and the items landed away from where it showed.
 - Items that attach to walls could not be put on a free spot of a wall when the item in hand touched something.
+- Items that attach to walls were hung on a wall instead of thrown when pressing the throw button.
 - Items could be picked up and used through boat walls, decks and ceilings.
 - Big items rotated around a point at their base or edge instead of their centre.
 - Cutting an item that had been lying on the boat for a while shook the boat with a thud.
@@ -96,6 +97,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Trade | Fix warehouse yard | The trade book counts only goods that really exist in the warehouse yard. |
 | Wall Attachment | Fix blocked attachment | Items that attach to walls go on a free spot of a wall even when the item in your hand touches something. |
 | Wall Attachment | Fix preview mismatch | On a moving boat, the preview of items that attach to walls stays steady, and they land where it shows. |
+| Wall Attachment | Fix throwing | Items that attach to walls are thrown, not hung on a wall, when you press the throw button. |
 
 ¹ "Fix reaching behind furniture" requires "Fix reaching into crates" and "Fix items falling out of crates" to be enabled.
 

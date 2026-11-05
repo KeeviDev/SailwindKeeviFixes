@@ -3,7 +3,7 @@ using HarmonyLib;
 
 namespace KeeviFixes.Runtime
 {
-    /// <summary>Reads the wall attachment state the game keeps on items.</summary>
+    /// <summary>Reads and clears the wall attachment state the game keeps on items.</summary>
     internal static class WallAttachment
     {
         private static readonly AccessTools.FieldRef<ShipItem, bool> InRangeOfWall = FindInRangeOfWall();
@@ -18,6 +18,12 @@ namespace KeeviFixes.Runtime
         public static bool IsInRangeOfWall(ShipItem item)
         {
             return InRangeOfWall(item);
+        }
+
+        /// <summary>Marks <paramref name="item"/> as having no wall spot to attach to in front of it.</summary>
+        public static void ClearWallSpot(ShipItem item)
+        {
+            InRangeOfWall(item) = false;
         }
 
         private static AccessTools.FieldRef<ShipItem, bool> FindInRangeOfWall()
