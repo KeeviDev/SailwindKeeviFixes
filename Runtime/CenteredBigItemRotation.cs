@@ -6,8 +6,8 @@ using UnityEngine;
 namespace KeeviFixes.Runtime
 {
     /// <summary>
-    /// Keeps a held big item's visual center in place whenever its rotation in the hand changes, so the item turns
-    /// around that center instead of around its pivot.
+    /// Keeps the center of a held big item's own mesh in place whenever its rotation in the hand changes, so the item
+    /// turns around that center instead of around its pivot.
     /// </summary>
     internal sealed class CenteredBigItemRotation
     {
@@ -16,7 +16,7 @@ namespace KeeviFixes.Runtime
 
         private readonly PickupableItem item;
 
-        /// <summary>Offset from the item's pivot to its visual center, in the item's rotation frame.</summary>
+        /// <summary>Offset from the item's pivot to the center it turns around, in the item's rotation frame.</summary>
         private readonly Vector3 pivotToCenter;
 
         /// <summary>The item's rotation relative to its holder when its center was last put in place.</summary>
@@ -105,16 +105,28 @@ namespace KeeviFixes.Runtime
         }
 
         /// <summary>
-        /// Returns the offset from the item's pivot to the center of its rendered meshes' bounding box, in the item's
-        /// rotation frame, or zero when the item renders no mesh.
+        /// Returns the offset from the item's pivot to the center of its own mesh's bounding box, in the item's
+        /// rotation frame. When the item's own object renders no mesh, returns the offset to the center of the box
+        /// around all its rendered meshes, or zero when the item renders no mesh at all.
         /// </summary>
         private static Vector3 MeasurePivotToCenter(PickupableItem heldItem)
         {
-            if (!TryGetRenderedBounds(heldItem, out Bounds boundsInItem))
+            if (!TryGetOwnMeshBounds(heldItem, out Bounds boundsInItem)
+                && !TryGetRenderedBounds(heldItem, out boundsInItem))
                 return Vector3.zero;
 
             Transform pivot = heldItem.transform;
             return Quaternion.Inverse(pivot.rotation) * (pivot.TransformPoint(boundsInItem.center) - pivot.position);
+        }
+
+        /// <summary>Gets the box, in the item's local space, of the mesh the item's own object renders.</summary>
+        /// <returns>False if the item's own object renders no mesh.</returns>
+        private static bool TryGetOwnMeshBounds(PickupableItem heldItem, out Bounds boundsInItem)
+        {
+            MeshFilter meshFilter = heldItem.GetComponent<MeshFilter>();
+            bool rendered = meshFilter != null && IsRendered(meshFilter);
+            boundsInItem = rendered ? meshFilter.sharedMesh.bounds : default(Bounds);
+            return rendered;
         }
 
         /// <summary>

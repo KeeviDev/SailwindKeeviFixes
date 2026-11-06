@@ -26,6 +26,7 @@
 - The islands shown in the main menu no longer stay loaded while a save loads; the end of loading is lighter and no longer plays sounds you can't hear ("Fix menu islands staying loaded")
 - Fixed a bug in "Fix mooring line length": mooring lines keep their length after loading a save also when "Fix moored boats coming loose" is turned off
 - Fixed a bug in "Fix moored boats coming loose": the ropes of moored boats no longer take several seconds longer to appear after loading a save
+- Fixed a bug in "Fix rotation center": big items with a part attached to their model, such as a stove's chimney, now turn around the middle of their base instead of the middle of the entire item
 
 ## [1.0.4] - 2026-11-04
 
