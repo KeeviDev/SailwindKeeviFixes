@@ -70,7 +70,7 @@ Every fix is on by default and can be switched off on its own. Change them in `B
 | Big Items | Fix barrels after drinking | Barrels behave like big items again after drinking. |
 | Big Items | Fix barrels from the cart | Barrels from the cart behave like big items. |
 | Big Items | Fix carried items vanishing ² | Big items no longer vanish while you carry them. |
-| Big Items | Fix rotation center | Big items turn around their middle. |
+| Big Items | Fix rotation center | Big items turn around their middle, and their name and controls hint show there. |
 | Boats | Fix bilge pump handle | Pausing no longer breaks the bilge pump handle. |
 | Boats | Fix moored boats coming loose | Moored boats stay tied after loading or coming back. |
 | Boats | Fix mooring line length | Mooring lines keep the length you gave them. |

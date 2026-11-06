@@ -98,7 +98,7 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes the rotation point of big items: crates, barrels, furniture and other big items turn " +
                     "around their middle when you rotate them, instead of swinging around a point at their base " +
-                    "or edge."));
+                    "or edge, and their name and controls hint show at their middle."));
 
             FixMapDrawingsDisappearing = config.Bind(
                 MapsSection,
