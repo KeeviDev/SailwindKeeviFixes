@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.1.0] - 2026-11-09
+
 ### Changed
 
 - "Fix rotation center" now also shows the name and controls hint of big items at their middle instead of at their base or edge
@@ -82,6 +84,7 @@
 - The map and other items no longer stay selected after charting or menus
 - Every fix has its own switch in the config, grouped into sections
 
+[1.1.0]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.1.0
 [1.0.4]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.4
 [1.0.3]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.3
 [1.0.2]: https://github.com/KeeviDev/SailwindKeeviFixes/releases/tag/v1.0.2
