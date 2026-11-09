@@ -6,52 +6,52 @@ namespace KeeviFixes.Configuration
     internal static class ModConfig
     {
         private const string AllItemsSection = "All Items";
-        private const string CratesSection = "Crates";
         private const string BigItemsSection = "Big Items";
-        private const string SmallItemsSection = "Small Items";
+        private const string BoatsSection = "Boats";
+        private const string CratesSection = "Crates";
+        private const string FishingSection = "Fishing";
         private const string FurnitureSection = "Furniture";
         private const string HooksSection = "Hooks";
+        private const string InterfaceSection = "Interface";
         private const string KnivesSection = "Knives";
         private const string MapsSection = "Maps";
-        private const string BoatsSection = "Boats";
-        private const string FishingSection = "Fishing";
+        private const string SavingAndLoadingSection = "Saving and Loading";
+        private const string SmallItemsSection = "Small Items";
         private const string SoundSection = "Sound";
         private const string TradeSection = "Trade";
-        private const string SavingAndLoadingSection = "Saving and Loading";
-        private const string InterfaceSection = "Interface";
         private const string WallAttachmentSection = "Wall Attachment";
-
-        public static ConfigEntry<bool> FixRotationCenter { get; private set; }
-
-        public static ConfigEntry<bool> FixMapDrawingsDisappearing { get; private set; }
-
-        public static ConfigEntry<bool> FixBarrelsAfterDrinking { get; private set; }
-
-        public static ConfigEntry<bool> FixBarrelsFromTheCart { get; private set; }
-
-        public static ConfigEntry<bool> FixBilgePumpHandle { get; private set; }
 
         public static ConfigEntry<bool> FixDroppingAfterPickup { get; private set; }
 
         public static ConfigEntry<bool> FixDroppingWhileInteracting { get; private set; }
 
-        public static ConfigEntry<bool> FixReachingIntoCrates { get; private set; }
+        public static ConfigEntry<bool> FixReachingThroughWalls { get; private set; }
+
+        public static ConfigEntry<bool> FixBarrelsAfterDrinking { get; private set; }
+
+        public static ConfigEntry<bool> FixBarrelsFromTheCart { get; private set; }
+
+        public static ConfigEntry<bool> FixCarriedItemsVanishing { get; private set; }
+
+        public static ConfigEntry<bool> FixRotationCenter { get; private set; }
+
+        public static ConfigEntry<bool> FixBilgePumpHandle { get; private set; }
+
+        public static ConfigEntry<bool> FixMooredBoatsComingLoose { get; private set; }
+
+        public static ConfigEntry<bool> FixMooringLineLength { get; private set; }
 
         public static ConfigEntry<bool> FixItemsFallingOutOfCrates { get; private set; }
 
-        public static ConfigEntry<bool> FixReachingThroughWalls { get; private set; }
+        public static ConfigEntry<bool> FixReachingIntoCrates { get; private set; }
 
-        public static ConfigEntry<bool> FixBlockedAttachment { get; private set; }
+        public static ConfigEntry<bool> FixStovesTakingCrateItems { get; private set; }
 
-        public static ConfigEntry<bool> FixPreviewMismatch { get; private set; }
-
-        public static ConfigEntry<bool> FixThrowing { get; private set; }
-
-        public static ConfigEntry<bool> FixReachingBehindFurniture { get; private set; }
-
-        public static ConfigEntry<bool> FixStuckClicks { get; private set; }
+        public static ConfigEntry<bool> FixFishingRodsTurning { get; private set; }
 
         public static ConfigEntry<bool> FixChartingKitPlacement { get; private set; }
+
+        public static ConfigEntry<bool> FixReachingBehindFurniture { get; private set; }
 
         public static ConfigEntry<bool> FixHungItemFacing { get; private set; }
 
@@ -61,72 +61,56 @@ namespace KeeviFixes.Configuration
 
         public static ConfigEntry<bool> FixLeftoverControlsHint { get; private set; }
 
+        public static ConfigEntry<bool> FixStuckClicks { get; private set; }
+
         public static ConfigEntry<bool> FixBoatShakingWhenCutting { get; private set; }
 
         public static ConfigEntry<bool> FixCutPiecePlacement { get; private set; }
 
-        public static ConfigEntry<bool> FixMooredBoatsComingLoose { get; private set; }
-
-        public static ConfigEntry<bool> FixMooringLineLength { get; private set; }
-
-        public static ConfigEntry<bool> FixFishingRodsTurning { get; private set; }
-
-        public static ConfigEntry<bool> FixSoundDirection { get; private set; }
-
-        public static ConfigEntry<bool> FixMenuIslandsStayingLoaded { get; private set; }
-
-        public static ConfigEntry<bool> FixSmokeOnItemSpawn { get; private set; }
+        public static ConfigEntry<bool> FixMapDrawingsDisappearing { get; private set; }
 
         public static ConfigEntry<bool> FixFailedSavesAndLoads { get; private set; }
 
-        public static ConfigEntry<bool> FixCarriedItemsVanishing { get; private set; }
+        public static ConfigEntry<bool> FixMenuIslandsStayingLoaded { get; private set; }
 
         public static ConfigEntry<bool> FixInventoryItemsVanishing { get; private set; }
 
-        public static ConfigEntry<bool> FixStovesTakingCrateItems { get; private set; }
+        public static ConfigEntry<bool> FixSmokeOnItemSpawn { get; private set; }
 
-        public static ConfigEntry<bool> FixWarehouseYard { get; private set; }
+        public static ConfigEntry<bool> FixSoundDirection { get; private set; }
 
         public static ConfigEntry<bool> FixTradeBookTrading { get; private set; }
 
+        public static ConfigEntry<bool> FixWarehouseYard { get; private set; }
+
+        public static ConfigEntry<bool> FixBlockedAttachment { get; private set; }
+
+        public static ConfigEntry<bool> FixPreviewMismatch { get; private set; }
+
+        public static ConfigEntry<bool> FixThrowing { get; private set; }
+
         public static void Bind(ConfigFile config)
         {
-            FixRotationCenter = config.Bind(
-                BigItemsSection,
-                "Fix rotation center",
-                true,
-                new ConfigDescription(
-                    "Fixes the rotation point of big items: crates, barrels, furniture and other big items turn " +
-                    "around their middle when you rotate them, instead of swinging around a point at their base " +
-                    "or edge, and their name and controls hint show at their middle."));
+            BindAllItems(config);
+            BindBigItems(config);
+            BindBoats(config);
+            BindCrates(config);
+            BindFishing(config);
+            BindFurniture(config);
+            BindHooks(config);
+            BindInterface(config);
+            BindKnives(config);
+            BindMaps(config);
+            BindSavingAndLoading(config);
+            BindSmallItems(config);
+            BindSound(config);
+            BindTrade(config);
+            BindWallAttachment(config);
+            KeepFurnitureReachDependentOnCrateFixes();
+        }
 
-            FixMapDrawingsDisappearing = config.Bind(
-                MapsSection,
-                "Fix map drawings disappearing",
-                true,
-                new ConfigDescription("Fixes drawings disappearing from maps."));
-
-            FixBarrelsAfterDrinking = config.Bind(
-                BigItemsSection,
-                "Fix barrels after drinking",
-                true,
-                new ConfigDescription(
-                    "Fixes barrels being held like small items after you drink from them."));
-
-            FixBarrelsFromTheCart = config.Bind(
-                BigItemsSection,
-                "Fix barrels from the cart",
-                true,
-                new ConfigDescription(
-                    "Fixes barrels taken from the cart, or right-clicked before you pick them up, being held like " +
-                    "small items."));
-
-            FixBilgePumpHandle = config.Bind(
-                BoatsSection,
-                "Fix bilge pump handle",
-                true,
-                new ConfigDescription("Fixes the bilge pump handle breaking when you pause while holding it."));
-
+        private static void BindAllItems(ConfigFile config)
+        {
             FixDroppingAfterPickup = config.Bind(
                 AllItemsSection,
                 "Fix dropping after pickup",
@@ -142,13 +126,73 @@ namespace KeeviFixes.Configuration
                     "Fixes dropping the item you hold when an interaction ends, such as climbing a ladder onto a " +
                     "boat or using other items and buttons."));
 
-            FixReachingIntoCrates = config.Bind(
-                CratesSection,
-                "Fix reaching into crates",
+            FixReachingThroughWalls = config.Bind(
+                AllItemsSection,
+                "Fix reaching through walls",
+                true,
+                new ConfigDescription("Fixes picking up and using items through walls, floors and ceilings on boats."));
+        }
+
+        private static void BindBigItems(ConfigFile config)
+        {
+            FixBarrelsAfterDrinking = config.Bind(
+                BigItemsSection,
+                "Fix barrels after drinking",
                 true,
                 new ConfigDescription(
-                    "Fixes picking up items stored in a crate or other storage without opening it."));
+                    "Fixes barrels being held like small items after you drink from them."));
 
+            FixBarrelsFromTheCart = config.Bind(
+                BigItemsSection,
+                "Fix barrels from the cart",
+                true,
+                new ConfigDescription(
+                    "Fixes barrels taken from the cart, or right-clicked before you pick them up, being held like " +
+                    "small items."));
+
+            FixCarriedItemsVanishing = config.Bind(
+                BigItemsSection,
+                "Fix carried items vanishing",
+                true,
+                new ConfigDescription(
+                    "Fixes big items that may vanish in some cases while you carry them. Requires a game restart."));
+
+            FixRotationCenter = config.Bind(
+                BigItemsSection,
+                "Fix rotation center",
+                true,
+                new ConfigDescription(
+                    "Fixes the rotation point of big items: crates, barrels, furniture and other big items turn " +
+                    "around their middle when you rotate them, instead of swinging around a point at their base " +
+                    "or edge, and their name and controls hint show at their middle."));
+        }
+
+        private static void BindBoats(ConfigFile config)
+        {
+            FixBilgePumpHandle = config.Bind(
+                BoatsSection,
+                "Fix bilge pump handle",
+                true,
+                new ConfigDescription("Fixes the bilge pump handle breaking when you pause while holding it."));
+
+            FixMooredBoatsComingLoose = config.Bind(
+                BoatsSection,
+                "Fix moored boats coming loose",
+                true,
+                new ConfigDescription(
+                    "Fixes moored boats coming loose and drifting away after loading a save or coming back to them."));
+
+            FixMooringLineLength = config.Bind(
+                BoatsSection,
+                "Fix mooring line length",
+                true,
+                new ConfigDescription(
+                    "Fixes mooring lines changing their length after loading a save, pausing or coming back to the " +
+                    "boat."));
+        }
+
+        private static void BindCrates(ConfigFile config)
+        {
             FixItemsFallingOutOfCrates = config.Bind(
                 CratesSection,
                 "Fix items falling out of crates",
@@ -157,12 +201,189 @@ namespace KeeviFixes.Configuration
                     "Fixes items stored in a crate or other storage ending up outside it or missing from it after " +
                     "loading a save or coming back to your boat."));
 
-            FixReachingThroughWalls = config.Bind(
-                AllItemsSection,
-                "Fix reaching through walls",
+            FixReachingIntoCrates = config.Bind(
+                CratesSection,
+                "Fix reaching into crates",
                 true,
-                new ConfigDescription("Fixes picking up and using items through walls, floors and ceilings on boats."));
+                new ConfigDescription(
+                    "Fixes picking up items stored in a crate or other storage without opening it."));
 
+            FixStovesTakingCrateItems = config.Bind(
+                CratesSection,
+                "Fix stoves taking crate items",
+                true,
+                new ConfigDescription(
+                    "Fixes food and firewood in an open crate being pulled into a nearby stove or smoker."));
+        }
+
+        private static void BindFishing(ConfigFile config)
+        {
+            FixFishingRodsTurning = config.Bind(
+                FishingSection,
+                "Fix fishing rods turning",
+                true,
+                new ConfigDescription(
+                    "Fixes fishing rods on hooks or lying around turning out of place when a fish bites."));
+        }
+
+        private static void BindFurniture(ConfigFile config)
+        {
+            FixChartingKitPlacement = config.Bind(
+                FurnitureSection,
+                "Fix charting kit placement",
+                true,
+                new ConfigDescription("Fixes being unable to put the charting kit on tables and other furniture."));
+
+            FixReachingBehindFurniture = config.Bind(
+                FurnitureSection,
+                "Fix reaching behind furniture",
+                true,
+                new ConfigDescription(
+                    "Lets you pick up small items behind or under nailed furniture, such as a cup that fell behind a " +
+                    "table or under a bed. Needs \"Fix reaching into crates\" and \"Fix items falling out of " +
+                    "crates\" turned on."));
+        }
+
+        private static void BindHooks(ConfigFile config)
+        {
+            FixHungItemFacing = config.Bind(
+                HooksSection,
+                "Fix hung item facing",
+                true,
+                new ConfigDescription("Fixes items hung on hooks slowly turning around when the boat rocks in waves."));
+
+            FixHungItemsFalling = config.Bind(
+                HooksSection,
+                "Fix hung items falling",
+                true,
+                new ConfigDescription(
+                    "Fixes items falling off hooks after loading a save or coming back to your boat."));
+        }
+
+        private static void BindInterface(ConfigFile config)
+        {
+            FixFocusClick = config.Bind(
+                InterfaceSection,
+                "Fix focus click",
+                true,
+                new ConfigDescription(
+                    "Fixes the click that switches to the game window acting in game, such as dropping the item you " +
+                    "hold."));
+
+            FixLeftoverControlsHint = config.Bind(
+                InterfaceSection,
+                "Fix leftover controls hint",
+                true,
+                new ConfigDescription(
+                    "Fixes the controls hint of the item you hold, or of the last thing you looked at, showing on a " +
+                    "ladder, door or anything else you look at."));
+
+            FixStuckClicks = config.Bind(
+                InterfaceSection,
+                "Fix stuck clicks",
+                true,
+                new ConfigDescription(
+                    "Fixes the map staying selected after charting, and other items and buttons staying selected " +
+                    "after menus, such as a winch after a pause."));
+        }
+
+        private static void BindKnives(ConfigFile config)
+        {
+            FixBoatShakingWhenCutting = config.Bind(
+                KnivesSection,
+                "Fix boat shaking when cutting",
+                true,
+                new ConfigDescription(
+                    "Fixes the boat shaking with a thud when you cut something lying on it, such as a fish or a " +
+                    "barrel."));
+
+            FixCutPiecePlacement = config.Bind(
+                KnivesSection,
+                "Fix cut piece placement",
+                true,
+                new ConfigDescription("Fixes the pieces of a cut item flying apart or falling through the deck."));
+        }
+
+        private static void BindMaps(ConfigFile config)
+        {
+            FixMapDrawingsDisappearing = config.Bind(
+                MapsSection,
+                "Fix map drawings disappearing",
+                true,
+                new ConfigDescription("Fixes drawings disappearing from maps."));
+        }
+
+        private static void BindSavingAndLoading(ConfigFile config)
+        {
+            FixFailedSavesAndLoads = config.Bind(
+                SavingAndLoadingSection,
+                "Fix failed saves and loads",
+                true,
+                new ConfigDescription(
+                    "Fixes saving silently stopping, and loading getting stuck or duplicating items, when " +
+                    "something in the save can't be saved or loaded, such as an item or boat from a mod you " +
+                    "removed."));
+
+            FixMenuIslandsStayingLoaded = config.Bind(
+                SavingAndLoadingSection,
+                "Fix menu islands staying loaded",
+                true,
+                new ConfigDescription(
+                    "Fixes the islands shown in the main menu staying loaded while a save loads: unloading them " +
+                    "early lightens the end of loading and removes sounds you can't hear."));
+        }
+
+        private static void BindSmallItems(ConfigFile config)
+        {
+            FixInventoryItemsVanishing = config.Bind(
+                SmallItemsSection,
+                "Fix inventory items vanishing",
+                true,
+                new ConfigDescription(
+                    "Fixes items in your inventory vanishing when you sail away from an island where you picked " +
+                    "them up."));
+
+            FixSmokeOnItemSpawn = config.Bind(
+                SmallItemsSection,
+                "Fix smoke on item spawn",
+                true,
+                new ConfigDescription(
+                    "Fixes food, pipes, pots and kettles giving off a puff of smoke when they appear, such as " +
+                    "in shops or after loading a save."));
+        }
+
+        private static void BindSound(ConfigFile config)
+        {
+            FixSoundDirection = config.Bind(
+                SoundSection,
+                "Fix sound direction",
+                true,
+                new ConfigDescription(
+                    "Fixes footsteps and other sounds near you coming from one side after loading a save. Requires " +
+                    "a game restart."));
+        }
+
+        private static void BindTrade(ConfigFile config)
+        {
+            FixTradeBookTrading = config.Bind(
+                TradeSection,
+                "Fix trade book trading",
+                true,
+                new ConfigDescription(
+                    "Fixes buying or selling through the trade book only changing the price at a port whose price " +
+                    "data in the save is broken."));
+
+            FixWarehouseYard = config.Bind(
+                TradeSection,
+                "Fix warehouse yard",
+                true,
+                new ConfigDescription(
+                    "Fixes the trade book showing the wrong goods in the warehouse yard and failing when you " +
+                    "sell them."));
+        }
+
+        private static void BindWallAttachment(ConfigFile config)
+        {
             FixBlockedAttachment = config.Bind(
                 WallAttachmentSection,
                 "Fix blocked attachment",
@@ -186,167 +407,6 @@ namespace KeeviFixes.Configuration
                 new ConfigDescription(
                     "Fixes items that attach to walls being hung on a wall instead of thrown when you press the " +
                     "throw button."));
-
-            FixReachingBehindFurniture = config.Bind(
-                FurnitureSection,
-                "Fix reaching behind furniture",
-                true,
-                new ConfigDescription(
-                    "Lets you pick up small items behind or under nailed furniture, such as a cup that fell behind a " +
-                    "table or under a bed. Needs \"Fix reaching into crates\" and \"Fix items falling out of " +
-                    "crates\" turned on."));
-
-            FixStuckClicks = config.Bind(
-                InterfaceSection,
-                "Fix stuck clicks",
-                true,
-                new ConfigDescription(
-                    "Fixes the map staying selected after charting, and other items and buttons staying selected " +
-                    "after menus, such as a winch after a pause."));
-
-            FixChartingKitPlacement = config.Bind(
-                FurnitureSection,
-                "Fix charting kit placement",
-                true,
-                new ConfigDescription("Fixes being unable to put the charting kit on tables and other furniture."));
-
-            FixHungItemFacing = config.Bind(
-                HooksSection,
-                "Fix hung item facing",
-                true,
-                new ConfigDescription("Fixes items hung on hooks slowly turning around when the boat rocks in waves."));
-
-            FixHungItemsFalling = config.Bind(
-                HooksSection,
-                "Fix hung items falling",
-                true,
-                new ConfigDescription(
-                    "Fixes items falling off hooks after loading a save or coming back to your boat."));
-
-            FixFocusClick = config.Bind(
-                InterfaceSection,
-                "Fix focus click",
-                true,
-                new ConfigDescription(
-                    "Fixes the click that switches to the game window acting in game, such as dropping the item you " +
-                    "hold."));
-
-            FixLeftoverControlsHint = config.Bind(
-                InterfaceSection,
-                "Fix leftover controls hint",
-                true,
-                new ConfigDescription(
-                    "Fixes the controls hint of the item you hold, or of the last thing you looked at, showing on a " +
-                    "ladder, door or anything else you look at."));
-
-            FixBoatShakingWhenCutting = config.Bind(
-                KnivesSection,
-                "Fix boat shaking when cutting",
-                true,
-                new ConfigDescription(
-                    "Fixes the boat shaking with a thud when you cut something lying on it, such as a fish or a " +
-                    "barrel."));
-
-            FixCutPiecePlacement = config.Bind(
-                KnivesSection,
-                "Fix cut piece placement",
-                true,
-                new ConfigDescription("Fixes the pieces of a cut item flying apart or falling through the deck."));
-
-            FixMooredBoatsComingLoose = config.Bind(
-                BoatsSection,
-                "Fix moored boats coming loose",
-                true,
-                new ConfigDescription(
-                    "Fixes moored boats coming loose and drifting away after loading a save or coming back to them."));
-
-            FixMooringLineLength = config.Bind(
-                BoatsSection,
-                "Fix mooring line length",
-                true,
-                new ConfigDescription(
-                    "Fixes mooring lines changing their length after loading a save, pausing or coming back to the " +
-                    "boat."));
-
-            FixFishingRodsTurning = config.Bind(
-                FishingSection,
-                "Fix fishing rods turning",
-                true,
-                new ConfigDescription(
-                    "Fixes fishing rods on hooks or lying around turning out of place when a fish bites."));
-
-            FixSoundDirection = config.Bind(
-                SoundSection,
-                "Fix sound direction",
-                true,
-                new ConfigDescription(
-                    "Fixes footsteps and other sounds near you coming from one side after loading a save. Requires " +
-                    "a game restart."));
-
-            FixMenuIslandsStayingLoaded = config.Bind(
-                SavingAndLoadingSection,
-                "Fix menu islands staying loaded",
-                true,
-                new ConfigDescription(
-                    "Fixes the islands shown in the main menu staying loaded while a save loads: unloading them " +
-                    "early lightens the end of loading and removes sounds you can't hear."));
-
-            FixSmokeOnItemSpawn = config.Bind(
-                SmallItemsSection,
-                "Fix smoke on item spawn",
-                true,
-                new ConfigDescription(
-                    "Fixes food, pipes, pots and kettles giving off a puff of smoke when they appear, such as " +
-                    "in shops or after loading a save."));
-
-            FixFailedSavesAndLoads = config.Bind(
-                SavingAndLoadingSection,
-                "Fix failed saves and loads",
-                true,
-                new ConfigDescription(
-                    "Fixes saving silently stopping, and loading getting stuck or duplicating items, when " +
-                    "something in the save can't be saved or loaded, such as an item or boat from a mod you " +
-                    "removed."));
-
-            FixCarriedItemsVanishing = config.Bind(
-                BigItemsSection,
-                "Fix carried items vanishing",
-                true,
-                new ConfigDescription(
-                    "Fixes big items that may vanish in some cases while you carry them. Requires a game restart."));
-
-            FixInventoryItemsVanishing = config.Bind(
-                SmallItemsSection,
-                "Fix inventory items vanishing",
-                true,
-                new ConfigDescription(
-                    "Fixes items in your inventory vanishing when you sail away from an island where you picked " +
-                    "them up."));
-
-            FixStovesTakingCrateItems = config.Bind(
-                CratesSection,
-                "Fix stoves taking crate items",
-                true,
-                new ConfigDescription(
-                    "Fixes food and firewood in an open crate being pulled into a nearby stove or smoker."));
-
-            FixWarehouseYard = config.Bind(
-                TradeSection,
-                "Fix warehouse yard",
-                true,
-                new ConfigDescription(
-                    "Fixes the trade book showing the wrong goods in the warehouse yard and failing when you " +
-                    "sell them."));
-
-            FixTradeBookTrading = config.Bind(
-                TradeSection,
-                "Fix trade book trading",
-                true,
-                new ConfigDescription(
-                    "Fixes buying or selling through the trade book only changing the price at a port whose price " +
-                    "data in the save is broken."));
-
-            KeepFurnitureReachDependentOnCrateFixes();
         }
 
         /// <summary>
