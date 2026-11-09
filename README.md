@@ -42,6 +42,12 @@
 - The islands shown in the main menu stayed loaded while a save loaded, adding work and sounds no one could hear to the end of loading.
 - Pausing while operating the bilge pump knocked its handle off its axis.
 
+## Save repair notice
+
+While a save loads, Keevi Fixes repairs corrupted data and removes from it what the game can't load: items and boats that no longer exist in the game, items that fail to load, and second copies of the same item. It also repairs broken price data. When it removes or repairs anything, a notice shows the counts, and the BepInEx log names each removed item.
+
+> **Important:** seeing the notice once after removing a mod is expected, but if it shows up after every load, this may indicate that some mod is breaking or duplicating items in the save.
+
 ## Rotation around the centre of big items
 
 In the base game, rotating a crate, barrel or piece of furniture swings it around a point at its base or edge, so it lurches across your view instead of turning in place. With Keevi Fixes it turns around its own middle, just like you'd expect.
